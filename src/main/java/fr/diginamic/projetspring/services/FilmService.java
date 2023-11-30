@@ -1,18 +1,20 @@
 package fr.diginamic.projetspring.services;
 
+import fr.diginamic.projetspring.entities.Acteur;
+import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.repositories.FilmRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class FilmService {
 
-    private final FilmRepository filmRepository;
-    private final ActeurRepository acteurRepository;
-    private final RoleRepository roleRepository;
-
     @Autowired
-    public FilmService(FilmRepository filmRepository, ActeurRepository acteurRepository, RoleRepository roleRepository) {
-        this.filmRepository = filmRepository;
-        this.acteurRepository = acteurRepository;
-        this.roleRepository = roleRepository;
-    }
+    private FilmRepository filmRepository;
 
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
@@ -22,36 +24,33 @@ public class FilmService {
         return filmRepository.findById(id);
     }
 
-    public Film createFilm(Film film) {
+    public Film saveFilm(Film film) {
         return filmRepository.save(film);
-    }
-
-    public Optional<Film> updateFilm(Long id, Film updatedFilm) {
-        Optional<Film> optionalFilm = filmRepository.findById(id);
-        if (optionalFilm.isPresent()) {
-            Film existingFilm = optionalFilm.get();
-            // Mettez à jour les propriétés du film existant avec les valeurs de updatedFilm
-            // ...
-            return Optional.of(filmRepository.save(existingFilm));
-        }
-        return Optional.empty();
     }
 
     public void deleteFilm(Long id) {
         filmRepository.deleteById(id);
     }
 
-    public List<Film> getFilmsByActeur(Long acteurId) {
-        Optional<Acteur> optionalActeur = acteurRepository.findById(acteurId);
-        if (optionalActeur.isPresent()) {
-            Acteur acteur = optionalActeur.get();
-            return roleRepository.findByActeur(acteur)
-                    .stream()
-                    .map(Role::getFilm)
-                    .collect(Collectors.toList());
-        }
-        return Collections.emptyList();
+    // Fonctionnalités supplémentaires
+
+    public List<Acteur> getActeursByFilm(Long filmId) {
+        Optional<Film> film = filmRepository.findById(filmId);
+        return film.map(Film::getActeurs)
+                .orElse(Collections.emptyList());
     }
 
-    // Ajoutez d'autres méthodes selon vos besoins
+    public List<Film> getFilmsByActeur(Long acteurId) {
+        return null;
+    }
+
+    public Film createFilm(Film film) {
+        return film;
+    }
+
+    public Optional<Film> updateFilm(Long id, Film film) {
+        return Optional.empty();
+    }
+
+    // Autres méthodes en fonction des besoins
 }

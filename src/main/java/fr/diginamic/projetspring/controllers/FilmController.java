@@ -1,5 +1,18 @@
 package fr.diginamic.projetspring.controllers;
 
+import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.entities.Rôle;
+import fr.diginamic.projetspring.services.ActeurService;
+import fr.diginamic.projetspring.services.FilmService;
+import fr.diginamic.projetspring.services.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/films")
 public class FilmController {
@@ -58,8 +71,8 @@ public class FilmController {
     }
 
     @GetMapping("/roles/{filmId}")
-    public ResponseEntity<List<Role>> getRolesByFilm(@PathVariable Long filmId) {
-        List<Role> roles = roleService.getRolesByFilm(filmId);
+    public ResponseEntity<List<Rôle>> getRolesByFilm(@PathVariable Long filmId) {
+        List<Rôle> roles = roleService.getRolesByFilm(filmId);
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 

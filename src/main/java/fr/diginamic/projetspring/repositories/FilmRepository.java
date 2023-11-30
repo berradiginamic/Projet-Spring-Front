@@ -1,23 +1,26 @@
 package fr.diginamic.projetspring.repositories;
 
-
+import fr.diginamic.projetspring.entities.Film;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface FilmRepository extends JpaRepository<Film, Long> {
 
     List<Film> findByTitreContainingIgnoreCase(String titre);
 
-    List<Film> findByAnneeSortieBetween(int startYear, int endYear);
+    List<Film> findByAnneeSortieBetween(int debut, int fin);
 
-    List<Film> findByActeurs(Acteur acteur);
+    // Autres méthodes en fonction des besoins
 
-    List<Film> findByGenres(Genre genre);
+    List<Film> findByActeurs_Nom(String nom);
 
-    List<Film> findByRealisateur(Realisateur realisateur);
+    List<Film> findByActeurs_NomAndActeurs_Prenom(String nom, String prenom);
 
-    // Vous pouvez ajouter d'autres méthodes en fonction des besoins
+    List<Film> findByGenres_Nom(String genre);
+
+    List<Film> findByActeurs_NomAndGenres_Nom(String nomActeur, String nomGenre);
+
+    List<Film> findByRealisateur_Nom(String nom);
+
 }

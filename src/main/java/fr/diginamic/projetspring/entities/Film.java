@@ -1,7 +1,6 @@
 package fr.diginamic.projetspring.entities;
 
-import javax.persistence.*;
-import java.util.Date;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
@@ -13,35 +12,49 @@ public class Film {
 
     private String titre;
 
-    private int anneeSortie;
-
     @ManyToOne
     @JoinColumn(name = "realisateur_id")
     private Realisateur realisateur;
 
     @OneToMany(mappedBy = "film")
-    private List<Role> roles;
-
-    @ManyToMany
-    @JoinTable(
-            name = "film_genre",
-            joinColumns = @JoinColumn(name = "film_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id"))
-    private List<Genre> genres;
+    private List<Acteur> acteurs;
 
     // Constructeurs
     public Film() {
     }
 
-    public Film(String titre, int anneeSortie, Realisateur realisateur) {
+    public Film(String titre, Realisateur realisateur, List<Acteur> acteurs) {
         this.titre = titre;
-        this.anneeSortie = anneeSortie;
+        this.realisateur = realisateur;
+        this.acteurs = acteurs;
+    }
+
+    // Getters et setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public Realisateur getRealisateur() {
+        return realisateur;
+    }
+
+    public void setRealisateur(Realisateur realisateur) {
         this.realisateur = realisateur;
     }
 
-    // Getters et Setters
-    // ...
-
-    // Autres méthodes, si nécessaire
+    public List<Acteur> getActeurs() {
+        return acteurs;
+    }
 }
-
