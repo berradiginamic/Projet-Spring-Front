@@ -1,0 +1,33 @@
+package fr.diginamic.projetspring.entities;
+
+import javax.persistence.*;
+
+@Entity
+public class Role {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "film_id")
+    private Film film;
+
+    @ManyToOne
+    @JoinColumn(name = "acteur_id")
+    private Acteur acteur;
+
+    // Constructeurs
+    public Role() {
+    }
+
+    public Role(Film film, Acteur acteur) {
+        this.film = film;
+        this.acteur = acteur;
+    }
+
+    // Getters et Setters
+    // ...
+
+    // Autres méthodes, si nécessaire
+}
