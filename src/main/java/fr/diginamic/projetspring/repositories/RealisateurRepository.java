@@ -7,10 +7,7 @@ import java.util.List;
 
 public interface RealisateurRepository extends JpaRepository<Realisateur, Long> {
 
-    List<Realisateur> findByNomAndPrenom(String nom, String prenom);
+    List<Realisateur> findByNom(String nom);
 
     // Autres méthodes en fonction des besoins
-
-    List<Realisateur> findByFilmsRealises_Titre(String titre);
-
 }

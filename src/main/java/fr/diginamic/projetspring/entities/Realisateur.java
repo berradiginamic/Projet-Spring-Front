@@ -12,8 +12,8 @@ public class Realisateur {
 
     private String nom;
 
-    @OneToMany(mappedBy = "realisateur")
-    private List<Film> filmsRealises;
+    private String lieuNaissance;
+    private String URLProfile;
 
     // Constructeurs
     public Realisateur() {
@@ -40,11 +40,27 @@ public class Realisateur {
         this.nom = nom;
     }
 
-    public List<Film> getFilmsRealises() {
-        return filmsRealises;
+    public void setDateNaissance(String dateNaissance) {
     }
 
-    public void setFilmsRealises(List<Film> filmsRealises) {
-        this.filmsRealises = filmsRealises;
+    getD==
+
+    public void setLieuNaissance(String lieuNaissance) {
+        this.lieuNaissance = lieuNaissance;
+    }
+
+    public String getLieuNaissance() {
+        return lieuNaissance;
+    }
+
+    public void setURLProfile(String urlProfile) {
+        this.URLProfile = urlProfile;
+    }
+
+    public String getURLProfile() {
+        return URLProfile;
+    }
+
+    public void insertFilm(Realisateur realisateurs) {
     }
 }
