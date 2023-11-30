@@ -11,22 +11,10 @@ public class GenreService {
 
     private final GenreRepository genreRepository;
 
-    @Autowired
     public GenreService(GenreRepository genreRepository) {
         this.genreRepository = genreRepository;
     }
 
-    // Ajoutez des méthodes de service au besoin
-
-    // Exemple : Récupérer tous les genres
-    public List<Genre> getAllGenres() {
-        return genreRepository.findAll();
-    }
-
-    // Exemple : Récupérer un genre par son nom
-    public Genre getGenreByName(String name) {
-        return genreRepository.findByName(name);
-    }
 
     // Exemple : Enregistrer un nouveau genre
     public Genre saveGenre(Genre genre) {

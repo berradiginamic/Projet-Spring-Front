@@ -17,6 +17,9 @@ public class RealisateurService {
         this.realisateurRepository = realisateurRepository;
     }
 
+    public static void insertFilm(Realisateur realisateurs) {
+    }
+
     public List<Realisateur> getAllRealisateurs() {
         return realisateurRepository.findAll();
     }

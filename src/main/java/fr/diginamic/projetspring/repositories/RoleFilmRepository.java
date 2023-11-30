@@ -1,10 +1,10 @@
 package fr.diginamic.projetspring.repositories;
 
-import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.entities.RoleFilm;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface FilmRepository extends JpaRepository<Film, Long> {
+public interface RoleFilmRepository extends JpaRepository<RoleFilm, Long> {
 
 }

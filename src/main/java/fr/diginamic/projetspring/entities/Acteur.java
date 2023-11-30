@@ -1,6 +1,8 @@
 package fr.diginamic.projetspring.entities;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,7 +20,9 @@ public class Acteur {
     private Film film;
 
     @OneToMany(mappedBy = "acteur")
-    private List<Rôle> roles;
+    private List<RoleFilm> roles;
+
+    private LocalDate dateNaissance;
 
     // Constructeurs
     public Acteur() {
@@ -63,7 +67,19 @@ public class Acteur {
         this.film = film;
     }
 
-    public List<Rôle> getRoles() {
+    public List<RoleFilm> getRoles() {
         return roles;
+    }
+
+    public void setDateNaissance(String element) {
+    }
+
+    public void setLieuNaissance(String element) {
+    }
+
+    public void setUrlProfil(String element) {
+    }
+
+    public void insertActeurs(Acteur acteurs) {
     }
 }

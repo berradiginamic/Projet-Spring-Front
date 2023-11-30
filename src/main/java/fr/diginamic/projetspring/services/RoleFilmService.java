@@ -1,7 +1,7 @@
 package fr.diginamic.projetspring.services;
 
-import fr.diginamic.projetspring.entities.Rôle;
-import fr.diginamic.projetspring.repositories.RôleRepository;
+import fr.diginamic.projetspring.entities.RoleFilm;
+import fr.diginamic.projetspring.repositories.RoleFilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,24 +9,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RoleService {
+public class RoleFilmService {
 
-    private final RôleRepository roleRepository;
+    private final RoleFilmRepository roleRepository;
 
     @Autowired
-    public RoleService(RôleRepository roleRepository) {
+    public RoleFilmService(RoleFilmRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
-    public Optional<Rôle> getRoleById(Long id) {
+    public static void insertFilm() {
+    }
+
+    public Optional<RoleFilm> getRoleById(Long id) {
         return roleRepository.findById(id);
     }
 
-    public List<Rôle> getAllRoles() {
+    public List<RoleFilm> getAllRoles() {
         return roleRepository.findAll();
     }
 
-    public Rôle saveRole(Rôle role) {
+    public RoleFilm saveRole(RoleFilm role) {
         return roleRepository.save(role);
     }
 
@@ -34,7 +37,7 @@ public class RoleService {
         roleRepository.deleteById(id);
     }
 
-    public List<Rôle> getRolesByFilm(Long filmId) {
+    public List<RoleFilm> getRolesByFilm(Long filmId) {
         return null;
     }
 

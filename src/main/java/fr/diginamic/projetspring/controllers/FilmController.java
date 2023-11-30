@@ -1,10 +1,10 @@
 package fr.diginamic.projetspring.controllers;
 
 import fr.diginamic.projetspring.entities.Film;
-import fr.diginamic.projetspring.entities.Rôle;
+import fr.diginamic.projetspring.entities.RoleFilm;
 import fr.diginamic.projetspring.services.ActeurService;
 import fr.diginamic.projetspring.services.FilmService;
-import fr.diginamic.projetspring.services.RoleService;
+import fr.diginamic.projetspring.services.RoleFilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +19,13 @@ public class FilmController {
 
     private final FilmService filmService;
     private final ActeurService acteurService;
-    private final RoleService roleService;
+    private final RoleFilmService roleFilmService;
 
     @Autowired
-    public FilmController(FilmService filmService, ActeurService acteurService, RoleService roleService) {
+    public FilmController(FilmService filmService, ActeurService acteurService, RoleFilmService roleFilmService) {
         this.filmService = filmService;
         this.acteurService = acteurService;
-        this.roleService = roleService;
+        this.roleFilmService = roleFilmService;
     }
 
     // Opérations CRUD pour les films
@@ -71,8 +71,8 @@ public class FilmController {
     }
 
     @GetMapping("/roles/{filmId}")
-    public ResponseEntity<List<Rôle>> getRolesByFilm(@PathVariable Long filmId) {
-        List<Rôle> roles = roleService.getRolesByFilm(filmId);
+    public ResponseEntity<List<RoleFilm>> getRolesByFilm(@PathVariable Long filmId) {
+        List<RoleFilm> roles = roleFilmService.getRolesByFilm(filmId);
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 

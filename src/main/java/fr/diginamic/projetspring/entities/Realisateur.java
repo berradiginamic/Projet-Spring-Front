@@ -47,4 +47,13 @@ public class Realisateur {
     public void setFilmsRealises(List<Film> filmsRealises) {
         this.filmsRealises = filmsRealises;
     }
+
+    public void setDateNaissance(String element) {
+    }
+
+    public void setLieuNaissance(String element) {
+    }
+
+    public void setURLProfile(String element) {
+    }
 }

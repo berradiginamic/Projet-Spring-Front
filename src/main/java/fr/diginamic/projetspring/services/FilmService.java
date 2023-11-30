@@ -16,6 +16,9 @@ public class FilmService {
     @Autowired
     private FilmRepository filmRepository;
 
+    public static void insertFilm(Film films) {
+    }
+
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
     }

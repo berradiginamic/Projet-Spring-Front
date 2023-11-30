@@ -57,4 +57,28 @@ public class Film {
     public List<Acteur> getActeurs() {
         return acteurs;
     }
+
+    public void setNom(String element) {
+    }
+
+    public void setAnneeSortie(String element) {
+    }
+
+    public void setAvis(String element) {
+    }
+
+    public void setLieuTournage(String element) {
+    }
+
+    public void setGenres(String element) {
+    }
+
+    public void setLangues(String element) {
+    }
+
+    public void setResume(String element) {
+    }
+
+    public void setPays(String element) {
+    }
 }

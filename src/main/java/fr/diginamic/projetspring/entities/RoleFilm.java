@@ -3,7 +3,7 @@ package fr.diginamic.projetspring.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class Rôle {
+public class RoleFilm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +21,25 @@ public class Rôle {
 
     // Constructeurs
 
-    public Rôle() {
+    public RoleFilm() {
     }
 
-    public Rôle(Acteur acteur, Film film, String roleName) {
+    public RoleFilm(Acteur acteur, Film film, String roleName) {
         this.acteur = acteur;
         this.film = film;
         this.roleName = roleName;
+    }
+
+    public static void setNom(String element) {
+    }
+
+    public static void setDateNaissance(String element) {
+    }
+
+    public static void setLieuNaissance(String element) {
+    }
+
+    public static void setURLProfile(String element) {
     }
 
     // Getters et Setters
