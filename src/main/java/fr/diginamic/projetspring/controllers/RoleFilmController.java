@@ -32,14 +32,14 @@ public class RoleFilmController {
     }
 
     @PostMapping
-    public ResponseEntity<RoleFilm> createRole(@RequestBody RoleFilm role) {
-        RoleFilm savedRole = roleFilmService.saveRole(role);
+    public ResponseEntity<RoleFilm> saveRoleFilm(@RequestBody RoleFilm role) {
+        RoleFilm savedRole = roleFilmService.saveRoleFilm(role);
         return ResponseEntity.ok(savedRole);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
-        roleFilmService.deleteRole(id);
+    public ResponseEntity<Void> deleteRoleFilm(@PathVariable Long id) {
+        roleFilmService.deleteRoleFilm(id);
         return ResponseEntity.noContent().build();
     }
 

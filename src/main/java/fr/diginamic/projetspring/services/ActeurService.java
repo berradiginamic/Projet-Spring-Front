@@ -2,7 +2,6 @@ package fr.diginamic.projetspring.services;
 
 import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.repositories.ActeurRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class ActeurService {
         return acteurRepository.findById(id).orElse(null);
     }
 
-    public Acteur createActeur(Acteur acteur) {
+    public Acteur saveActeur(Acteur acteur) {
         // Logique de création de l'acteur (par exemple, validation des données, etc.)
         return acteurRepository.save(acteur);
     }

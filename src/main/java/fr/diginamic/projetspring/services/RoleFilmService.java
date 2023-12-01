@@ -18,8 +18,6 @@ public class RoleFilmService {
         this.roleRepository = roleRepository;
     }
 
-    public static void insertFilm() {
-    }
 
     public Optional<RoleFilm> getRoleById(Long id) {
         return roleRepository.findById(id);
@@ -29,11 +27,11 @@ public class RoleFilmService {
         return roleRepository.findAll();
     }
 
-    public RoleFilm saveRole(RoleFilm role) {
+    public RoleFilm saveRoleFilm(RoleFilm role) {
         return roleRepository.save(role);
     }
 
-    public void deleteRole(Long id) {
+    public void deleteRoleFilm(Long id) {
         roleRepository.deleteById(id);
     }
 

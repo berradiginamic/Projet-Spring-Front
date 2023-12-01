@@ -29,8 +29,8 @@ public class ActeurController {
     }
 
     @PostMapping
-    public Acteur createActeur(@RequestBody Acteur acteur) {
-        return acteurService.createActeur(acteur);
+    public Acteur saveActeur(@RequestBody Acteur acteur) {
+        return acteurService.saveActeur(acteur);
     }
 
     @PutMapping("/{id}")
