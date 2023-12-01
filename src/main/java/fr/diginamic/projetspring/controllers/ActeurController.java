@@ -44,7 +44,7 @@ public class ActeurController {
      * @return L'acteur correspondant à l'identifiant.
      */
     @GetMapping("/{id}")
-    public Acteur getActeurById(@PathVariable Long id) {
+    public Acteur getActeurById(@PathVariable("id") Long id) {
         return acteurService.getActeurById(id);
     }
 
@@ -67,7 +67,7 @@ public class ActeurController {
      * @return L'acteur mis à jour.
      */
     @PutMapping("/{id}")
-    public Acteur updateActeur(@PathVariable Long id, @RequestBody Acteur acteur) {
+    public Acteur updateActeur(@PathVariable("id") Long id, @RequestBody Acteur acteur) {
         return acteurService.updateActeur(id, acteur);
     }
 
@@ -77,7 +77,7 @@ public class ActeurController {
      * @param id Identifiant de l'acteur à supprimer.
      */
     @DeleteMapping("/{id}")
-    public void deleteActeur(@PathVariable Long id) {
+    public void deleteActeur(@PathVariable("id") Long id) {
         acteurService.deleteActeur(id);
     }
 }

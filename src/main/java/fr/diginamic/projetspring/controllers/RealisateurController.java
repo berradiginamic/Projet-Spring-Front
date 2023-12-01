@@ -46,7 +46,7 @@ public class RealisateurController {
      * @return Le réalisateur correspondant à l'identifiant.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Realisateur> getRealisateurById(@PathVariable Long id) {
+    public ResponseEntity<Realisateur> getRealisateurById(@PathVariable("id") Long id) {
         Optional<Realisateur> realisateur = realisateurService.getRealisateurById(id);
         return realisateur.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -68,7 +68,7 @@ public class RealisateurController {
      * @param id Identifiant du réalisateur à supprimer.
      */
     @DeleteMapping("/{id}")
-    public void deleteRealisateurById(@PathVariable Long id) {
+    public void deleteRealisateurById(@PathVariable("id") Long id) {
         realisateurService.deleteRealisateurById(id);
     }
 

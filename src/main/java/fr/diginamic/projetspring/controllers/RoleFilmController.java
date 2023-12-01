@@ -36,7 +36,7 @@ public class RoleFilmController {
      * @return Le rôle correspondant à l'identifiant.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<RoleFilm> getRoleById(@PathVariable Long id) {
+    public ResponseEntity<RoleFilm> getRoleById(@PathVariable("id") Long id) {
         Optional<RoleFilm> role = roleFilmService.getRoleById(id);
         return role.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -70,7 +70,7 @@ public class RoleFilmController {
      * @return Réponse indiquant le succès de l'opération.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRole(@PathVariable("id") Long id) {
         roleFilmService.deleteRole(id);
         return ResponseEntity.noContent().build();
     }

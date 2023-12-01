@@ -63,7 +63,7 @@ public class FilmController {
      * @return Le film correspondant à l'identifiant.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Film> getFilmById(@PathVariable Long id) {
+    public ResponseEntity<Film> getFilmById(@PathVariable("id") Long id) {
         Optional<Film> optionalFilm = filmService.getFilmById(id);
         return optionalFilm.map(film -> new ResponseEntity<>(film, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -89,7 +89,7 @@ public class FilmController {
      * @return Le film mis à jour.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Film> updateFilm(@PathVariable Long id, @RequestBody Film film) {
+    public ResponseEntity<Film> updateFilm(@PathVariable("id") Long id, @RequestBody Film film) {
         Optional<Film> optionalUpdatedFilm = filmService.updateFilm(id, film);
         return optionalUpdatedFilm.map(updatedFilm -> new ResponseEntity<>(updatedFilm, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -102,7 +102,7 @@ public class FilmController {
      * @return Réponse indiquant le succès de l'opération.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFilm(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteFilm(@PathVariable("id") Long id) {
         filmService.deleteFilm(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -116,7 +116,7 @@ public class FilmController {
      * @return La liste des films associés à l'acteur.
      */
     @GetMapping("/acteur/{acteurId}")
-    public ResponseEntity<List<Film>> getFilmsByActeur(@PathVariable Long acteurId) {
+    public ResponseEntity<List<Film>> getFilmsByActeur(@PathVariable("acteurId") Long acteurId) {
         List<Film> films = filmService.getFilmsByActeur(acteurId);
         return new ResponseEntity<>(films, HttpStatus.OK);
     }
@@ -128,7 +128,7 @@ public class FilmController {
      * @return La liste des rôles dans le film.
      */
     @GetMapping("/roles/{filmId}")
-    public ResponseEntity<List<RoleFilm>> getRolesByFilm(@PathVariable Long filmId) {
+    public ResponseEntity<List<RoleFilm>> getRolesByFilm(@PathVariable("filmId") Long filmId) {
         List<RoleFilm> roles = roleFilmService.getRolesByFilm(filmId);
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
