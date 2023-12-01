@@ -12,7 +12,6 @@ public class ActeurService {
 
     private final ActeurRepository acteurRepository;
 
-
     public ActeurService(ActeurRepository acteurRepository) {
         this.acteurRepository = acteurRepository;
     }

@@ -8,6 +8,7 @@ public class RoleFilm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String personnage;
 
     @ManyToOne
     @JoinColumn(name = "acteur_id")
@@ -17,29 +18,15 @@ public class RoleFilm {
     @JoinColumn(name = "film_id")
     private Film film;
 
-    private String roleName;
-
     // Constructeurs
 
     public RoleFilm() {
     }
 
-    public RoleFilm(Acteur acteur, Film film, String roleName) {
+    public RoleFilm(Acteur acteur, Film film, String personnage) {
         this.acteur = acteur;
         this.film = film;
-        this.roleName = roleName;
-    }
-
-    public static void setNom(String element) {
-    }
-
-    public static void setDateNaissance(String element) {
-    }
-
-    public static void setLieuNaissance(String element) {
-    }
-
-    public static void setURLProfile(String element) {
+        this.personnage = personnage;
     }
 
     // Getters et Setters
@@ -68,11 +55,11 @@ public class RoleFilm {
         this.film = film;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getPersonnage() {
+        return personnage;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setPersonnage(String personnage) {
+        this.personnage = personnage;
     }
 }

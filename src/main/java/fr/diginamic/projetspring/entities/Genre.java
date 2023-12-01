@@ -9,8 +9,7 @@ public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String nom;
+    private String type;
 
     @ManyToMany
     @JoinTable(
@@ -24,8 +23,8 @@ public class Genre {
     public Genre() {
     }
 
-    public Genre(String nom) {
-        this.nom = nom;
+    public Genre(String type) {
+        this.type = type;
     }
 
     // Getters et Setters
@@ -37,12 +36,12 @@ public class Genre {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getType() {
+        return type;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<Film> getFilms() {
