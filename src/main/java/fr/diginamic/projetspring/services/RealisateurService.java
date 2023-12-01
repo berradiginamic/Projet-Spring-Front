@@ -17,15 +17,21 @@ public class RealisateurService {
         this.realisateurRepository = realisateurRepository;
     }
 
-    public static void insertFilm(Realisateur realisateurs) {
-    }
-
     public List<Realisateur> getAllRealisateurs() {
         return realisateurRepository.findAll();
     }
 
     public Optional<Realisateur> getRealisateurById(Long id) {
         return realisateurRepository.findById(id);
+    }
+
+    public Realisateur updateRealisateur(Long id, Realisateur realisateur) {
+        // Logique de mise à jour du réalisateur
+        if (realisateurRepository.existsById(id)) {
+            realisateur.setId(id);
+            return realisateurRepository.save(realisateur);
+        }
+        return null; // Ou lancez une exception appropriée si nécessaire
     }
 
     public Realisateur saveRealisateur(Realisateur realisateur) {

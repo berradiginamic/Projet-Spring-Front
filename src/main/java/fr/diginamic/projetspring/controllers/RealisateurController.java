@@ -35,6 +35,11 @@ public class RealisateurController {
         return realisateurService.saveRealisateur(realisateur);
     }
 
+    @PutMapping("/{id}")
+    public Realisateur updateRealisateur(@PathVariable Long id, @RequestBody Realisateur realisateur) {
+        return realisateurService.updateRealisateur(id, realisateur);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteRealisateurById(@PathVariable Long id) {
         realisateurService.deleteRealisateurById(id);

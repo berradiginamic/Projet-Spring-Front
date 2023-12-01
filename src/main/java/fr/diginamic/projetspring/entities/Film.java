@@ -13,9 +13,10 @@ public class Film {
     private Long id;
     private String nom;
     private LocalDate anneeSortie;
-    private Double rating;
+    private String rating;
     private String urlProfile;
     private String lieuTournage;
+    private String Genres;
     private String langue;
     private String resume;
     private String pays;
@@ -59,11 +60,11 @@ public class Film {
         this.anneeSortie = anneeSortie;
     }
 
-    public Double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -81,6 +82,14 @@ public class Film {
 
     public void setLieuTournage(String lieuTournage) {
         this.lieuTournage = lieuTournage;
+    }
+
+    public String getGenres() {
+        return Genres;
+    }
+
+    public void setGenres(String genres) {
+        Genres = genres;
     }
 
     public String getLangue() {

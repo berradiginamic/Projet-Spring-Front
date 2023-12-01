@@ -8,10 +8,5 @@ import java.util.List;
 
 public interface ActeurRepository extends JpaRepository<Acteur, Long> {
 
-    List<Acteur> findByNom(String nom);
-
-    List<Acteur> findByPrenom(String prenom);
-
-
     // Autres méthodes en fonction des besoins
 }
