@@ -58,8 +58,8 @@ public class RoleFilmController {
      * @return Le rôle créé.
      */
     @PostMapping
-    public ResponseEntity<RoleFilm> createRole(@RequestBody RoleFilm role) {
-        RoleFilm savedRole = roleFilmService.saveRole(role);
+    public ResponseEntity<RoleFilm> saveRoleFilm(@RequestBody RoleFilm role) {
+        RoleFilm savedRole = roleFilmService.saveRoleFilm(role);
         return ResponseEntity.ok(savedRole);
     }
 

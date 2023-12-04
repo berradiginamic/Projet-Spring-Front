@@ -17,14 +17,15 @@ public class Acteur {
 
     /** Nom de l'acteur. */
     private String nom;
-
-    /** Prénom de l'acteur. */
-    private String prenom;
+    private LocalDate dateNaissance;
+    private String LieuNaissance;
+    private String urlProfile;
 
     /** Film dans lequel l'acteur a joué. */
     @ManyToOne
     @JoinColumn(name = "film_id")
     private Film film;
+
 
     /** Liste des rôles que l'acteur a joués dans des films. */
     @OneToMany(mappedBy = "acteur")
@@ -33,6 +34,10 @@ public class Acteur {
     /** Date de naissance de l'acteur. */
     private LocalDate dateNaissance;
 
+
+    @OneToMany(mappedBy = "acteur")
+    private List<RoleFilm> roles;
+
     // Constructeurs
     /**
      * Constructeur par défaut.
@@ -40,16 +45,15 @@ public class Acteur {
     public Acteur() {
     }
 
+
     /**
      * Constructeur avec nom, prénom et film dans lequel l'acteur a joué.
      *
      * @param nom    Nom de l'acteur.
-     * @param prenom Prénom de l'acteur.
      * @param film   Film dans lequel l'acteur a joué.
      */
-    public Acteur(String nom, String prenom, Film film) {
+    public Acteur(String nom, Film film) {
         this.nom = nom;
-        this.prenom = prenom;
         this.film = film;
     }
 
@@ -87,26 +91,31 @@ public class Acteur {
      *
      * @param nom Le nom de l'acteur.
      */
+
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    /**
-     * Obtient le prénom de l'acteur.
-     *
-     * @return Le prénom de l'acteur.
-     */
-    public String getPrenom() {
-        return prenom;
+    public LocalDate getDateNaissance() {
+        return dateNaissance;
+    }
+    public void setDateNaissance(LocalDate dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 
-    /**
-     * Définit le prénom de l'acteur.
-     *
-     * @param prenom Le prénom de l'acteur.
-     */
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+
+    public String getLieuNaissance() {
+        return LieuNaissance;
+    }
+    public void setLieuNaissance(String lieuNaissance) {
+        LieuNaissance = lieuNaissance;
+    }
+
+    public String getUrlProfile() {
+        return urlProfile;
+    }
+    public void setUrlProfile(String urlProfile) {
+        this.urlProfile = urlProfile;
     }
 
     /**
@@ -117,6 +126,7 @@ public class Acteur {
     public Film getFilm() {
         return film;
     }
+
 
     /**
      * Définit le film dans lequel l'acteur a joué.
@@ -135,6 +145,7 @@ public class Acteur {
     public List<RoleFilm> getRoles() {
         return roles;
     }
+
 
     /**
      * Obtient la date de naissance de l'acteur.
@@ -165,4 +176,5 @@ public class Acteur {
     public void insertActeur(Acteur acteur) {
         // Logique pour insérer l'acteur dans la base de données.
     }
+}
 }

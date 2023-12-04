@@ -67,6 +67,11 @@ public class RealisateurController {
      *
      * @param id Identifiant du réalisateur à supprimer.
      */
+
+    @PutMapping("/{id}")
+    public Realisateur updateRealisateur(@PathVariable Long id, @RequestBody Realisateur realisateur) {
+        return realisateurService.updateRealisateur(id, realisateur);
+    }
     @DeleteMapping("/{id}")
     public void deleteRealisateurById(@PathVariable("id") Long id) {
         realisateurService.deleteRealisateurById(id);

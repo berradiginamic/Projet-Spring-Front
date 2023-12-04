@@ -55,8 +55,8 @@ public class ActeurController {
      * @return L'acteur créé.
      */
     @PostMapping
-    public Acteur createActeur(@RequestBody Acteur acteur) {
-        return acteurService.createActeur(acteur);
+    public Acteur saveActeur(@RequestBody Acteur acteur) {
+        return acteurService.saveActeur(acteur);
     }
 
     /**

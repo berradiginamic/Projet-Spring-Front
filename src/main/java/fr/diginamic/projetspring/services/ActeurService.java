@@ -2,7 +2,6 @@ package fr.diginamic.projetspring.services;
 
 import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.repositories.ActeurRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,8 +49,9 @@ public class ActeurService {
      * @param acteur L'acteur à créer.
      * @return L'acteur créé.
      */
-    public Acteur createActeur(Acteur acteur) {
+ 
         // Logique de création de l'acteur (par exemple, validation des données, etc.)
+  public Acteur saveActeur(Acteur acteur) {
         return acteurRepository.save(acteur);
     }
 

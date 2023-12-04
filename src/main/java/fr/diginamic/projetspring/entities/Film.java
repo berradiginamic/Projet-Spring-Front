@@ -22,7 +22,7 @@ public class Film {
     private LocalDate anneeSortie;
 
     /** Note du film. */
-    private Double rating;
+    private String rating;
 
     /** URL du profil du film. */
     private String urlProfile;
@@ -32,6 +32,8 @@ public class Film {
 
     /** Langue du film. */
     private String langue;
+    
+  private String Genres;
 
     /** Résumé du film. */
     private String resume;
@@ -124,12 +126,13 @@ public class Film {
         this.anneeSortie = anneeSortie;
     }
 
+
     /**
      * Obtient la note du film.
      *
      * @return La note du film.
      */
-    public Double getRating() {
+    public String getRating() {
         return rating;
     }
 
@@ -138,9 +141,10 @@ public class Film {
      *
      * @param rating La note du film.
      */
-    public void setRating(Double rating) {
-        this.rating = rating;
+     public void setRating(String rating) {
+       this.rating = rating;
     }
+        
 
     /**
      * Obtient l'URL du profil du film.
@@ -178,7 +182,16 @@ public class Film {
         this.lieuTournage = lieuTournage;
     }
 
-    /**
+
+    public String getGenres() {
+        return Genres;
+    }
+
+    public void setGenres(String genres) {
+        Genres = genres;
+    }
+
+  /**
      * Obtient la langue du film.
      *
      * @return La langue du film.

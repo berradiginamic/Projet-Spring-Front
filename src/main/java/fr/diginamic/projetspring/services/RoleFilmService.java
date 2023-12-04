@@ -26,6 +26,7 @@ public class RoleFilmService {
         this.roleRepository = roleRepository;
     }
 
+
     /**
      * Insère un rôle dans la base de données.
      */
@@ -58,7 +59,7 @@ public class RoleFilmService {
      * @param role Le rôle à enregistrer.
      * @return Le rôle enregistré.
      */
-    public RoleFilm saveRole(RoleFilm role) {
+   public RoleFilm saveRoleFilm(RoleFilm role) {
         return roleRepository.save(role);
     }
 
@@ -67,7 +68,7 @@ public class RoleFilmService {
      *
      * @param id L'identifiant du rôle à supprimer.
      */
-    public void deleteRole(Long id) {
+    public void deleteRoleFilm(Long id) {
         roleRepository.deleteById(id);
     }
 
