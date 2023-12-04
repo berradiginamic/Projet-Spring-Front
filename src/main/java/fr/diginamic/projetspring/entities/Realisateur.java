@@ -15,6 +15,9 @@ public class Realisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /** Identifiant imdb du réalisateur. */
+    private String realisateur_id;
+
     /** Nom du réalisateur. */
     private String nom;
 
@@ -65,6 +68,14 @@ public class Realisateur {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRealisateur_id() {
+        return realisateur_id;
+    }
+
+    public void setRealisateur_id(String realisateur_id) {
+        this.realisateur_id = realisateur_id;
     }
 
     /**

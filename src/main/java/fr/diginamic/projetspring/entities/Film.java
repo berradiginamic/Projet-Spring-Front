@@ -32,8 +32,8 @@ public class Film {
 
     /** Langue du film. */
     private String langue;
-    
-  private String Genres;
+
+    private String Genres;
 
     /** Résumé du film. */
     private String resume;
@@ -141,10 +141,10 @@ public class Film {
      *
      * @param rating La note du film.
      */
-     public void setRating(String rating) {
-       this.rating = rating;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
-        
+
 
     /**
      * Obtient l'URL du profil du film.
@@ -191,7 +191,7 @@ public class Film {
         Genres = genres;
     }
 
-  /**
+    /**
      * Obtient la langue du film.
      *
      * @return La langue du film.

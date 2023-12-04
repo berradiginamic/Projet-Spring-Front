@@ -5,7 +5,6 @@ import fr.diginamic.projetspring.entities.Film;
 import fr.diginamic.projetspring.repositories.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +14,11 @@ import java.util.Optional;
  */
 @Service
 public class FilmService {
-
+    private final FilmRepository filmRepository;
     @Autowired
-    private FilmRepository filmRepository;
+    public FilmService(FilmRepository filmRepository) {
+        this.filmRepository = filmRepository;
+    }
 
     /**
      * Insère un film dans la base de données.
@@ -112,4 +113,5 @@ public class FilmService {
     }
 
     // Ajoutez d'autres méthodes en fonction des besoins
+
 }

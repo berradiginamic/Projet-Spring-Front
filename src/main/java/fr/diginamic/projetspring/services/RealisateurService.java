@@ -14,14 +14,13 @@ import java.util.Optional;
 @Service
 public class RealisateurService {
 
-    private final RealisateurRepository realisateurRepository;
-
     /**
      * Constructeur du service Realisateur.
      *
      * @param realisateurRepository Le repository pour les opérations liées à l'entité Realisateur.
      */
     @Autowired
+    private final RealisateurRepository realisateurRepository;
     public RealisateurService(RealisateurRepository realisateurRepository) {
         this.realisateurRepository = realisateurRepository;
     }

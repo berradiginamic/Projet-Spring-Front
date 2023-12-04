@@ -10,13 +10,5 @@ import java.util.List;
  */
 public interface FilmRepository extends JpaRepository<Film, Long> {
 
-    /**
-     * Méthode héritée de JpaRepository pour rechercher tous les films.
-     *
-     * @return Une liste de tous les films.
-     */
-    List<Film> findAll();
-
-    // Ajoutez d'autres méthodes déclaratives en fonction des besoins
 
 }

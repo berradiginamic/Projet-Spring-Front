@@ -17,7 +17,7 @@ import java.util.Optional;
  * Contrôleur REST pour la gestion des films.
  */
 @RestController
-@RequestMapping("/api/films")
+@RequestMapping("/films")
 public class FilmController {
 
     /** Service gérant la logique métier des films. */

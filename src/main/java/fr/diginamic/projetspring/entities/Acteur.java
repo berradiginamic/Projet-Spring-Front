@@ -16,6 +16,7 @@ public class Acteur {
     private Long id;
 
     /** Nom de l'acteur. */
+    private String acteur_id;
     private String nom;
     private Date dateNaissance;
     private String LieuNaissance;
@@ -25,7 +26,6 @@ public class Acteur {
     @ManyToOne
     @JoinColumn(name = "film_id")
     private Film film;
-
 
     /** Liste des rôles que l'acteur a joués dans des films. */
     @OneToMany(mappedBy = "acteur")
@@ -53,21 +53,39 @@ public class Acteur {
     // Getters et setters
 
     /**
-     * Obtient l'identifiant unique de l'acteur.
+     * Obtient l'identifiant unique de l'acteur dans notre base de données.
      *
-     * @return L'identifiant unique de l'acteur.
+     * @return L'identifiant unique de l'acteur dans notre base de données.
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * Définit l'identifiant unique de l'acteur.
+     * Définit l'identifiant unique de l'acteur dans notre base de données.
      *
-     * @param id L'identifiant unique de l'acteur.
+     * @param id L'identifiant unique de l'acteur dans notre base de données.
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * Obtient l'identifiant imdb de l'acteur.
+     *
+     * @return L'identifiant unique de l'acteur.
+     */
+    public String getActeur_id() {
+        return acteur_id;
+    }
+
+    /**
+     * Définit l'identifiant imdb de l'acteur.
+     *
+     * @param acteur_id L'identifiant imdb de l'acteur
+     */
+    public void setActeur_id(String acteur_id) {
+        this.acteur_id = acteur_id;
     }
 
     /**
