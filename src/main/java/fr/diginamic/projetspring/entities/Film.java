@@ -1,7 +1,7 @@
 package fr.diginamic.projetspring.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class Film {
     private String nom;
 
     /** Date de sortie du film. */
-    private LocalDate anneeSortie;
+    private Date anneeSortie;
 
     /** Note du film. */
     private String rating;
@@ -113,7 +113,7 @@ public class Film {
      *
      * @return La date de sortie du film.
      */
-    public LocalDate getAnneeSortie() {
+    public Date getAnneeSortie() {
         return anneeSortie;
     }
 
@@ -122,7 +122,7 @@ public class Film {
      *
      * @param anneeSortie La date de sortie du film.
      */
-    public void setAnneeSortie(LocalDate anneeSortie) {
+    public void setAnneeSortie(Date anneeSortie) {
         this.anneeSortie = anneeSortie;
     }
 

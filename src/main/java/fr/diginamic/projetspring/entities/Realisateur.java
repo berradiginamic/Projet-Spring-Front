@@ -1,7 +1,7 @@
 package fr.diginamic.projetspring.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class Realisateur {
     private String nom;
 
     /** Date de naissance du réalisateur. */
-    private LocalDate dateNaissance;
+    private Date dateNaissance;
 
     /** Lieu de naissance du réalisateur. */
     private String lieuNaissance;
@@ -90,7 +90,7 @@ public class Realisateur {
      *
      * @return La date de naissance du réalisateur.
      */
-    public LocalDate getDateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 
@@ -99,7 +99,7 @@ public class Realisateur {
      *
      * @param dateNaissance La date de naissance du réalisateur.
      */
-    public void setDateNaissance(LocalDate dateNaissance) {
+    public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 

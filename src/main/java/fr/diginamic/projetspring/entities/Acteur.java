@@ -31,13 +31,6 @@ public class Acteur {
     @OneToMany(mappedBy = "acteur")
     private List<RoleFilm> roles;
 
-    /** Date de naissance de l'acteur. */
-    private LocalDate dateNaissance;
-
-
-    @OneToMany(mappedBy = "acteur")
-    private List<RoleFilm> roles;
-
     // Constructeurs
     /**
      * Constructeur par défaut.
@@ -91,16 +84,8 @@ public class Acteur {
      *
      * @param nom Le nom de l'acteur.
      */
-
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public Date getDateNaissance() {
-        return dateNaissance;
-    }
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
     }
 
 
@@ -152,7 +137,7 @@ public class Acteur {
      *
      * @return La date de naissance de l'acteur.
      */
-    public LocalDate getDateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 
@@ -161,7 +146,7 @@ public class Acteur {
      *
      * @param dateNaissance La date de naissance de l'acteur.
      */
-    public void setDateNaissance(LocalDate dateNaissance) {
+    public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
@@ -176,5 +161,4 @@ public class Acteur {
     public void insertActeur(Acteur acteur) {
         // Logique pour insérer l'acteur dans la base de données.
     }
-}
 }

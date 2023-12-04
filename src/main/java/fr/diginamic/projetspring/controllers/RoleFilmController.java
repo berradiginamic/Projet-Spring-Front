@@ -71,7 +71,7 @@ public class RoleFilmController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRole(@PathVariable("id") Long id) {
-        roleFilmService.deleteRole(id);
+        roleFilmService.deleteRoleFilm(id);
         return ResponseEntity.noContent().build();
     }
 
