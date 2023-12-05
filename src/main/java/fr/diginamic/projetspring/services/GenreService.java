@@ -23,6 +23,12 @@ public class GenreService {
     public List<Genre> findAll() {
         return genreRepository.findAll();
     }
+    public Genre updateGenre(Integer genreId, Genre genre) {
+        // Votre logique de mise à jour du genre
+
+        // Assurez-vous de retourner le genre mis à jour
+        return genreRepository.save(genre);
+    }
 
     public Genre findById(Integer genreId) {
         return genreRepository.findById(genreId).orElse(null);

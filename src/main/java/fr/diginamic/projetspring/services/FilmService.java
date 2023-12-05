@@ -19,6 +19,9 @@ public class FilmService {
      *
      * @return Une liste de tous les films.
      */
+    public List<Film> getFilmsByGenre(String genreType) {
+        return filmRepository.findByGenresContainingIgnoreCase(genreType);
+    }
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
     }
@@ -47,16 +50,18 @@ public class FilmService {
      * Met à jour un film existant.
      *
      * @param filmId L'identifiant du film à mettre à jour.
-     * @param film   Les nouvelles données du film.
-     * @return Le film mis à jour, ou un Optional vide si le film avec l'ID spécifié n'existe pas.
-     */
+     *  * @param film   Les nouvelles données du film.
+     *  * @return Le film mis à jour, ou un Optional vide si le film avec l'ID spécifié n'existe pas.
+     *  */
+
+
     public Film updateFilm(Integer filmId, Film film) {
-        if (filmRepository.existsById(filmId)) {
-            film.setFilmId(filmId);
-            return filmRepository.save(film);
-        }
-        return null;
-    }
+     if (filmRepository.existsById(filmId)) {
+     film.setId(filmId); // Utilisez setId pour définir l'identifiant du film
+     return filmRepository.save(film);
+     }
+     return null;
+     }
 
         /**
          * Supprime un film par son identifiant.

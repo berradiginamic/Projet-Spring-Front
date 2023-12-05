@@ -9,8 +9,15 @@ public class Film {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_id")
-    private Integer filmId;
+    private Integer id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_genre",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> genres;
 
     private String nom;
     private String idIMDB;
@@ -19,7 +26,6 @@ public class Film {
     private String urlProfile;
     private String lieuTournage;
     private String langue;
-    private String genres;
     private String resume;
     private String pays;
 
@@ -30,14 +36,10 @@ public class Film {
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RealisateurFilm> realisateurFilms;
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id")
-    private Genre genre;
-
     public Film() {
     }
 
-    public Film(Integer anneeSortie, String langue, String lieuTournage, String nom, String pays, String rating, String resume, String urlProfile, String genres) {
+    public Film(Integer anneeSortie, String langue, String lieuTournage, String nom, String pays, String rating, String resume, String urlProfile, List<Genre> genres) {
         this.anneeSortie = anneeSortie;
         this.langue = langue;
         this.lieuTournage = lieuTournage;
@@ -49,12 +51,12 @@ public class Film {
         this.genres = genres;
     }
 
-    public Integer getFilmId() {
-        return filmId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFilmId(Integer filmId) {
-        this.filmId = filmId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getIdIMDB() {
@@ -113,14 +115,6 @@ public class Film {
         this.langue = langue;
     }
 
-    public String getGenres() {
-        return genres;
-    }
-
-    public void setGenres(String genres) {
-        this.genres = genres;
-    }
-
     public String getResume() {
         return resume;
     }
@@ -145,10 +139,26 @@ public class Film {
         this.realisateur = realisateur;
     }
 
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public List<RealisateurFilm> getRealisateurFilms() {
+        return realisateurFilms;
+    }
+
+    public void setRealisateurFilms(List<RealisateurFilm> realisateurFilms) {
+        this.realisateurFilms = realisateurFilms;
+    }
+
     @Override
     public String toString() {
         return "Film{" +
-                "filmId=" + filmId +
+                "id=" + id +
                 ", titre='" + idIMDB + '\'' +
                 ", anneeSortie=" + anneeSortie +
                 ", langue='" + langue + '\'' +
@@ -158,7 +168,7 @@ public class Film {
                 ", rating=" + rating +
                 ", resume='" + resume + '\'' +
                 ", urlProfile='" + urlProfile + '\'' +
-                ", genre='" + genres + '\'' +
+                ", genres='" + genres + '\'' +
                 ", realisateur=" + realisateur +
                 '}';
     }
