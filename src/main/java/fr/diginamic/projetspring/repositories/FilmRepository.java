@@ -39,6 +39,6 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     List<Film> findAllByGenres(String genres);
 
     // Find all films by realisateur id
-    @Query("SELECT f FROM Film f JOIN f.realisateur r WHERE r.id = :realisateurId")
+    @Query("SELECT f FROM Film f JOIN f.realisateur r WHERE r.idRealisateur = :realisateurId")
     List<Film> findAllByRealisateurId(@Param("realisateurId") Integer realisateurId);
 }

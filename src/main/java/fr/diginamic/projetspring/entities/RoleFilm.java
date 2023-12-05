@@ -6,7 +6,7 @@ import jakarta.persistence.*;
  * Représente le rôle d'un acteur dans un film, avec le personnage joué.
  */
 @Entity
-@Table(name = "filmrole")
+@Table(name = "rolefilm")
 public class RoleFilm {
 
     /** Identifiant unique du rôle dans un film. */
