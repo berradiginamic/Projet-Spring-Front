@@ -18,13 +18,16 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class TraitementFichierApplication implements CommandLineRunner {
@@ -56,54 +59,97 @@ public class TraitementFichierApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM d yyyy");
+        // Set up a Set to track unique IDs
+        Set<String> uniqueActeurIds = new HashSet<>();
 
         /** Import du fichier acteurs.csv */
-       /* Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
-        List<String> rowsActeurs = Files.readAllLines(pathActeurs);
-        rowsActeurs.remove(0);
-        for (String rowActeur : rowsActeurs) {
-            System.out.println(rowActeur);
-            String[] elements = rowActeur.split(";");
-            Acteur acteurs = new Acteur();
-            acteurs.setIdIMDB(elements[0]);
-            acteurs.setNom(elements[1]);
-            try{
-            Date dateNaissance = sdf.parse(elements[2]);
-            acteurs.setDateNaissance(dateNaissance);}
-            catch (ParseException e) {
-                // Handle the parsing exception appropriately
-            }
-            acteurs.setLieuNaissance(elements[3]);
-            acteurs.setUrlProfile(elements[5]);
-            acteurService.createActeur(acteurs);
-        } */
+        Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
+        try {
+            List<String> rowsActeurs = Files.readAllLines(pathActeurs);
+            rowsActeurs.remove(0);
 
-       /*  Import du fichier films.csv
+            for (String rowActeur : rowsActeurs) {
+                System.out.println(rowActeur);
+
+                String[] elements = rowActeur.split(";");
+                String idIMDB = elements[0].trim();
+                // Vérification si l'ID existe déja
+                if (!uniqueActeurIds.contains(idIMDB)) {
+                    Acteur acteurs = new Acteur();
+                    acteurs.setIdIMDB(idIMDB);
+                    acteurs.setNom(elements[1]);
+                    try {
+                        Date dateNaissance = sdf.parse(elements[2]);
+                        acteurs.setDateNaissance(dateNaissance);
+                    } catch (ParseException e) {
+                        // Handle the parsing exception appropriately
+                    }
+                    acteurs.setLieuNaissance(elements[3]);
+                    acteurs.setUrlProfile(elements[5]);
+                    // Sauvegarde de l'acteur dans la base de données
+                    acteurService.createActeur(acteurs);
+                    // Addition de Id dans le set de id unique
+                    uniqueActeurIds.add(idIMDB);
+                } else {
+                    System.out.println("Duplicate ID: " + idIMDB);
+                }
+            }}
+            catch (IOException e) {
+                e.printStackTrace();
+                // Handle the IO exception appropriately
+            }
+
+       /*  Import du fichier films.csv */
         Path pathFilms = Paths.get("C:/dev-java/films.csv");
         List<String> rowFilms = Files.readAllLines(pathFilms);
         rowFilms.remove(0);
+        Set<String> uniqueFilmIds = new HashSet<>();
         for (String rowFilm : rowFilms) {
             System.out.println(rowFilm);
             String[] elements = rowFilm.split(";");
-            Film films = new Film();
-            films.setIdIMDB(elements[0]);
-            films.setNom(elements[1]);
-            try {
-                films.setAnneeSortie(Integer.valueOf(elements[2]));
-            } catch (NumberFormatException e) {
-                System.out.println("Error converting film data: " + rowFilm);
-                e.printStackTrace();
-                continue;
+            String idIMDB = elements[0];
+            // Vérification si l'ID existe déja
+            if (!uniqueFilmIds.contains(idIMDB)) {
+                Film films = new Film();
+                films.setIdIMDB(idIMDB);
+                films.setNom(elements[1]);
+                // Handle anneeSortie
+                if (elements.length >= 2) {
+                    try {
+                        films.setAnneeSortie(Integer.valueOf(elements[2]));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error converting film data: " + rowFilm);
+                        e.printStackTrace();
+                        continue;
+                    }
+                } else{
+                        System.out.println("Année de sortie manquante");
+                    }
+                // Handle de resume
+                if (elements.length >= 8) {
+                    String resume = elements[8];
+                    // Vérification de la longueur maximum d'un résumé
+                    if (resume.length() > 255) {
+                        // Truncate the resume to the maximum length
+                        resume = resume.substring(0, 255);
+                    }
+                } else {
+                    films.setResume("");
+                }
+                films.setRating(elements[3]);
+                films.setUrlProfile(elements[4]);
+                films.setLieuTournage(elements[5]);
+                films.setGenres(elements[6]);
+                films.setLangue(elements[7]);
+                films.setPays(elements[9]);
+                // ajout de l'id dans le set
+                uniqueFilmIds.add(idIMDB);
+                //sauvegarde de film dans la base de données
+                filmService.createFilm(films);
+            } else {
+                System.out.println("Duplicate ID: " + idIMDB);
             }
-            films.setRating(elements[3]);
-            films.setUrlProfile(elements[4]);
-            films.setLieuTournage(elements[5]);
-            films.setGenres(elements[6]);
-            films.setLangue(elements[7]);
-            /* films.setResume(elements[8]); cause une erreure de chaines trop longues
-            films.setPays(elements[9]);
-            filmService.createFilm(films);
-        } */
+        }
 
         /* Import du fichier realisateurs.csv */
         Path pathRealisateurs = Paths.get("C:/dev-java/realisateurs.csv");
@@ -112,8 +158,12 @@ public class TraitementFichierApplication implements CommandLineRunner {
         for (String rowRealisateur : rowRealisateurs) {
             System.out.println(rowRealisateur);
             String[] elements = rowRealisateur.split(";");
+            String idIMDB = elements[0];
+            // Check if ID already exists
+            if (!uniqueActeurIds.contains(idIMDB)) {
+                // Create and save a new Film object
             Realisateur realisateurs = new Realisateur();
-            realisateurs.setIdIMDB(elements[0]);
+            realisateurs.setIdIMDB(idIMDB);
             realisateurs.setNom(elements[1]);
             try{
                 Date dateNaissance = sdf.parse(elements[2]);
@@ -123,8 +173,16 @@ public class TraitementFichierApplication implements CommandLineRunner {
             }
             realisateurs.setLieuNaissance(elements[3]);
             realisateurs.setUrlProfile(elements[4]);
+
+            // Save the film to the database
             realisateurService.createRealisateur(realisateurs);
+
+            // Add ID to the unique IDs SetuniqueIds.add(idIMDB);
+            } else {
+                System.out.println("Duplicate ID: " + idIMDB);
         }
+        }
+
 
     /** Import du fichier roles.csv
         Path pathRoleFilm = Paths.get("C:/dev-java/roles.csv");

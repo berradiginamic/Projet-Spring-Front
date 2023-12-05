@@ -16,6 +16,7 @@ public class Acteur {
     private Integer acteurId;
 
     /** Nom de l'acteur. */
+    @Column(unique = true)
     private String idIMDB;
     private String nom;
     private Date dateNaissance;

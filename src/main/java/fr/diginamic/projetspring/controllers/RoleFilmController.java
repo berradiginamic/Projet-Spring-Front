@@ -1,5 +1,6 @@
 package fr.diginamic.projetspring.controllers;
 
+import fr.diginamic.projetspring.entities.Film;
 import fr.diginamic.projetspring.entities.RoleFilm;
 import fr.diginamic.projetspring.services.RoleFilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,4 +76,8 @@ public class RoleFilmController {
     }
 
     // Ajoutez d'autres méthodes d'endpoint au besoin
+    @GetMapping("/acteur/{acteurId}")
+    public List<RoleFilm> findByActeurId(@PathVariable("acteurId") Integer acteurId) {
+        return roleFilmService.findByActeurId(acteurId);
+    }
 }

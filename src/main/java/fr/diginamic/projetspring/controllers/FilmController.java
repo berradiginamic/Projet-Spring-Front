@@ -24,6 +24,8 @@ public class FilmController {
     /** Service gérant la logique métier des films. */
     @Autowired
     private FilmService filmService;
+    @Autowired
+    private RoleFilmService roleFilmService;
 
     // Opérations CRUD pour les films
 
@@ -89,4 +91,14 @@ public class FilmController {
     // Opérations spécifiques
 
     // Ajoutez d'autres méthodes selon vos besoins
+    /**
+     * Endpoint pour obtenir la liste des rôles dans un film.
+     *
+     * @ filmId Identifiant du film.
+     * @return La liste des rôles dans le film.
+     */
+    @GetMapping("/realisateur/{realisateurId}")
+    public List<Film> findByRealisateurId(@PathVariable("realisateurId") Integer realisateurId) {
+        return filmService.findByRealisateurId(realisateurId);
+    }
 }
