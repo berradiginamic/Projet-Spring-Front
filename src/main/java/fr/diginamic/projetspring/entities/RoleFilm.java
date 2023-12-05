@@ -6,14 +6,16 @@ import jakarta.persistence.*;
  * Représente le rôle d'un acteur dans un film, avec le personnage joué.
  */
 @Entity
+@Table(name = "filmrole")
 public class RoleFilm {
 
     /** Identifiant unique du rôle dans un film. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer roleId;
 
     /** Personnage joué par l'acteur dans le film. */
+    @Column(name="personnage")
     private String personnage;
 
     /** Acteur qui joue le rôle. */
@@ -37,14 +39,14 @@ public class RoleFilm {
     /**
      * Constructeur avec acteur, film et personnage.
      *
-     * @param acteur     L'acteur qui joue le rôle.
-     * @param film       Le film dans lequel le rôle est joué.
+     *  acteur     L'acteur qui joue le rôle.
+     *  film       Le film dans lequel le rôle est joué.
      * @param personnage Le personnage joué par l'acteur dans le film.
      */
-    public RoleFilm(Acteur acteur, Film film, String personnage) {
-        this.acteur = acteur;
-        this.film = film;
+    public RoleFilm(String personnage, Film film, Acteur acteur) {
         this.personnage = personnage;
+        this.film = film;
+        this.acteur = acteur;
     }
 
     // Getters et Setters
@@ -54,53 +56,17 @@ public class RoleFilm {
      *
      * @return L'identifiant unique du rôle dans un film.
      */
-    public Long getId() {
-        return id;
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**
      * Définit l'identifiant unique du rôle dans un film.
      *
-     * @param id L'identifiant unique du rôle dans un film.
+     * @param roleId L'identifiant unique du rôle dans un film.
      */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * Obtient l'acteur qui joue le rôle.
-     *
-     * @return L'acteur qui joue le rôle.
-     */
-    public Acteur getActeur() {
-        return acteur;
-    }
-
-    /**
-     * Définit l'acteur qui joue le rôle.
-     *
-     * @param acteur L'acteur qui joue le rôle.
-     */
-    public void setActeur(Acteur acteur) {
-        this.acteur = acteur;
-    }
-
-    /**
-     * Obtient le film dans lequel le rôle est joué.
-     *
-     * @return Le film dans lequel le rôle est joué.
-     */
-    public Film getFilm() {
-        return film;
-    }
-
-    /**
-     * Définit le film dans lequel le rôle est joué.
-     *
-     * @param film Le film dans lequel le rôle est joué.
-     */
-    public void setFilm(Film film) {
-        this.film = film;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     /**
@@ -119,5 +85,26 @@ public class RoleFilm {
      */
     public void setPersonnage(String personnage) {
         this.personnage = personnage;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    public Acteur getActeur() {
+        return acteur;
+    }
+
+    public void setActeur(Acteur acteur) {
+        this.acteur = acteur;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" + "roleId=" + roleId + ", personnage='" + personnage + '\'' + '}';
     }
 }

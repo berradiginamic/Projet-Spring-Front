@@ -4,6 +4,8 @@ import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.repositories.ActeurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,18 +13,15 @@ import java.util.List;
  */
 @Service
 public class ActeurService {
-
-    private final ActeurRepository acteurRepository;
+    @Autowired
+    private ActeurRepository acteurRepository;
 
     /**
      * Constructeur du service Acteur.
      *
      * @param acteurRepository Le repository Spring Data JPA pour l'entité Acteur.
      */
-    @Autowired
-    public ActeurService(ActeurRepository acteurRepository) {
-        this.acteurRepository = acteurRepository;
-    }
+
 
     /**
      * Récupère tous les acteurs.
@@ -36,11 +35,11 @@ public class ActeurService {
     /**
      * Récupère un acteur par son identifiant.
      *
-     * @param id L'identifiant de l'acteur.
+     * @param acteurId L'identifiant de l'acteur.
      * @return L'acteur correspondant à l'identifiant, ou null s'il n'existe pas.
      */
-    public Acteur getActeurById(Long id) {
-        return acteurRepository.findById(id).orElse(null);
+    public Acteur getActeurById(Integer acteurId) {
+        return acteurRepository.findById(acteurId).orElse(null);
     }
 
     /**
@@ -51,21 +50,21 @@ public class ActeurService {
      */
  
         // Logique de création de l'acteur (par exemple, validation des données, etc.)
-  public Acteur saveActeur(Acteur acteur) {
+  public Acteur createActeur(Acteur acteur) {
         return acteurRepository.save(acteur);
     }
 
     /**
      * Met à jour un acteur existant.
      *
-     * @param id     L'identifiant de l'acteur à mettre à jour.
+     * @param acteurId     L'identifiant de l'acteur à mettre à jour.
      * @param acteur Les nouvelles données de l'acteur.
      * @return L'acteur mis à jour, ou null si l'acteur avec l'ID spécifié n'existe pas.
      */
-    public Acteur updateActeur(Long id, Acteur acteur) {
+    public Acteur updateActeur(Integer acteurId, Acteur acteur) {
         // Logique de mise à jour de l'acteur (par exemple, vérification de l'existence de l'acteur, validation des données, etc.)
-        if (acteurRepository.existsById(id)) {
-            acteur.setId(id);
+        if (acteurRepository.existsById(acteurId)) {
+            acteur.setActeurId(acteurId);
             return acteurRepository.save(acteur);
         }
         return null; // Ou lancez une exception appropriée si nécessaire
@@ -74,9 +73,26 @@ public class ActeurService {
     /**
      * Supprime un acteur par son identifiant.
      *
-     * @param id L'identifiant de l'acteur à supprimer.
+     * @param acteurId L'identifiant de l'acteur à supprimer.
      */
-    public void deleteActeur(Long id) {
-        acteurRepository.deleteById(id);
+    public void deleteActeur(Integer acteurId) {
+        acteurRepository.deleteById(acteurId);
+    }
+
+
+    public List<Acteur> findByNom(String nom) {
+        return acteurRepository.findAllByNom(nom);
+    }
+
+    public List<Acteur> findByLieuNaissance(String lieuNaissance) {
+        return acteurRepository.findAllByLieuNaissance(lieuNaissance);
+    }
+
+    public List<Acteur> findByDateNaissance(Date dateNaissance) {
+        return acteurRepository.findAllByDateNaissance(dateNaissance);
+    }
+
+    public List<Acteur> findByUrlProfile(String urlProfile) {
+        return acteurRepository.findAllByUrlProfile(urlProfile);
     }
 }

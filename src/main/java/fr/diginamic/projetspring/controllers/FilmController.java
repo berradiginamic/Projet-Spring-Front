@@ -1,6 +1,7 @@
 package fr.diginamic.projetspring.controllers;
 
 import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.entities.RoleFilm;
 import fr.diginamic.projetspring.services.ActeurService;
 import fr.diginamic.projetspring.services.FilmService;
@@ -21,27 +22,8 @@ import java.util.Optional;
 public class FilmController {
 
     /** Service gérant la logique métier des films. */
-    private final FilmService filmService;
-
-    /** Service gérant la logique métier des acteurs. */
-    private final ActeurService acteurService;
-
-    /** Service gérant la logique métier des rôles dans les films. */
-    private final RoleFilmService roleFilmService;
-
-    /**
-     * Constructeur du contrôleur avec injection des services.
-     *
-     * @param filmService    Service gérant la logique métier des films.
-     * @param acteurService  Service gérant la logique métier des acteurs.
-     * @param roleFilmService Service gérant la logique métier des rôles dans les films.
-     */
     @Autowired
-    public FilmController(FilmService filmService, ActeurService acteurService, RoleFilmService roleFilmService) {
-        this.filmService = filmService;
-        this.acteurService = acteurService;
-        this.roleFilmService = roleFilmService;
-    }
+    private FilmService filmService;
 
     // Opérations CRUD pour les films
 
@@ -59,14 +41,13 @@ public class FilmController {
     /**
      * Endpoint pour obtenir un film par son identifiant.
      *
-     * @param id Identifiant du film à récupérer.
+     * @param filmId Identifiant du film à récupérer.
      * @return Le film correspondant à l'identifiant.
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<Film> getFilmById(@PathVariable("id") Long id) {
-        Optional<Film> optionalFilm = filmService.getFilmById(id);
-        return optionalFilm.map(film -> new ResponseEntity<>(film, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/{filmId}")
+    public ResponseEntity<Film> getFilmById(@PathVariable("filmId") Integer filmId) {
+        Optional<Film> film = Optional.ofNullable(filmService.getFilmById(filmId));
+        return film.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     /**
@@ -84,54 +65,28 @@ public class FilmController {
     /**
      * Endpoint pour mettre à jour un film existant.
      *
-     * @param id   Identifiant du film à mettre à jour.
+     * @param filmId   Identifiant du film à mettre à jour.
      * @param film Les nouvelles données du film.
      * @return Le film mis à jour.
      */
-    @PutMapping("/{id}")
-    public ResponseEntity<Film> updateFilm(@PathVariable("id") Long id, @RequestBody Film film) {
-        Optional<Film> optionalUpdatedFilm = filmService.updateFilm(id, film);
-        return optionalUpdatedFilm.map(updatedFilm -> new ResponseEntity<>(updatedFilm, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+    @PutMapping("/{filmId}")
+    public Film updateFilm(@PathVariable("filmId") Integer filmId, @RequestBody Film film) {
+        return filmService.updateFilm(filmId, film);
+        }
+
 
     /**
      * Endpoint pour supprimer un film par son identifiant.
      *
-     * @param id Identifiant du film à supprimer.
+     * @param filmId Identifiant du film à supprimer.
      * @return Réponse indiquant le succès de l'opération.
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFilm(@PathVariable("id") Long id) {
-        filmService.deleteFilm(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/{filmId}")
+    public void deleteFilm(@PathVariable Integer filmId) {
+        filmService.deleteFilm(filmId);
     }
 
     // Opérations spécifiques
-
-    /**
-     * Endpoint pour obtenir la liste des films associés à un acteur.
-     *
-     * @param acteurId Identifiant de l'acteur.
-     * @return La liste des films associés à l'acteur.
-     */
-    @GetMapping("/acteur/{acteurId}")
-    public ResponseEntity<List<Film>> getFilmsByActeur(@PathVariable("acteurId") Long acteurId) {
-        List<Film> films = filmService.getFilmsByActeur(acteurId);
-        return new ResponseEntity<>(films, HttpStatus.OK);
-    }
-
-    /**
-     * Endpoint pour obtenir la liste des rôles dans un film.
-     *
-     * @param filmId Identifiant du film.
-     * @return La liste des rôles dans le film.
-     */
-    @GetMapping("/roles/{filmId}")
-    public ResponseEntity<List<RoleFilm>> getRolesByFilm(@PathVariable("filmId") Long filmId) {
-        List<RoleFilm> roles = roleFilmService.getRolesByFilm(filmId);
-        return new ResponseEntity<>(roles, HttpStatus.OK);
-    }
 
     // Ajoutez d'autres méthodes selon vos besoins
 }

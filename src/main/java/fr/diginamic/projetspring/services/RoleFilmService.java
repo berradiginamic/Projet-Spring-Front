@@ -13,35 +13,22 @@ import java.util.Optional;
  */
 @Service
 public class RoleFilmService {
-
-    private final RoleFilmRepository roleRepository;
-
     /**
      * Constructeur du service RoleFilm.
      *
      * @param roleRepository Le repository pour les opérations liées à l'entité RoleFilm.
      */
     @Autowired
-    public RoleFilmService(RoleFilmRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
-
-
-    /**
-     * Insère un rôle dans la base de données.
-     */
-    public static void insertFilm() {
-        // Implémentation selon les besoins
-    }
+    private RoleFilmRepository roleRepository;
 
     /**
      * Récupère un rôle par son identifiant.
      *
-     * @param id L'identifiant du rôle.
+     * @param roleId L'identifiant du rôle.
      * @return Le rôle correspondant à l'identifiant, ou un Optional vide s'il n'existe pas.
      */
-    public Optional<RoleFilm> getRoleById(Long id) {
-        return roleRepository.findById(id);
+    public Optional<RoleFilm> getRoleById(Integer roleId) {
+        return roleRepository.findById(roleId);
     }
 
     /**
@@ -59,17 +46,17 @@ public class RoleFilmService {
      * @param role Le rôle à enregistrer.
      * @return Le rôle enregistré.
      */
-   public RoleFilm saveRoleFilm(RoleFilm role) {
+   public RoleFilm createRoleFilm(RoleFilm role) {
         return roleRepository.save(role);
     }
 
     /**
      * Supprime un rôle par son identifiant.
      *
-     * @param id L'identifiant du rôle à supprimer.
+     * @param roleId L'identifiant du rôle à supprimer.
      */
-    public void deleteRoleFilm(Long id) {
-        roleRepository.deleteById(id);
+    public void deleteRoleFilm(Integer roleId) {
+        roleRepository.deleteById(roleId);
     }
 
     /**
@@ -78,9 +65,12 @@ public class RoleFilmService {
      * @param filmId L'identifiant du film.
      * @return Une liste de rôles associés au film, ou une liste vide s'il n'y en a pas.
      */
-    public List<RoleFilm> getRolesByFilm(Long filmId) {
-        // Implémentation selon les besoins
-        return null;
+    public List<RoleFilm> findByFilmId(Integer filmId) {
+        return roleRepository.findAllByFilmId(filmId);
+    }
+
+    public List<RoleFilm> findByActeurId(Integer acteurId) {
+        return roleRepository.findAllByActeurId(acteurId);
     }
 
     // Ajoutez d'autres méthodes en fonction des besoins

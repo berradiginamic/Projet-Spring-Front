@@ -32,12 +32,12 @@ public class RoleFilmController {
     /**
      * Endpoint pour obtenir un rôle par son identifiant.
      *
-     * @param id Identifiant du rôle à récupérer.
+     * @param roleId Identifiant du rôle à récupérer.
      * @return Le rôle correspondant à l'identifiant.
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<RoleFilm> getRoleById(@PathVariable("id") Long id) {
-        Optional<RoleFilm> role = roleFilmService.getRoleById(id);
+    @GetMapping("/{roleId}")
+    public ResponseEntity<RoleFilm> getRoleById(@PathVariable("roleId") Integer roleId) {
+        Optional<RoleFilm> role = roleFilmService.getRoleById(roleId);
         return role.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -58,20 +58,19 @@ public class RoleFilmController {
      * @return Le rôle créé.
      */
     @PostMapping
-    public ResponseEntity<RoleFilm> saveRoleFilm(@RequestBody RoleFilm role) {
-        RoleFilm savedRole = roleFilmService.saveRoleFilm(role);
-        return ResponseEntity.ok(savedRole);
+    public RoleFilm createRoleFilm(@RequestBody RoleFilm role) {
+        return roleFilmService.createRoleFilm(role);
     }
 
     /**
      * Endpoint pour supprimer un rôle par son identifiant.
      *
-     * @param id Identifiant du rôle à supprimer.
+     * @param roleId Identifiant du rôle à supprimer.
      * @return Réponse indiquant le succès de l'opération.
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRole(@PathVariable("id") Long id) {
-        roleFilmService.deleteRoleFilm(id);
+    @DeleteMapping("/{roleId}")
+    public ResponseEntity<Void> deleteRoleFilm(@PathVariable("roleId") Integer roleId) {
+        roleFilmService.deleteRoleFilm(roleId);
         return ResponseEntity.noContent().build();
     }
 

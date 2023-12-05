@@ -15,17 +15,8 @@ import java.util.List;
 public class ActeurController {
 
     /** Service gérant la logique métier des acteurs. */
-    private final ActeurService acteurService;
-
-    /**
-     * Constructeur du contrôleur avec injection du service.
-     *
-     * @param acteurService Service gérant la logique métier des acteurs.
-     */
     @Autowired
-    public ActeurController(ActeurService acteurService) {
-        this.acteurService = acteurService;
-    }
+    private ActeurService acteurService;
 
     /**
      * Endpoint pour obtenir la liste de tous les acteurs.
@@ -40,12 +31,12 @@ public class ActeurController {
     /**
      * Endpoint pour obtenir un acteur par son identifiant.
      *
-     * @param id Identifiant de l'acteur à récupérer.
+     * @param acteurId Identifiant de l'acteur à récupérer.
      * @return L'acteur correspondant à l'identifiant.
      */
-    @GetMapping("/{id}")
-    public Acteur getActeurById(@PathVariable("id") Long id) {
-        return acteurService.getActeurById(id);
+    @GetMapping("/{acteurId}")
+    public Acteur getActeurById(@PathVariable("acteurId") Integer acteurId) {
+        return acteurService.getActeurById(acteurId);
     }
 
     /**
@@ -55,29 +46,29 @@ public class ActeurController {
      * @return L'acteur créé.
      */
     @PostMapping
-    public Acteur saveActeur(@RequestBody Acteur acteur) {
-        return acteurService.saveActeur(acteur);
+    public Acteur createActeur(@RequestBody Acteur acteur) {
+        return acteurService.createActeur(acteur);
     }
 
     /**
      * Endpoint pour mettre à jour un acteur existant.
      *
-     * @param id     Identifiant de l'acteur à mettre à jour.
+     * @param acteurId     Identifiant de l'acteur à mettre à jour.
      * @param acteur Les nouvelles données de l'acteur.
      * @return L'acteur mis à jour.
      */
-    @PutMapping("/{id}")
-    public Acteur updateActeur(@PathVariable("id") Long id, @RequestBody Acteur acteur) {
-        return acteurService.updateActeur(id, acteur);
+    @PutMapping("/{acteurId}")
+    public Acteur updateActeur(@PathVariable("acteurId") Integer acteurId, @RequestBody Acteur acteur) {
+        return acteurService.updateActeur(acteurId, acteur);
     }
 
     /**
      * Endpoint pour supprimer un acteur par son identifiant.
      *
-     * @param id Identifiant de l'acteur à supprimer.
+     * @param acteurId Identifiant de l'acteur à supprimer.
      */
-    @DeleteMapping("/{id}")
-    public void deleteActeur(@PathVariable("id") Long id) {
-        acteurService.deleteActeur(id);
+    @DeleteMapping("/{acteurId}")
+    public void deleteActeur(@PathVariable("acteurId") Integer acteurId) {
+        acteurService.deleteActeur(acteurId);
     }
 }

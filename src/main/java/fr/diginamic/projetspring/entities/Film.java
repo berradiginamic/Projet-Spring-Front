@@ -8,49 +8,71 @@ import java.util.List;
  * Représente un film avec ses caractéristiques et les personnes impliquées dans sa création.
  */
 @Entity
+@Table(name= "films")
 public class Film {
 
-    /** Identifiant unique du film. */
+    /**
+     * Identifiant unique du film.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer filmId;
 
-    /** Nom du film. */
+    /**
+     * Nom du film.
+     */
     private String nom;
-
-    /** Date de sortie du film. */
-    private Date anneeSortie;
-
-    /** Note du film. */
-    private String rating;
-
-    /** URL du profil du film. */
+    /**
+     * identifiant IMDB du film
+     */
+    private String idIMDB;
+    /**
+     * Date de sortie du film.
+     */
+    private Integer anneeSortie;
+    /**
+     * Note du film.
+     */
+    private String rating;  // Penser a changer a Float
+    /**
+     * URL du profil du film.
+     */
     private String urlProfile;
-
-    /** Lieu de tournage du film. */
+    /**
+     * Lieu de tournage du film.
+     */
     private String lieuTournage;
-
-    /** Langue du film. */
+    /**
+     * Langue du film.
+     */
     private String langue;
-
-    private String Genres;
-
-    /** Résumé du film. */
+    private String genres;
+    /**
+     * Résumé du film.
+     */
     private String resume;
-
-    /** Pays d'origine du film. */
+    /**
+     * Pays d'origine du film.
+     */
     private String pays;
 
-    /** Réalisateur du film. */
+    /**
+     * Réalisateur du film.
+     */
     @ManyToOne
     @JoinColumn(name = "realisateur_id")
     private Realisateur realisateur;
 
-    /** Liste des acteurs qui ont joué dans le film. */
-    @OneToMany(mappedBy = "film")
-    private List<Acteur> acteurs;
+    /** Liste des rôles que l'acteur a joués dans des films. */
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RoleFilm> rolefilm;
+
+    @ManyToOne
+    @JoinColumn(name ="genre_id")
+    private Genre genre;
 
     // Constructeurs
+
     /**
      * Constructeur par défaut.
      */
@@ -60,15 +82,23 @@ public class Film {
     /**
      * Constructeur avec nom, réalisateur et liste d'acteurs.
      *
-     * @param nom       Nom du film.
-     * @param realisateur Réalisateur du film.
-     * @param acteurs   Liste des acteurs qui ont joué dans le film.
+     * @param nom         Nom du film.
+     *  realisateur Réalisateur du film.
+     *  acteurs     Liste des acteurs qui ont joué dans le film.
      */
-    public Film(String nom, Realisateur realisateur, List<Acteur> acteurs) {
+    public Film(Integer filmId, Integer anneeSortie, String langue, String lieuTournage, String nom, String pays, String rating, String resume, String urlProfile, String genre) {
+        this.filmId = Integer.parseInt(idIMDB); // Convert filmId to integer
+        this.anneeSortie = anneeSortie;
+        this.langue = langue;
+        this.lieuTournage = lieuTournage;
         this.nom = nom;
-        this.realisateur = realisateur;
-        this.acteurs = acteurs;
+        this.pays = pays;
+        this.rating = rating;
+        this.resume = resume;
+        this.urlProfile = urlProfile;
+        this.genres = genres;
     }
+
 
     // Getters et setters
 
@@ -77,17 +107,35 @@ public class Film {
      *
      * @return L'identifiant unique du film.
      */
-    public Long getId() {
-        return id;
+    public Integer getFilmId() {
+        return filmId;
     }
 
     /**
      * Définit l'identifiant unique du film.
      *
-     * @param id L'identifiant unique du film.
+     * @param filmId L'identifiant unique du film.
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
+
+    /**
+     * Obtient l'identifiant IMDB du film
+     *
+     * @return l'identifiant IMDB du film
+     */
+    public String getIdIMDB() {
+        return idIMDB;
+    }
+
+    /**
+     * Définit l'identifiant du film.
+     *
+     * @param idIMDB Le nom du film.
+     */
+    public void setIdIMDB(String idIMDB) {
+        this.idIMDB = idIMDB;
     }
 
     /**
@@ -113,7 +161,7 @@ public class Film {
      *
      * @return La date de sortie du film.
      */
-    public Date getAnneeSortie() {
+    public Integer getAnneeSortie() {
         return anneeSortie;
     }
 
@@ -122,7 +170,7 @@ public class Film {
      *
      * @param anneeSortie La date de sortie du film.
      */
-    public void setAnneeSortie(Date anneeSortie) {
+    public void setAnneeSortie(Integer anneeSortie) {
         this.anneeSortie = anneeSortie;
     }
 
@@ -184,11 +232,11 @@ public class Film {
 
 
     public String getGenres() {
-        return Genres;
+        return genres;
     }
 
     public void setGenres(String genres) {
-        Genres = genres;
+        this.genres = genres;
     }
 
     /**
@@ -268,7 +316,22 @@ public class Film {
      *
      * @return La liste des acteurs du film.
      */
-    public List<Acteur> getActeurs() {
-        return acteurs;
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "filmId=" + filmId +
+                ", titre='" + idIMDB + '\'' +
+                ", anneeSortie=" + anneeSortie +
+                ", langue='" + langue + '\'' +
+                ", lieuTournage='" + lieuTournage + '\'' +
+                ", nom='" + nom + '\'' +
+                ", pays='" + pays + '\'' +
+                ", rating=" + rating +
+                ", resume='" + resume + '\'' +
+                ", urlProfile='" + urlProfile + '\'' +
+                ", genre='" + genres + '\'' +
+                ", realisateur=" + realisateur +
+                '}';
     }
 }

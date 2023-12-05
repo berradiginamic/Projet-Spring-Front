@@ -8,31 +8,28 @@ import java.util.List;
  * Représente un réalisateur avec ses informations personnelles et la liste des films qu'il a réalisés.
  */
 @Entity
+@Table(name= "realisateurs")
 public class Realisateur {
 
     /** Identifiant unique du réalisateur. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer idRealisateur;
 
     /** Identifiant imdb du réalisateur. */
-    private String realisateur_id;
-
+    private String idIMDB;
     /** Nom du réalisateur. */
     private String nom;
-
     /** Date de naissance du réalisateur. */
     private Date dateNaissance;
-
     /** Lieu de naissance du réalisateur. */
     private String lieuNaissance;
-
     /** URL du profil du réalisateur. */
     private String urlProfile;
 
     /** Liste des films réalisés par le réalisateur. */
-    @OneToMany(mappedBy = "realisateur")
-    private List<Film> filmsRealises;
+    @OneToMany(mappedBy = "realisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Film> film;
 
     // Constructeurs
     /**
@@ -46,8 +43,12 @@ public class Realisateur {
      *
      * @param nom Le nom du réalisateur.
      */
-    public Realisateur(String nom) {
+    public Realisateur(String idIMDB, String lieuNaissance, Date dateNaissance, String nom, String urlProfile) {
+        this.idRealisateur = Integer.parseInt(idIMDB);
+        this.lieuNaissance = lieuNaissance;
+        this.dateNaissance = dateNaissance;
         this.nom = nom;
+        this.urlProfile = urlProfile;
     }
 
     // Getters et Setters
@@ -57,25 +58,25 @@ public class Realisateur {
      *
      * @return L'identifiant unique du réalisateur.
      */
-    public Long getId() {
-        return id;
+    public Integer getIdRealisateur() {
+        return idRealisateur;
     }
 
     /**
      * Définit l'identifiant unique du réalisateur.
      *
-     * @param id L'identifiant unique du réalisateur.
+     * @param idRealisateur L'identifiant unique du réalisateur.
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRealisateur(Integer idRealisateur) {
+        this.idRealisateur = idRealisateur;
     }
 
-    public String getRealisateur_id() {
-        return realisateur_id;
+    public String getIdIMDB() {
+        return idIMDB;
     }
 
-    public void setRealisateur_id(String realisateur_id) {
-        this.realisateur_id = realisateur_id;
+    public void setIdIMDB(String idIMDB) {
+        this.idIMDB = idIMDB;
     }
 
     /**
@@ -155,16 +156,23 @@ public class Realisateur {
      *
      * @return La liste des films réalisés par le réalisateur.
      */
-    public List<Film> getFilmsRealises() {
-        return filmsRealises;
+    public List<Film> getFilm() {
+        return film;
     }
 
     /**
      * Définit la liste des films réalisés par le réalisateur.
      *
-     * @param filmsRealises La liste des films réalisés par le réalisateur.
+     * @param film La liste des films réalisés par le réalisateur.
      */
-    public void setFilmsRealises(List<Film> filmsRealises) {
-        this.filmsRealises = filmsRealises;
+    public void setFilm(List<Film> film) {
+        this.film = film;
+    }
+
+    @Override
+    public String toString() {
+        return "Realisateur{" + "idRealisateur=" + idRealisateur + ", lieuNaissance='" + lieuNaissance + '\''
+                + ", dateNaissance=" + dateNaissance + ", nom='" + nom + '\''
+                + ", urlProfile='" + urlProfile + '\'' + ", films=" + film + '}';
     }
 }

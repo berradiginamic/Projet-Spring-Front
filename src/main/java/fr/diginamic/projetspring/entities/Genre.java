@@ -7,24 +7,18 @@ import java.util.List;
  * Représente un genre de film avec son type et la liste des films associés à ce genre.
  */
 @Entity
+@Table(name="genres")
 public class Genre {
 
     /** Identifiant unique du genre. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer genreId;
 
     /** Type du genre (ex: Action, Comédie, Drame, etc.). */
+    @Column(name="type")
     private String type;
 
-    /** Liste des films associés à ce genre. */
-    @ManyToMany
-    @JoinTable(
-            name = "film_genre",
-            joinColumns = @JoinColumn(name = "genre_id"),
-            inverseJoinColumns = @JoinColumn(name = "film_id")
-    )
-    private List<Film> films;
 
     // Constructeurs
     /**
@@ -49,17 +43,17 @@ public class Genre {
      *
      * @return L'identifiant unique du genre.
      */
-    public Long getId() {
-        return id;
+    public Integer getGenreId() {
+        return genreId;
     }
 
     /**
      * Définit l'identifiant unique du genre.
      *
-     * @param id L'identifiant unique du genre.
+     * @param genreId L'identifiant unique du genre.
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setGenreId(Integer genreId) {
+        this.genreId = genreId;
     }
 
     /**
@@ -85,16 +79,17 @@ public class Genre {
      *
      * @return La liste des films associés à ce genre.
      */
-    public List<Film> getFilms() {
-        return films;
-    }
+    @Override
 
-    /**
-     * Définit la liste des films associés à ce genre.
-     *
-     * @param films La liste des films associés à ce genre.
-     */
-    public void setFilms(List<Film> films) {
-        this.films = films;
+
+    public String toString()
+
+    {
+        return
+
+                "Genre{" +
+                        "genreId=" + genreId +
+                        ", nom='" + type + '\'' +
+                        '}';
     }
 }

@@ -5,22 +5,27 @@ import fr.diginamic.projetspring.repositories.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Service gérant les opérations liées à l'entité Genre.
  */
 @Service
 public class GenreService {
-
-    private final GenreRepository genreRepository;
-
     /**
      * Constructeur du service Genre.
      *
      * @param genreRepository Le repository pour les opérations liées à l'entité Genre.
      */
     @Autowired
-    public GenreService(GenreRepository genreRepository) {
-        this.genreRepository = genreRepository;
+    private GenreRepository genreRepository;
+
+    public List<Genre> findAll() {
+        return genreRepository.findAll();
+    }
+
+    public Genre findById(Integer genreId) {
+        return genreRepository.findById(genreId).orElse(null);
     }
 
     /**
@@ -29,16 +34,19 @@ public class GenreService {
      * @param genre Le genre à enregistrer.
      * @return Le genre enregistré.
      */
-    public Genre saveGenre(Genre genre) {
+    public Genre createGenre(Genre genre) {
         return genreRepository.save(genre);
     }
 
     /**
      * Supprime un genre par son identifiant.
      *
-     * @param id L'identifiant du genre à supprimer.
+     * @param genreId L'identifiant du genre à supprimer.
      */
-    public void deleteGenreById(Long id) {
-        genreRepository.deleteById(id);
+    public void deleteGenre(Integer genreId) {
+        genreRepository.deleteById(genreId);}
+
+    public List<Genre> findByType(String type) {
+        return genreRepository.findAllByType(type);
     }
 }

@@ -13,28 +13,25 @@ import java.util.Optional;
  * Contrôleur REST pour la gestion des réalisateurs.
  */
 @RestController
-@RequestMapping("/realisateurs")
+@RequestMapping("/realisateurs") // ajouter /api/realisateurs si besoins
 public class RealisateurController {
 
     /** Service gérant la logique métier des réalisateurs. */
-    private final RealisateurService realisateurService;
+    @Autowired
+    private RealisateurService realisateurService;
 
     /**
      * Constructeur du contrôleur avec injection du service.
      *
      * @param realisateurService Service gérant la logique métier des réalisateurs.
      */
-    @Autowired
-    public RealisateurController(RealisateurService realisateurService) {
-        this.realisateurService = realisateurService;
-    }
 
     /**
      * Endpoint pour obtenir la liste de tous les réalisateurs.
      *
      * @return La liste de tous les réalisateurs.
      */
-    @GetMapping("/all")
+    @GetMapping
     public List<Realisateur> getAllRealisateurs() {
         return realisateurService.getAllRealisateurs();
     }
@@ -42,12 +39,12 @@ public class RealisateurController {
     /**
      * Endpoint pour obtenir un réalisateur par son identifiant.
      *
-     * @param id Identifiant du réalisateur à récupérer.
+     * @param idRealisateur Identifiant du réalisateur à récupérer.
      * @return Le réalisateur correspondant à l'identifiant.
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<Realisateur> getRealisateurById(@PathVariable("id") Long id) {
-        Optional<Realisateur> realisateur = realisateurService.getRealisateurById(id);
+    @GetMapping("/{idRealisateur}")
+    public ResponseEntity<Realisateur> getRealisateurById(@PathVariable("idRealisateur") Integer idRealisateur) {
+        Optional<Realisateur> realisateur = realisateurService.getRealisateurById(idRealisateur);
         return realisateur.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -57,24 +54,24 @@ public class RealisateurController {
      * @param realisateur Le réalisateur à sauvegarder.
      * @return Le réalisateur sauvegardé.
      */
-    @PostMapping("/save")
-    public Realisateur saveRealisateur(@RequestBody Realisateur realisateur) {
-        return realisateurService.saveRealisateur(realisateur);
+    @PostMapping
+    public Realisateur createRealisateur(@RequestBody Realisateur realisateur) {
+        return realisateurService.createRealisateur(realisateur);
     }
 
     /**
      * Endpoint pour supprimer un réalisateur par son identifiant.
      *
-     * @param id Identifiant du réalisateur à supprimer.
+     * @param idRealisateur Identifiant du réalisateur à supprimer.
      */
 
-    @PutMapping("/{id}")
-    public Realisateur updateRealisateur(@PathVariable Long id, @RequestBody Realisateur realisateur) {
-        return realisateurService.updateRealisateur(id, realisateur);
+    @PutMapping("/{idRealisateur}")
+    public Realisateur updateRealisateur(@PathVariable Integer idRealisateur, @RequestBody Realisateur realisateur) {
+        return realisateurService.updateRealisateur(idRealisateur, realisateur);
     }
-    @DeleteMapping("/{id}")
-    public void deleteRealisateurById(@PathVariable("id") Long id) {
-        realisateurService.deleteRealisateurById(id);
+    @DeleteMapping("/{idRealisateur}")
+    public void deleteRealisateurById(@PathVariable("id") Integer idRealisateur) {
+        realisateurService.deleteRealisateurById(idRealisateur);
     }
 
     // Ajoutez d'autres méthodes d'endpoint au besoin

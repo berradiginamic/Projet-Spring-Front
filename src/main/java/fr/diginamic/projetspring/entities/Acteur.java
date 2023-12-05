@@ -13,23 +13,18 @@ public class Acteur {
     /** Identifiant unique de l'acteur. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer acteurId;
 
     /** Nom de l'acteur. */
-    private String acteur_id;
+    private String idIMDB;
     private String nom;
     private Date dateNaissance;
-    private String LieuNaissance;
+    private String lieuNaissance;
     private String urlProfile;
-
-    /** Film dans lequel l'acteur a joué. */
-    @ManyToOne
-    @JoinColumn(name = "film_id")
-    private Film film;
 
     /** Liste des rôles que l'acteur a joués dans des films. */
     @OneToMany(mappedBy = "acteur")
-    private List<RoleFilm> roles;
+    private List<RoleFilm> rolefilm;
 
     // Constructeurs
     /**
@@ -38,16 +33,18 @@ public class Acteur {
     public Acteur() {
     }
 
-
     /**
      * Constructeur avec nom, prénom et film dans lequel l'acteur a joué.
      *
      * @param nom    Nom de l'acteur.
-     * @param film   Film dans lequel l'acteur a joué.
+     *  film   Film dans lequel l'acteur a joué.
      */
-    public Acteur(String nom, Film film) {
+    public Acteur(String acteurIdStr, String lieuNaissance, Date dateNaissance, String nom, String urlProfile) {
+        this.acteurId = Integer.parseInt(acteurIdStr); // Convert acteurId to integer
+        this.lieuNaissance = lieuNaissance;
+        this.dateNaissance = dateNaissance;
         this.nom = nom;
-        this.film = film;
+        this.urlProfile = urlProfile;
     }
 
     // Getters et setters
@@ -57,17 +54,17 @@ public class Acteur {
      *
      * @return L'identifiant unique de l'acteur dans notre base de données.
      */
-    public Long getId() {
-        return id;
+    public Integer getActeurId() {
+        return acteurId;
     }
 
     /**
      * Définit l'identifiant unique de l'acteur dans notre base de données.
      *
-     * @param id L'identifiant unique de l'acteur dans notre base de données.
+     * @param acteurId L'identifiant unique de l'acteur dans notre base de données.
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setActeurId(Integer acteurId) {
+        this.acteurId = acteurId;
     }
 
     /**
@@ -75,17 +72,17 @@ public class Acteur {
      *
      * @return L'identifiant unique de l'acteur.
      */
-    public String getActeur_id() {
-        return acteur_id;
+    public String getIdIMDB() {
+        return idIMDB;
     }
 
     /**
      * Définit l'identifiant imdb de l'acteur.
      *
-     * @param acteur_id L'identifiant imdb de l'acteur
+     * @param idIMDB L'identifiant imdb de l'acteur
      */
-    public void setActeur_id(String acteur_id) {
-        this.acteur_id = acteur_id;
+    public void setIdIMDB(String idIMDB) {
+        this.idIMDB = idIMDB;
     }
 
     /**
@@ -108,10 +105,10 @@ public class Acteur {
 
 
     public String getLieuNaissance() {
-        return LieuNaissance;
+        return lieuNaissance;
     }
     public void setLieuNaissance(String lieuNaissance) {
-        LieuNaissance = lieuNaissance;
+        this.lieuNaissance = lieuNaissance;
     }
 
     public String getUrlProfile() {
@@ -126,28 +123,13 @@ public class Acteur {
      *
      * @return Le film dans lequel l'acteur a joué.
      */
-    public Film getFilm() {
-        return film;
-    }
 
 
     /**
      * Définit le film dans lequel l'acteur a joué.
      *
-     * @param film Le film dans lequel l'acteur a joué.
+     *  Le film dans lequel l'acteur a joué.
      */
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-
-    /**
-     * Obtient la liste des rôles que l'acteur a joués dans des films.
-     *
-     * @return La liste des rôles que l'acteur a joués.
-     */
-    public List<RoleFilm> getRoles() {
-        return roles;
-    }
 
 
     /**
@@ -168,15 +150,30 @@ public class Acteur {
         this.dateNaissance = dateNaissance;
     }
 
+    /**
+     * Obtient la liste des rôles que l'acteur a joués dans des films.
+     *
+     * @return La liste des rôles que l'acteur a joués.
+     */
+    public List<RoleFilm> getRolefilm() {
+        return rolefilm;
+    }
+    public void setRolefilm(List<RoleFilm> rolefilm) {
+        this.rolefilm = rolefilm;
+    }
+
     // Autres méthodes
     // (Ajoutez ici d'autres méthodes pertinentes avec des commentaires JavaDoc)
 
-    /**
-     * Insère un acteur dans la base de données.
-     *
-     * @param acteur L'acteur à insérer.
-     */
-    public void insertActeur(Acteur acteur) {
-        // Logique pour insérer l'acteur dans la base de données.
+    @Override
+    public String toString() {
+        return "Acteur{" +
+                "acteurId=" + acteurId +
+                ", lieuNaissance='" + lieuNaissance + '\'' +
+                ", dateNaissance=" + dateNaissance +
+                ", nom='" + nom + '\'' +
+                ", urlProfile='" + urlProfile + '\'' +
+                ", roles=" + rolefilm +
+                '}';
     }
 }

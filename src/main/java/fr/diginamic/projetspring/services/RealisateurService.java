@@ -5,6 +5,7 @@ import fr.diginamic.projetspring.repositories.RealisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,20 +21,14 @@ public class RealisateurService {
      * @param realisateurRepository Le repository pour les opérations liées à l'entité Realisateur.
      */
     @Autowired
-    private final RealisateurRepository realisateurRepository;
-    public RealisateurService(RealisateurRepository realisateurRepository) {
-        this.realisateurRepository = realisateurRepository;
-    }
-
+    private RealisateurRepository realisateurRepository;
 
     /**
      * Insère un réalisateur dans la base de données.
      *
      * @param realisateur Le réalisateur à insérer.
      */
-    public static void insertFilm(Realisateur realisateur) {
-        // Implémentation selon les besoins
-    }
+
 
     /**
      * Récupère tous les réalisateurs.
@@ -47,11 +42,11 @@ public class RealisateurService {
     /**
      * Récupère un réalisateur par son identifiant.
      *
-     * @param id L'identifiant du réalisateur.
+     * @param idRealisateur L'identifiant du réalisateur.
      * @return Le réalisateur correspondant à l'identifiant, ou un Optional vide s'il n'existe pas.
      */
-    public Optional<Realisateur> getRealisateurById(Long id) {
-        return realisateurRepository.findById(id);
+    public Optional<Realisateur> getRealisateurById(Integer idRealisateur) {
+        return realisateurRepository.findById(idRealisateur);
     }
 
 
@@ -61,7 +56,7 @@ public class RealisateurService {
      * @param realisateur Le réalisateur à enregistrer.
      * @return Le réalisateur enregistré.
      */
-  public Realisateur saveRealisateur(Realisateur realisateur) {
+  public Realisateur createRealisateur(Realisateur realisateur) {
         return realisateurRepository.save(realisateur);
     }
   
@@ -72,10 +67,10 @@ public class RealisateurService {
      * @return Le réalisateur enregistré.
      */
 
-    public Realisateur updateRealisateur(Long id, Realisateur realisateur) {
+    public Realisateur updateRealisateur(Integer idRealisateur, Realisateur realisateur) {
         // Logique de mise à jour du réalisateur
-        if (realisateurRepository.existsById(id)) {
-            realisateur.setId(id);
+        if (realisateurRepository.existsById(idRealisateur)) {
+            realisateur.setIdRealisateur(idRealisateur);
             return realisateurRepository.save(realisateur);
         }
         return null; // Ou lancez une exception appropriée si nécessaire
@@ -84,11 +79,26 @@ public class RealisateurService {
     /**
      * Supprime un réalisateur par son identifiant.
      *
-     * @param id L'identifiant du réalisateur à supprimer.
+     * @param idRealisateur L'identifiant du réalisateur à supprimer.
      */
-    public void deleteRealisateurById(Long id) {
-        realisateurRepository.deleteById(id);
+    public void deleteRealisateurById(Integer idRealisateur) {
+        realisateurRepository.deleteById(idRealisateur);
     }
 
     // Ajoutez d'autres méthodes en fonction des besoins
+    public List<Realisateur> findByNom(String nom) {
+        return realisateurRepository.findAllByNom(nom);
+    }
+
+    public List<Realisateur> findByLieuNaissance(String lieuNaissance) {
+        return realisateurRepository.findAllByLieuNaissance(lieuNaissance);
+    }
+
+    public List<Realisateur> findByDateNaissance(Date dateNaissance) {
+        return realisateurRepository.findAllByDateNaissance(dateNaissance);
+    }
+
+    public List<Realisateur> findByUrlProfile(String urlProfile) {
+        return realisateurRepository.findAllByUrlProfile(urlProfile);
+    }
 }

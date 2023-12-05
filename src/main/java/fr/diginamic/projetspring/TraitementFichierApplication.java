@@ -5,6 +5,8 @@ import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Film;
 import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.entities.RoleFilm;
+import fr.diginamic.projetspring.repositories.ActeurRepository;
+import fr.diginamic.projetspring.repositories.FilmRepository;
 import fr.diginamic.projetspring.services.ActeurService;
 import fr.diginamic.projetspring.services.FilmService;
 import fr.diginamic.projetspring.services.RealisateurService;
@@ -35,6 +37,10 @@ public class TraitementFichierApplication implements CommandLineRunner {
     private RoleFilmService roleFilmService;
     @Autowired
     private FilmService filmService;// doit ajouter les autres services
+    @Autowired
+    private ActeurRepository acteurRepository;
+    @Autowired
+    private FilmRepository filmRepository;
 
     public static void main(String[] args) throws Exception {
         SpringApplication app = new SpringApplication(TraitementFichierApplication.class);
@@ -52,14 +58,14 @@ public class TraitementFichierApplication implements CommandLineRunner {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM d yyyy");
 
         /** Import du fichier acteurs.csv */
-        Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
+       /* Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
         List<String> rowsActeurs = Files.readAllLines(pathActeurs);
         rowsActeurs.remove(0);
         for (String rowActeur : rowsActeurs) {
             System.out.println(rowActeur);
             String[] elements = rowActeur.split(";");
             Acteur acteurs = new Acteur();
-            acteurs.setActeur_id(elements[0]);
+            acteurs.setIdIMDB(elements[0]);
             acteurs.setNom(elements[1]);
             try{
             Date dateNaissance = sdf.parse(elements[2]);
@@ -69,10 +75,10 @@ public class TraitementFichierApplication implements CommandLineRunner {
             }
             acteurs.setLieuNaissance(elements[3]);
             acteurs.setUrlProfile(elements[5]);
-            acteurService.saveActeur(acteurs);
-        }
+            acteurService.createActeur(acteurs);
+        } */
 
-        /** Import du fichier films.csv */
+       /*  Import du fichier films.csv
         Path pathFilms = Paths.get("C:/dev-java/films.csv");
         List<String> rowFilms = Files.readAllLines(pathFilms);
         rowFilms.remove(0);
@@ -80,25 +86,26 @@ public class TraitementFichierApplication implements CommandLineRunner {
             System.out.println(rowFilm);
             String[] elements = rowFilm.split(";");
             Film films = new Film();
-
+            films.setIdIMDB(elements[0]);
             films.setNom(elements[1]);
-            try{
-                Date anneeSortie = sdf.parse(elements[2]);
-                films.setAnneeSortie(anneeSortie);}
-            catch (ParseException e) {
-                // Handle the parsing exception appropriately
+            try {
+                films.setAnneeSortie(Integer.valueOf(elements[2]));
+            } catch (NumberFormatException e) {
+                System.out.println("Error converting film data: " + rowFilm);
+                e.printStackTrace();
+                continue;
             }
             films.setRating(elements[3]);
             films.setUrlProfile(elements[4]);
             films.setLieuTournage(elements[5]);
             films.setGenres(elements[6]);
             films.setLangue(elements[7]);
-            /* films.setResume(elements[8]); cause une erreure de chaines trop longues */
+            /* films.setResume(elements[8]); cause une erreure de chaines trop longues
             films.setPays(elements[9]);
-            filmService.saveFilm(films);
-        }
+            filmService.createFilm(films);
+        } */
 
-        /** Import du fichier realisateurs.csv */
+        /* Import du fichier realisateurs.csv */
         Path pathRealisateurs = Paths.get("C:/dev-java/realisateurs.csv");
         List<String> rowRealisateurs = Files.readAllLines(pathRealisateurs);
         rowRealisateurs.remove(0);
@@ -106,7 +113,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
             System.out.println(rowRealisateur);
             String[] elements = rowRealisateur.split(";");
             Realisateur realisateurs = new Realisateur();
-            realisateurs.setRealisateur_id(elements[0]);
+            realisateurs.setIdIMDB(elements[0]);
             realisateurs.setNom(elements[1]);
             try{
                 Date dateNaissance = sdf.parse(elements[2]);
@@ -116,20 +123,33 @@ public class TraitementFichierApplication implements CommandLineRunner {
             }
             realisateurs.setLieuNaissance(elements[3]);
             realisateurs.setUrlProfile(elements[4]);
-            realisateurService.saveRealisateur(realisateurs);
+            realisateurService.createRealisateur(realisateurs);
         }
 
-    /** Import du fichier roles.csv */
+    /** Import du fichier roles.csv
         Path pathRoleFilm = Paths.get("C:/dev-java/roles.csv");
         List<String> rowRoleFilm = Files.readAllLines(pathRoleFilm);
         rowRoleFilm.remove(0);
         for (String rowRoleFilms : rowRoleFilm) {
             System.out.println(rowRoleFilm);
             String[] elements = rowRoleFilms.split(";");
-            RoleFilm role = new RoleFilm();
+            Acteur acteur = acteurRepository.findById(Integer.parseInt(elements[0])).orElse(null);
+            if (acteur == null) {
+                System.out.println("Acteur with ID " + elements[0] + " not found");
+                continue;
+            }
 
+            String filmId = elements[1];
+            Film film = filmService.getFilmById(filmId); // Use the findByFilmId method to find the Film object
+            if (film == null) {
+                System.out.println("Film with ID " + filmId + " not found");
+                continue;
+            }
+            RoleFilm role = new RoleFilm();
+            role.setActeur(acteur);
+            role.setFilm(film);
             role.setPersonnage(elements[2]);
-            roleFilmService.saveRoleFilm(role);
+            roleFilmService.createRoleFilm(role); */
         }
     }
-}
+
