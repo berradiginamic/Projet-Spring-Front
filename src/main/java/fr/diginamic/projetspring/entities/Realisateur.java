@@ -8,7 +8,7 @@ import java.util.List;
  * Représente un réalisateur avec ses informations personnelles et la liste des films qu'il a réalisés.
  */
 @Entity
-@Table(name= "realisateurs")
+@Table(name = "realisateurs")
 public class Realisateur {
 
     /** Identifiant unique du réalisateur. */
@@ -19,7 +19,7 @@ public class Realisateur {
     /** Identifiant imdb du réalisateur. */
     @Column(unique = true)
     private String idIMDB;
-    /** Nom du réalisateur. */
+
     private String nom;
     /** Date de naissance du réalisateur. */
     private Date dateNaissance;
@@ -32,24 +32,15 @@ public class Realisateur {
     @OneToMany(mappedBy = "realisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Film> film;
 
-    // Constructeurs
-    /**
-     * Constructeur par défaut.
-     */
     public Realisateur() {
     }
 
-    /**
-     * Constructeur avec nom du réalisateur.
-     *
-     * @param nom Le nom du réalisateur.
-     */
-    public Realisateur(String idIMDB, String lieuNaissance, Date dateNaissance, String nom, String urlProfile) {
-        this.idRealisateur = Integer.parseInt(idIMDB);
+    public Realisateur(String lieuNaissance, Date dateNaissance, String nom, String urlProfile, String idIMDB) {
         this.lieuNaissance = lieuNaissance;
         this.dateNaissance = dateNaissance;
         this.nom = nom;
         this.urlProfile = urlProfile;
+        this.idIMDB = idIMDB;
     }
 
     // Getters et Setters
@@ -172,8 +163,12 @@ public class Realisateur {
 
     @Override
     public String toString() {
-        return "Realisateur{" + "idRealisateur=" + idRealisateur + ", lieuNaissance='" + lieuNaissance + '\''
-                + ", dateNaissance=" + dateNaissance + ", nom='" + nom + '\''
-                + ", urlProfile='" + urlProfile + '\'' + ", films=" + film + '}';
+        return "Realisateur{" +
+                "idRealisateur=" + idRealisateur +
+                ", idIMDB='" + idIMDB + '\'' +
+                ", nom='" + nom + '\'' +
+                ", dateNaissance=" + dateNaissance +
+                ", lieuNaissance='" + lieuNaissance + '\'' +
+                ", urlProfile='" + urlProfile + '\'';
     }
 }

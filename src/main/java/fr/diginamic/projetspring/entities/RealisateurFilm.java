@@ -1,4 +1,8 @@
 package fr.diginamic.projetspring.entities;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 import jakarta.persistence.*;
 
 @Entity
@@ -7,10 +11,18 @@ public class RealisateurFilm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     private Integer idRealisateurFilm;
 
     @ManyToOne
     @JoinColumn(name = "realisateur_id")
+=======
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_realisateur")
+>>>>>>> origin/master
     private Realisateur realisateur;
 
     @ManyToOne
@@ -25,12 +37,21 @@ public class RealisateurFilm {
         this.film = film;
     }
 
+<<<<<<< HEAD
     public Integer getIdRealisateurFilm() {
         return idRealisateurFilm;
     }
 
     public void setIdRealisateurFilm(Integer idRealisateurFilm) {
         this.idRealisateurFilm = idRealisateurFilm;
+=======
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+>>>>>>> origin/master
     }
 
     public Realisateur getRealisateur() {
@@ -52,7 +73,11 @@ public class RealisateurFilm {
     @Override
     public String toString() {
         return "RealisateurFilm{" +
+<<<<<<< HEAD
                 "id=" + idRealisateurFilm +
+=======
+                "id=" + id +
+>>>>>>> origin/master
                 ", realisateur=" + realisateur +
                 ", film=" + film +
                 '}';

@@ -8,7 +8,7 @@ import java.util.List;
  * Représente un film avec ses caractéristiques et les personnes impliquées dans sa création.
  */
 @Entity
-@Table(name= "films")
+@Table(name = "films")
 public class Film {
 
     /**
@@ -31,13 +31,7 @@ public class Film {
      * Date de sortie du film.
      */
     private Integer anneeSortie;
-    /**
-     * Note du film.
-     */
-    private String rating;  // Penser a changer a Float
-    /**
-     * URL du profil du film.
-     */
+    private String rating;
     private String urlProfile;
     /**
      * Lieu de tournage du film.
@@ -69,7 +63,7 @@ public class Film {
     private List<RoleFilm> rolefilm;
 
     @ManyToOne
-    @JoinColumn(name ="genre_id")
+    @JoinColumn(name = "genre_id")
     private Genre genre;
 
     // Constructeurs
@@ -80,15 +74,7 @@ public class Film {
     public Film() {
     }
 
-    /**
-     * Constructeur avec nom, réalisateur et liste d'acteurs.
-     *
-     * @param nom         Nom du film.
-     *  realisateur Réalisateur du film.
-     *  acteurs     Liste des acteurs qui ont joué dans le film.
-     */
-    public Film(Integer filmId, Integer anneeSortie, String langue, String lieuTournage, String nom, String pays, String rating, String resume, String urlProfile, String genre) {
-        this.filmId = Integer.parseInt(idIMDB); // Convert filmId to integer
+    public Film(Integer anneeSortie, String langue, String lieuTournage, String nom, String pays, String rating, String resume, String urlProfile, String genres) {
         this.anneeSortie = anneeSortie;
         this.langue = langue;
         this.lieuTournage = lieuTournage;
@@ -322,7 +308,7 @@ public class Film {
     public String toString() {
         return "Film{" +
                 "filmId=" + filmId +
-                ", titre='" + idIMDB + '\'' +
+                ", idIMDB='" + idIMDB + '\'' +
                 ", anneeSortie=" + anneeSortie +
                 ", langue='" + langue + '\'' +
                 ", lieuTournage='" + lieuTournage + '\'' +
@@ -331,8 +317,6 @@ public class Film {
                 ", rating=" + rating +
                 ", resume='" + resume + '\'' +
                 ", urlProfile='" + urlProfile + '\'' +
-                ", genre='" + genres + '\'' +
-                ", realisateur=" + realisateur +
-                '}';
+                ", genre='" + genres + '\'';
     }
 }
