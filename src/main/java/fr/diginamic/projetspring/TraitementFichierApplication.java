@@ -17,6 +17,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -64,6 +65,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
 
         /** Import du fichier acteurs.csv */
         Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
+
         try {
             List<String> rowsActeurs = Files.readAllLines(pathActeurs);
             rowsActeurs.remove(0);
@@ -73,31 +75,45 @@ public class TraitementFichierApplication implements CommandLineRunner {
 
                 String[] elements = rowActeur.split(";");
                 String idIMDB = elements[0].trim();
-                // Vérification si l'ID existe déja
+
+                // Vérification si l'ID existe déjà
                 if (!uniqueActeurIds.contains(idIMDB)) {
                     Acteur acteurs = new Acteur();
                     acteurs.setIdIMDB(idIMDB);
                     acteurs.setNom(elements[1]);
+
                     try {
                         Date dateNaissance = sdf.parse(elements[2]);
                         acteurs.setDateNaissance(dateNaissance);
                     } catch (ParseException e) {
+                        e.printStackTrace();
                         // Handle the parsing exception appropriately
                     }
+
                     acteurs.setLieuNaissance(elements[3]);
                     acteurs.setUrlProfile(elements[5]);
-                    // Sauvegarde de l'acteur dans la base de données
-                    acteurService.createActeur(acteurs);
-                    // Addition de Id dans le set de id unique
-                    uniqueActeurIds.add(idIMDB);
+
+                    try {
+                        // Attempt to save the Acteur entity
+                        acteurService.createActeur(acteurs);
+                        // Addition de l'ID dans le set d'ID uniques
+                        uniqueActeurIds.add(idIMDB);
+                    } catch (DataIntegrityViolationException e) {
+                        // Handle the unique constraint violation
+                        System.out.println("Duplicate ID: " + idIMDB);
+                        // You might want to log the exception or take other actions
+                    }
                 } else {
                     System.out.println("Duplicate ID: " + idIMDB);
                 }
-            }}
-            catch (IOException e) {
-                e.printStackTrace();
-                // Handle the IO exception appropriately
             }
+
+            System.out.println("Unique IDs Set: " + uniqueActeurIds);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the IO exception appropriately
+        }
 
        /*  Import du fichier films.csv */
         Path pathFilms = Paths.get("C:/dev-java/films.csv");
