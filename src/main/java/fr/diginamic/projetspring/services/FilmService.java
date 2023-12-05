@@ -1,5 +1,6 @@
 package fr.diginamic.projetspring.services;
 
+import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Film;
 import fr.diginamic.projetspring.repositories.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,5 +109,9 @@ public class FilmService {
         public List<Film> findByRealisateurId (Integer realisateurId){
             return filmRepository.findAllByRealisateurId(realisateurId);
         }
+
+    public Film findByIdIMDB(String idIMDB){
+        return filmRepository.findByIdIMDB(idIMDB);
+    }
 }
 

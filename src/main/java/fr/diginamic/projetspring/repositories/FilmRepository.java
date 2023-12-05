@@ -1,5 +1,6 @@
 package fr.diginamic.projetspring.repositories;
 
+import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Film;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -42,5 +43,6 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     @Query("SELECT f FROM Film f JOIN f.realisateur r WHERE r.id = :realisateurId")
     List<Film> findAllByRealisateurId(@Param("realisateurId") Integer realisateurId);
 
+    Film findByIdIMDB(String idIMDB);
 
 }

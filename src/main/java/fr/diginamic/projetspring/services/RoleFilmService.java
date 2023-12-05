@@ -1,7 +1,10 @@
 package fr.diginamic.projetspring.services;
 
+import fr.diginamic.projetspring.entities.Acteur;
+import fr.diginamic.projetspring.entities.Film;
 import fr.diginamic.projetspring.entities.RoleFilm;
 import fr.diginamic.projetspring.repositories.RoleFilmRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,11 @@ public class RoleFilmService {
      */
     @Autowired
     private RoleFilmRepository roleRepository;
+    @Autowired
+    private ActeurService acteurService;
+
+    @Autowired
+    private FilmService filmService;
 
     /**
      * Récupère un rôle par son identifiant.
@@ -46,9 +54,16 @@ public class RoleFilmService {
      * @param role Le rôle à enregistrer.
      * @return Le rôle enregistré.
      */
-   public RoleFilm createRoleFilm(RoleFilm role) {
-        return roleRepository.save(role);
-    }
+   @Transactional
+    public RoleFilm createRoleFilm(RoleFilm role) {
+       // Map IMDB IDs to database IDs
+       Acteur acteur = acteurService.findByIdIMDB(role.getActeur().getIdIMDB());
+       Film film = filmService.findByIdIMDB(role.getFilm().getIdIMDB());
+       role.setActeur(acteur);
+       role.setFilm(film);
+       return roleRepository.save(role);
+   }
+
 
     /**
      * Supprime un rôle par son identifiant.

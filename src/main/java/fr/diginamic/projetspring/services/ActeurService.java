@@ -84,6 +84,10 @@ public class ActeurService {
         return acteurRepository.findAllByNom(nom);
     }
 
+    public Acteur findByIdIMDB(String idIMDB){
+        return acteurRepository.findByIdIMDB(idIMDB);
+    }
+
     public List<Acteur> findByLieuNaissance(String lieuNaissance) {
         return acteurRepository.findAllByLieuNaissance(lieuNaissance);
     }

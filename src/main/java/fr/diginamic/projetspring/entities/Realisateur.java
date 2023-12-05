@@ -17,6 +17,7 @@ public class Realisateur {
     private Integer idRealisateur;
 
     /** Identifiant imdb du réalisateur. */
+    @Column(unique = true)
     private String idIMDB;
     /** Nom du réalisateur. */
     private String nom;

@@ -25,6 +25,7 @@ public class Film {
     /**
      * identifiant IMDB du film
      */
+    @Column(unique = true)
     private String idIMDB;
     /**
      * Date de sortie du film.

@@ -22,5 +22,7 @@ public interface ActeurRepository extends JpaRepository<Acteur, Integer> {
 
     // Find all actors by URL profile
     List<Acteur> findAllByUrlProfile(String urlProfile);
+
+    Acteur findByIdIMDB(String idIMDB);
 }
 
