@@ -40,8 +40,7 @@ public class GenreController {
 
     @PutMapping("/{genreId}")
     public Genre updateGenre(@PathVariable("genreId") Integer genreId, @RequestBody Genre genre) {
-        genre.setGenreId(genreId);
-        return genreService.createGenre(genre);
+        return genreService.updateGenre(genreId, genre);
     }
 
     @DeleteMapping("/{genreId}")
