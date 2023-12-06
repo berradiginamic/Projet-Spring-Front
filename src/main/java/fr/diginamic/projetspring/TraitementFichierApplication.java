@@ -78,7 +78,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
 
 
         /** Import du fichier acteurs.csv */
-        Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
+      /*  Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
         try {
             List<String> rowsActeurs = Files.readAllLines(pathActeurs);
             rowsActeurs.remove(0);
@@ -118,7 +118,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
         } catch (IOException e) {
             e.printStackTrace();
             // Handle the IO exception appropriately
-        }
+        } */
 
 
         /*  Import du fichier films.csv */
