@@ -124,4 +124,11 @@ public class FilmController {
         return filmService.findFilmsReleasedBetweenYears(startYear, endYear);
     }
 
+    // Tache 4: Extraire les films communs à 2 acteurs ou actrices donnés.
+    @GetMapping("/by-two-actors")
+    public List<Object[]> getFilmsByTwoActors(@RequestParam("acteurId1") Integer acteurId1,
+                                              @RequestParam("acteurId2") Integer acteurId2) {
+        return filmService.findFilmsByTwoActors(acteurId1, acteurId2);
+    }
+
 }

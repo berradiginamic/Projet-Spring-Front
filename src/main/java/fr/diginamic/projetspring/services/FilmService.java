@@ -131,5 +131,10 @@ public class FilmService {
     public List<Film> findFilmsReleasedBetweenYears(int startYear, int endYear) {
         return filmRepository.findFilmsReleasedBetweenYears(startYear, endYear);
     }
+
+    // Tache 4: Extraire les films communs à 2 acteurs ou actrices donnés.
+    public List<Object[]> findFilmsByTwoActors(Integer acteurId1, Integer acteurId2) {
+        return filmRepository.findFilmsByTwoActors(acteurId1, acteurId2);
+    }
 }
 

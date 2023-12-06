@@ -58,5 +58,15 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     @Query("SELECT f FROM Film f WHERE f.anneeSortie BETWEEN :startYear AND :endYear")
     List<Film> findFilmsReleasedBetweenYears(@Param("startYear") int startYear, @Param("endYear") int endYear);
 
+    // Tache 4: Extraire les films communs à 2 acteurs ou actrices donnés.
+    @Query("SELECT f.nom AS filmNom, f.anneeSortie " +
+            "FROM Acteur a1 " +
+            "JOIN RoleFilm r1 ON a1.acteurId = r1.acteur.acteurId " +
+            "JOIN Film f ON r1.film.filmId = f.filmId " +
+            "JOIN RoleFilm r2 ON f.filmId = r2.film.filmId " +
+            "JOIN Acteur a2 ON r2.acteur.acteurId = a2.acteurId " +
+            "WHERE a1.acteurId = :acteurId1 AND a2.acteurId = :acteurId2")
+    List<Object[]> findFilmsByTwoActors(@Param("acteurId1") Integer acteurId1, @Param("acteurId2") Integer acteurId2);
+
 
 }
