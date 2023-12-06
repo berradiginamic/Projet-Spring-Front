@@ -27,9 +27,7 @@ public class FilmService {
      *
      * @return Une liste de tous les films.
      */
-    public List<Film> getFilmsByGenre(String genreType) {
-        return filmRepository.findByGenresContainingIgnoreCase(genreType);
-    }
+
     public List<Film> getAllFilms() {
         return filmRepository.findAll();
     }
@@ -65,7 +63,7 @@ public class FilmService {
 
     public Film updateFilm(Integer filmId, Film film) {
      if (filmRepository.existsById(filmId)) {
-     film.setId(filmId); // Utilisez setId pour définir l'identifiant du film
+     film.setFilmId(filmId); // Utilisez setId pour définir l'identifiant du film
      return filmRepository.save(film);
      }
      return null;

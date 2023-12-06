@@ -43,13 +43,6 @@ public class FilmController {
         return new ResponseEntity<>(films, HttpStatus.OK);
     }
 
-    @GetMapping("/par-genre/{genreType}")
-    public ResponseEntity<List<Film>> getFilmsByGenre(@PathVariable("genreType") String genreType) {
-        // Utilisez le service pour rechercher les films par genre
-        List<Film> films = filmService.getFilmsByGenre(genreType);
-        return new ResponseEntity<>(films, HttpStatus.OK);
-    }
-
     /**
      * Endpoint pour obtenir un film par son identifiant.
      *

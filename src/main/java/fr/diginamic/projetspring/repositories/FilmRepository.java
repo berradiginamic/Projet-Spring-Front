@@ -11,10 +11,6 @@ import java.util.Set;
  * Interface repository pour l'entité Film, utilisant Spring Data JPA.
  */
 public interface FilmRepository extends JpaRepository<Film, Integer> {
-    List<Film> findByGenresContainingIgnoreCase(String genreType);
-
-        List<Film> findByGenresTypeIgnoreCase(String genreType);
-
 
     // Find all films by annee de sortie
     List<Film> findAllByAnneeSortie(Integer anneeSortie);
