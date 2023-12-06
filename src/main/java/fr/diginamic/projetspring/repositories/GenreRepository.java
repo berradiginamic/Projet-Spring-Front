@@ -15,7 +15,7 @@ public interface GenreRepository extends JpaRepository<Genre, Integer> {
 
     // Ajoutez d'autres méthodes déclaratives en fonction des besoins
     // Find all genres by nom
-    List<Genre> findAllByName(String name);
+    List<Genre> findAllByType(String type);
 
-    Optional<Genre> findByName(String name);
+    Optional<Genre> findByType(String type);
 }

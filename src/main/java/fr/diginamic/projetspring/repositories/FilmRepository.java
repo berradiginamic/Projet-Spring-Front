@@ -44,5 +44,5 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 
     Film findByIdIMDB(String idIMDB);
 
-    List<Film> findByGenres_Name(String genreName);
+    List<Film> findByGenres_Type(String genreType);
 }

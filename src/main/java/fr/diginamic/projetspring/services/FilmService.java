@@ -19,8 +19,8 @@ public class FilmService {
     @Autowired
     private FilmRepository filmRepository;
 
-    public List<Film> getFilmsByGenre(String genreName) {
-        return filmRepository.findByGenres_Name(genreName);
+    public List<Film> getFilmsByGenre(String genreType) {
+        return filmRepository.findByGenres_Type(genreType);
     }
     /**
      * Récupère tous les films.
@@ -109,7 +109,7 @@ public class FilmService {
             return filmRepository.findAllByUrlProfile(urlProfile);
         }
 
-   
+
 
 
 
@@ -121,8 +121,8 @@ public class FilmService {
         return filmRepository.findByIdIMDB(idIMDB);
     }
 
-    public List<Film> getFilmsByGenreNames(Set<String> genreNames) {
-        Set<Genre> genres = genreNames.stream().map(Genre::new).collect(Collectors.toSet());
+    public List<Film> getFilmsByGenreTypes(Set<String> genreTypes) {
+        Set<Genre> genres = genreTypes.stream().map(Genre::new).collect(Collectors.toSet());
         return filmRepository.findAllByGenresIn(genres);
     }
 }

@@ -22,6 +22,7 @@ public class Realisateur {
 
     private String nom;
     /** Date de naissance du réalisateur. */
+    @Temporal(TemporalType.DATE)
     private Date dateNaissance;
     /** Lieu de naissance du réalisateur. */
     private String lieuNaissance;

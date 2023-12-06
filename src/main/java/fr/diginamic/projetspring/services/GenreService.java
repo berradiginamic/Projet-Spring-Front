@@ -47,13 +47,13 @@ public class GenreService {
     public void deleteGenre(Integer genreId) {
         genreRepository.deleteById(genreId);}
 
-    public List<Genre> findByName(String name) {
-        return genreRepository.findAllByName(name);
+    public List<Genre> findByType(String type) {
+        return genreRepository.findAllByType(type);
     }
 
-    public Genre findOrCreateGenreByName(String name) {
-        // Check if the genre with the given name already exists
-        Optional<Genre> existingGenre = genreRepository.findByName(name);
+    public Genre findOrCreateGenreByType(String type) {
+        // Check if the genre with the given type already exists
+        Optional<Genre> existingGenre = genreRepository.findByType(type);
 
         if (existingGenre.isPresent()) {
             // If the genre exists, return it
@@ -61,7 +61,7 @@ public class GenreService {
         } else {
             // If the genre does not exist, create a new one and save it
             Genre newGenre = new Genre();
-            newGenre.setName(name);
+            newGenre.setType(type);
             return genreRepository.save(newGenre);
         }
     }

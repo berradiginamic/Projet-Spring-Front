@@ -50,10 +50,10 @@ public class TraitementFichierApplication implements CommandLineRunner {
     }
     Set<Genre> convertGenres(String genresString) {
         Set<Genre> genres = new HashSet<>();
-        String[] genreNames = genresString.split(","); // Adjust the delimiter as needed
+        String[] genreTypes = genresString.split(","); // Adjust the delimiter as needed
 
-        for (String genreName : genreNames) {
-            Genre genre = genreService.findOrCreateGenreByName(genreName.trim());
+        for (String genreType : genreTypes) {
+            Genre genre = genreService.findOrCreateGenreByType(genreType.trim());
             genres.add(genre);
         }
 

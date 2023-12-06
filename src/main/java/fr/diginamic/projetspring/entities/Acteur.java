@@ -19,6 +19,8 @@ public class Acteur {
     @Column(unique = true)
     private String idIMDB;
     private String nom;
+    // Indique le mapping de 'Date' au type SQL 'DATE' coté BDD
+    @Temporal(TemporalType.DATE)
     private Date dateNaissance;
     private String lieuNaissance;
     private String urlProfile;

@@ -106,9 +106,9 @@ public class FilmController {
     }*/
 
     @GetMapping("/byGenres")
-    public ResponseEntity<List<Film>> getFilmsByGenres(@RequestParam Set<String> genreNames) {
+    public ResponseEntity<List<Film>> getFilmsByGenres(@RequestParam Set<String> genreTypes) {
         try {
-            List<Film> films = filmService.getFilmsByGenreNames(genreNames);
+            List<Film> films = filmService.getFilmsByGenreTypes(genreTypes);
             return new ResponseEntity<>(films, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -116,8 +116,8 @@ public class FilmController {
     }
 
     @GetMapping("/byGenre")
-    public List<Film> getFilmsByGenre(@RequestParam String genreName) {
-        // Example of using findByGenres_Name
-        return filmService.getFilmsByGenre(genreName);
+    public List<Film> getFilmsByGenre(@RequestParam String genreType) {
+        // Example of using findByGenres_Type
+        return filmService.getFilmsByGenre(genreType);
     }
 }

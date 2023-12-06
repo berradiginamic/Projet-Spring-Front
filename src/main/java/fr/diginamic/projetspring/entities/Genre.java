@@ -17,8 +17,8 @@ public class Genre {
     private Integer genreId;
 
     /** Type du genre (ex: Action, Comédie, Drame, etc.). */
-    @Column(name="name")
-    private String name;
+    @Column(name="type")
+    private String type;
 
     @ManyToMany(mappedBy = "genres")
     private Set<Film> films = new HashSet<>();
@@ -33,10 +33,10 @@ public class Genre {
     /**
      * Constructeur avec type de genre.
      *
-     * @param name Le type de genre (ex: Action, Comédie, Drame, etc.).
+     * @param type Le type de genre (ex: Action, Comédie, Drame, etc.).
      */
-    public Genre(String name) {
-        this.name = name;
+    public Genre(String type) {
+        this.type = type;
     }
 
     // Getters et Setters
@@ -64,17 +64,17 @@ public class Genre {
      *
      * @return Le type de genre.
      */
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
     /**
      * Définit le type de genre.
      *
-     * @param name Le type de genre.
+     * @param type Le type de genre.
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -93,7 +93,7 @@ public class Genre {
 
                 "Genre{" +
                         "genreId=" + genreId +
-                        ", nom='" + name + '\'' +
+                        ", nom='" + type + '\'' +
                         '}';
     }
 }
