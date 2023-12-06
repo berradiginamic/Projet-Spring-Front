@@ -137,4 +137,12 @@ public class FilmController {
         return filmService.findFilmsByGenre(genreId);
     }
 
+    // Tache 8: Extraire les films sortis entre 2 années données et qui ont un acteur/actrice donné parmi les acteurs
+    @GetMapping("/betweenYearsAndByActeur")
+    public List<Object[]> getFilmsBetweenYearsAndByActeur(@RequestParam("startYear") Integer startYear,
+                                                          @RequestParam("endYear") Integer endYear,
+                                                          @RequestParam("acteurId") Integer acteurId) {
+        return filmService.findFilmsBetweenYearsAndByActeur(startYear, endYear, acteurId);
+    }
+
 }

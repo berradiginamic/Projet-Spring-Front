@@ -141,5 +141,10 @@ public class FilmService {
     public List<Object[]> findFilmsByGenre(Integer genreId) {
         return filmRepository.findFilmsByGenre(genreId);
     }
+
+    // Tache 8:
+    public List<Object[]> findFilmsBetweenYearsAndByActeur(Integer startYear, Integer endYear, Integer acteurId) {
+        return filmRepository.findFilmsBetweenYearsAndByActeur(startYear, endYear, acteurId);
+    }
 }
 

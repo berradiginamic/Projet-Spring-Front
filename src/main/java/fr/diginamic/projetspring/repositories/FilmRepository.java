@@ -75,4 +75,15 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
             "WHERE g.genreId = :genreId")
     List<Object[]> findFilmsByGenre(@Param("genreId") Integer genreId);
 
+    // Tache 8: Extraire les films sortis entre 2 années données et qui ont un acteur/actrice donné parmi les acteurs
+    @Query("SELECT DISTINCT f.nom AS film_nom, f.anneeSortie " +
+            "FROM Film f " +
+            "JOIN RoleFilm r ON f.filmId = r.film.filmId " +
+            "JOIN Acteur a ON r.acteur.acteurId = a.acteurId " +
+            "WHERE f.anneeSortie BETWEEN :startYear AND :endYear " +
+            "AND a.acteurId = :acteurId")
+    List<Object[]> findFilmsBetweenYearsAndByActeur(@Param("startYear") Integer startYear,
+                                                    @Param("endYear") Integer endYear,
+                                                    @Param("acteurId") Integer acteurId);
+
 }
