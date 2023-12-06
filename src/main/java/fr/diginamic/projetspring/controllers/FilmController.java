@@ -131,4 +131,10 @@ public class FilmController {
         return filmService.findFilmsByTwoActors(acteurId1, acteurId2);
     }
 
+    // Tache 5:  Extraire tous les films d’un genre donné
+    @GetMapping("/by-genre")
+    public List<Object[]> getFilmsByGenre(@RequestParam("genreId") Integer genreId) {
+        return filmService.findFilmsByGenre(genreId);
+    }
+
 }

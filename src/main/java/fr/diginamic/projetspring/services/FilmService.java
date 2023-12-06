@@ -136,5 +136,10 @@ public class FilmService {
     public List<Object[]> findFilmsByTwoActors(Integer acteurId1, Integer acteurId2) {
         return filmRepository.findFilmsByTwoActors(acteurId1, acteurId2);
     }
+
+    // Tache 5:  Extraire tous les films d’un genre donné
+    public List<Object[]> findFilmsByGenre(Integer genreId) {
+        return filmRepository.findFilmsByGenre(genreId);
+    }
 }
 

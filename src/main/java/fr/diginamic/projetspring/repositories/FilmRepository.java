@@ -68,5 +68,11 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
             "WHERE a1.acteurId = :acteurId1 AND a2.acteurId = :acteurId2")
     List<Object[]> findFilmsByTwoActors(@Param("acteurId1") Integer acteurId1, @Param("acteurId2") Integer acteurId2);
 
+    // Tache 5:  Extraire tous les films d’un genre donné
+    @Query("SELECT f.nom AS filmNom, f.anneeSortie " +
+            "FROM Genre g " +
+            "JOIN g.films f " +       // Assuming "films" is the property name in Genre entity
+            "WHERE g.genreId = :genreId")
+    List<Object[]> findFilmsByGenre(@Param("genreId") Integer genreId);
 
 }
