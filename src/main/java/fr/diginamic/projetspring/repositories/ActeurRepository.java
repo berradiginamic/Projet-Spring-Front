@@ -35,5 +35,15 @@ public interface ActeurRepository extends JpaRepository<Acteur, Integer> {
             "JOIN Film f ON r.film.filmId = f.filmId " +
             "WHERE a.acteurId = :acteurId")
     List<Object[]> findFilmsByActeurId(@Param("acteurId") Integer acteurId);
+
+    //Tache 6:  Extraire les acteurs communs à 2 films donnés
+    @Query("SELECT a.nom AS acteurNom " +
+            "FROM Film f1 " +
+            "JOIN RoleFilm r1 ON f1.filmId = r1.film.filmId " +
+            "JOIN Acteur a ON r1.acteur.acteurId = a.acteurId " +
+            "JOIN RoleFilm r2 ON a.acteurId = r2.acteur.acteurId " +
+            "JOIN Film f2 ON r2.film.filmId = f2.filmId " +
+            "WHERE f1.filmId = :filmId1 AND f2.filmId = :filmId2")
+    List<Object[]> findActeursInFilms(@Param("filmId1") Integer filmId1, @Param("filmId2") Integer filmId2);
 }
 

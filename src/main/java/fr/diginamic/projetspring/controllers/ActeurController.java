@@ -78,4 +78,10 @@ public class ActeurController {
     public List<Object[]> getFilmsByActeurId(@PathVariable("acteurId") Integer acteurId) {
         return acteurService.findFilmsByActeurId(acteurId);
     }
+
+    // Tache 6:
+    @GetMapping("/in-films")
+    public List<Object[]> getActeursInFilms(@RequestParam Integer filmId1, @RequestParam Integer filmId2) {
+        return acteurService.findActeursInFilms(filmId1, filmId2);
+    }
 }

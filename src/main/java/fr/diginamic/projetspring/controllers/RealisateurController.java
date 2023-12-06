@@ -74,5 +74,13 @@ public class RealisateurController {
         realisateurService.deleteRealisateurById(idRealisateur);
     }
 
+    // Implementation des requetes
+    // Tache 7:  Extraire tous les films d’un réalisateur donné
+    @GetMapping("/{idRealisateur}/films")
+    public List<Object[]> getFilmsByRealisateurId(@PathVariable("idRealisateur") Integer idRealisateur) {
+        return realisateurService.findFilmsByRealisateurId(idRealisateur);
+    }
+
+
     // Ajoutez d'autres méthodes d'endpoint au besoin
 }

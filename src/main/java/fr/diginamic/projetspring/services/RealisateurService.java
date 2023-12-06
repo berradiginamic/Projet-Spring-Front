@@ -105,4 +105,10 @@ public class RealisateurService {
     public Realisateur findByIdIMDB(String realisateurIdIMDB) {
         return realisateurRepository.findByIdIMDB(realisateurIdIMDB);
     }
+
+    // Implementation des requetes:
+    //  Tache 7: Extraire tous les films d’un réalisateur donné
+    public List<Object[]> findFilmsByRealisateurId(Integer idRealisateur) {
+        return realisateurRepository.findFilmsByRealisateurId(idRealisateur);
+    }
 }

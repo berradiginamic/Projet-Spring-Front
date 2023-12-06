@@ -106,4 +106,9 @@ public class ActeurService {
         return acteurRepository.findFilmsByActeurId(acteurId);
     }
 
+    // Tache 6:  Extraire les acteurs communs à 2 films donnés
+    public List<Object[]> findActeursInFilms(Integer filmId1, Integer filmId2) {
+        return acteurRepository.findActeursInFilms(filmId1, filmId2);
+    }
+
 }
