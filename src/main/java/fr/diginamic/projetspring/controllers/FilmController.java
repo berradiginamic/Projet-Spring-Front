@@ -94,17 +94,6 @@ public class FilmController {
     // Opérations spécifiques
 
     // Ajoutez d'autres méthodes selon vos besoins
-    /**
-     * Endpoint pour obtenir la liste des rôles dans un film.
-     *
-     * @ filmId Identifiant du film.
-     * @return La liste des rôles dans le film.
-     */
-    /*@GetMapping("/realisateur/{realisateurId}")
-    public List<Film> findByRealisateurId(@PathVariable("realisateurId") Integer realisateurId) {
-        return filmService.findByRealisateurId(realisateurId);
-    }*/
-
     @GetMapping("/byGenres")
     public ResponseEntity<List<Film>> getFilmsByGenres(@RequestParam Set<String> genreTypes) {
         try {
@@ -120,4 +109,19 @@ public class FilmController {
         // Example of using findByGenres_Type
         return filmService.getFilmsByGenre(genreType);
     }
+
+    // Implementation des requetes:
+    // Tache 2: Extraire tous les rôles d’un film donné
+    @GetMapping("/{filmId}/actors-and-characters")
+    public List<Object[]> getActorsAndCharactersByFilmId(@PathVariable("filmId") Integer filmId) {
+        return filmService.findActorsAndCharactersByFilmId(filmId);
+    }
+
+    // Tache 3: Extraire les films sortis entre 2 années données
+    @GetMapping("/released-between-years")
+    public List<Film> getFilmsReleasedBetweenYears(@RequestParam("startYear") int startYear,
+                                                   @RequestParam("endYear") int endYear) {
+        return filmService.findFilmsReleasedBetweenYears(startYear, endYear);
+    }
+
 }

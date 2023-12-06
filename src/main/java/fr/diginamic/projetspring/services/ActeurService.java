@@ -99,4 +99,11 @@ public class ActeurService {
     public List<Acteur> findByUrlProfile(String urlProfile) {
         return acteurRepository.findAllByUrlProfile(urlProfile);
     }
+
+    // Implementations des requetes:
+    // Tache 1: Extraire tous les films (nom et années de sortie) d’un acteur donné
+    public List<Object[]> findFilmsByActeurId(Integer acteurId) {
+        return acteurRepository.findFilmsByActeurId(acteurId);
+    }
+
 }

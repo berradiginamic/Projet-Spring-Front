@@ -71,4 +71,11 @@ public class ActeurController {
     public void deleteActeur(@PathVariable("acteurId") Integer acteurId) {
         acteurService.deleteActeur(acteurId);
     }
+
+    // Implementation des requetes:
+    // Tache 1: Extraire tous les films (nom et années de sortie) d’un acteur donné
+    @GetMapping("/{acteurId}/films")
+    public List<Object[]> getFilmsByActeurId(@PathVariable("acteurId") Integer acteurId) {
+        return acteurService.findFilmsByActeurId(acteurId);
+    }
 }

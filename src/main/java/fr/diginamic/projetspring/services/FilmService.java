@@ -112,14 +112,6 @@ public class FilmService {
             return filmRepository.findAllByUrlProfile(urlProfile);
         }
 
-
-
-
-
-        /*public List<Film> findByRealisateurId (Integer realisateurId){
-            return filmRepository.findAllByRealisateurId(realisateurId);
-        }*/
-
     public Film findByIdIMDB(String idIMDB){
         return filmRepository.findByIdIMDB(idIMDB);
     }
@@ -127,6 +119,17 @@ public class FilmService {
     public List<Film> getFilmsByGenreTypes(Set<String> genreTypes) {
         Set<Genre> genres = genreTypes.stream().map(Genre::new).collect(Collectors.toSet());
         return filmRepository.findAllByGenresIn(genres);
+    }
+
+    //Implementation des requetes:
+    // Tache 2:Extraire tous les rôles d’un film donné
+    public List<Object[]> findActorsAndCharactersByFilmId(Integer filmId) {
+        return filmRepository.findActorsAndCharactersByFilmId(filmId);
+    }
+
+    // Tache 3: Extraire les films sortis entre 2 années données
+    public List<Film> findFilmsReleasedBetweenYears(int startYear, int endYear) {
+        return filmRepository.findFilmsReleasedBetweenYears(startYear, endYear);
     }
 }
 
