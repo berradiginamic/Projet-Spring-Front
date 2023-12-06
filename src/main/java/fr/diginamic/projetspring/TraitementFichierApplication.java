@@ -1,16 +1,10 @@
 package fr.diginamic.projetspring;
 
 
-import fr.diginamic.projetspring.entities.Acteur;
-import fr.diginamic.projetspring.entities.Film;
-import fr.diginamic.projetspring.entities.Realisateur;
-import fr.diginamic.projetspring.entities.RoleFilm;
+import fr.diginamic.projetspring.entities.*;
 import fr.diginamic.projetspring.repositories.ActeurRepository;
 import fr.diginamic.projetspring.repositories.FilmRepository;
-import fr.diginamic.projetspring.services.ActeurService;
-import fr.diginamic.projetspring.services.FilmService;
-import fr.diginamic.projetspring.services.RealisateurService;
-import fr.diginamic.projetspring.services.RoleFilmService;
+import fr.diginamic.projetspring.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +12,7 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,9 +37,9 @@ public class TraitementFichierApplication implements CommandLineRunner {
     @Autowired
     private FilmService filmService;// doit ajouter les autres services
     @Autowired
-    private ActeurRepository acteurRepository;
+    private RealisateurFilmService realisateurFilmService;
     @Autowired
-    private FilmRepository filmRepository;
+    private GenreService genreService;
 
     public static void main(String[] args) throws Exception {
         SpringApplication app = new SpringApplication(TraitementFichierApplication.class);
@@ -53,20 +48,35 @@ public class TraitementFichierApplication implements CommandLineRunner {
         TraitementFichierApplication traitementFichierApplication = context.getBean(TraitementFichierApplication.class);
         traitementFichierApplication.run();
     }
+    Set<Genre> convertGenres(String genresString) {
+        Set<Genre> genres = new HashSet<>();
+        String[] genreNames = genresString.split(","); // Adjust the delimiter as needed
 
+        for (String genreName : genreNames) {
+            Genre genre = genreService.findOrCreateGenreByName(genreName.trim());
+            genres.add(genre);
+        }
 
+        return genres;
+    }
 
     /* Alimentation de la base de données à partir de fichiers CSV */
     @Override
     public void run(String... args) throws Exception {
+
+
+
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM d yyyy");
         // Set up a Set to track unique IDs
         Set<String> uniqueActeurIds = new HashSet<>();
         Set<String> uniqueFilmIds = new HashSet<>();
         Set<String> uniqueRealisateursIds = new HashSet<>();
+        Set<String> uniqueRealisateursFilmsIds = new HashSet<>();
+        Set<String> uniqueRoleFilmIds = new HashSet<>();
+
 
         /** Import du fichier acteurs.csv */
-      /* Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
+        Path pathActeurs = Paths.get("C:/dev-java/acteurs.csv");
         try {
             List<String> rowsActeurs = Files.readAllLines(pathActeurs);
             rowsActeurs.remove(0);
@@ -107,9 +117,10 @@ public class TraitementFichierApplication implements CommandLineRunner {
             e.printStackTrace();
             // Handle the IO exception appropriately
         }
-*/
+
+
         /*  Import du fichier films.csv */
-    /*   Path pathFilms = Paths.get("C:/dev-java/films.csv");
+       Path pathFilms = Paths.get("C:/dev-java/films.csv");
         List<String> rowFilms = Files.readAllLines(pathFilms);
         rowFilms.remove(0);
         for (String rowFilm : rowFilms) {
@@ -154,7 +165,14 @@ public class TraitementFichierApplication implements CommandLineRunner {
                 films.setRating(elements[3]);
                 films.setUrlProfile(elements[4]);
                 films.setLieuTournage(elements[5]);
-                films.setGenres(elements[6]);
+
+                // genres
+                if (elements.length >= 7) {
+                    String genresString = elements[6];
+                    Set<Genre> genres = convertGenres(genresString);
+                    films.setGenres(genres);
+                }
+
                 films.setLangue(elements[7]);
                 films.setPays(elements[9]);
                 try {
@@ -170,10 +188,10 @@ public class TraitementFichierApplication implements CommandLineRunner {
             } else {
                 System.out.println("Duplicate ID: " + idIMDB);
             }
-        } */
+        }
 
         /* Import du fichier realisateurs.csv */
-      /*Path pathRealisateurs = Paths.get("C:/dev-java/realisateurs.csv");
+      Path pathRealisateurs = Paths.get("C:/dev-java/realisateurs.csv");
         List<String> rowRealisateurs = Files.readAllLines(pathRealisateurs);
         rowRealisateurs.remove(0);
         for (String rowRealisateur : rowRealisateurs) {
@@ -205,13 +223,11 @@ public class TraitementFichierApplication implements CommandLineRunner {
                     // You might want to log the exception or take other actions
                 }
 
-
                 // Add ID to the unique IDs SetuniqueIds.add(idIMDB);
             } else {
                 System.out.println("Duplicate ID: " + idIMDB);
             }
-        } */
-
+        }
 
 
         /** Import du fichier roles.csv */
@@ -220,38 +236,75 @@ public class TraitementFichierApplication implements CommandLineRunner {
         rowRoleFilm.remove(0);
 
         for (String rowRoleFilms : rowRoleFilm) {
-            System.out.println(rowRoleFilm);
-
+            System.out.println(rowRoleFilms);
             String[] elements = rowRoleFilms.split(";");
             String acteurIdIMDB = elements[1].trim();
             String filmIdIMDB = elements[0].trim();
-            Acteur acteur = acteurService.findByIdIMDB(acteurIdIMDB);
-            Film film = filmService.findByIdIMDB(filmIdIMDB);
 
-            if (acteur != null && film != null) {
-                // Create and save a new Role entity
-                RoleFilm role = new RoleFilm();
+            // Check if the role ID already exists
+            String roleId = acteurIdIMDB + "_" + filmIdIMDB;
+            if (!uniqueRoleFilmIds.contains(roleId)) {
+                Acteur acteur = acteurService.findByIdIMDB(acteurIdIMDB);
+                Film film = filmService.findByIdIMDB(filmIdIMDB);
+                if (acteur != null && film != null) {
+                    // Create and save a new Role entity
+                    RoleFilm role = new RoleFilm();
+                    role.setActeur(acteur);
+                    role.setFilm(film);
+                    role.setPersonnage(elements[2]); // Set the correct value for personnage
+                    roleFilmService.createRoleFilm(role);
 
-                role.setActeurId(acteur.getActeurId());
-                role.setFilmId(film.getFilmId());
-                if (acteur.getActeurId() != null) {
-                    role.setActeurId(acteur.getActeurId());
+                    // Addition of the role ID to the set of unique IDs
+                    uniqueRoleFilmIds.add(roleId);
                 } else {
-                    System.out.println("Acteur ID is null for IDIMDB: " + acteurIdIMDB);
-                    continue; // Skip the current iteration if Acteur ID is null
+                    System.out.println("Invalid Acteur or Film ID");
                 }
-
-                // Check if Film ID is not null before setting it
-                if (film.getFilmId() != null) {
-                    role.setFilmId(film.getFilmId());
-                } else {
-                    System.out.println("Film ID is null for IDIMDB: " + filmIdIMDB);
-                    continue; // Skip the current iteration if Film ID is null
-                }
-
-                role.setPersonnage(elements[2]); // Set the correct value for personnage
-                roleFilmService.createRoleFilm(role);
+            } else {
+                System.out.println("Duplicate Role ID: " + roleId);
             }
         }
-    }}
+        System.out.println("Unique Role IDs Set: " + uniqueRoleFilmIds);
+
+
+        /** Import du fichier film_realisateurs.csv */
+        Path pathRealisateurFilm = Paths.get("C:/dev-java/film_realisateurs.csv");
+        List<String> rowRealisateurFilm = Files.readAllLines(pathRealisateurFilm);
+        rowRealisateurFilm.remove(0);
+
+        Set<String> uniqueRealisateurFilmIds = new HashSet<>(); // Set to track unique RealisateurFilm IDs
+
+        for (String rowRealisateurFilms : rowRealisateurFilm) {
+            System.out.println(rowRealisateurFilms);
+            String[] elements = rowRealisateurFilms.split(";");
+
+            String filmIdIMDB = elements[0].trim();
+            String realisateurIdIMDB = elements[1].trim();
+
+            // Check if the RealisateurFilm ID already exists
+            String realisateurFilmId = realisateurIdIMDB + "_" + filmIdIMDB;
+            if (!uniqueRealisateurFilmIds.contains(realisateurFilmId)) {
+                Realisateur realisateur = realisateurService.findByIdIMDB(realisateurIdIMDB);
+                Film film = filmService.findByIdIMDB(filmIdIMDB);
+
+                if (realisateur != null && film != null) {
+                    // Create and save a new RealisateurFilm entity
+                    RealisateurFilm realisateurFilm = new RealisateurFilm();
+                    realisateurFilm.setRealisateur(realisateur);
+                    realisateurFilm.setFilm(film);
+                    realisateurFilmService.createRealisateurFilm(realisateurFilm);
+
+                    // Addition of the RealisateurFilm ID to the set of unique IDs
+                    uniqueRealisateurFilmIds.add(realisateurFilmId);
+                } else {
+                    System.out.println("Invalid Realisateur or Film ID");
+                }
+            } else {
+                System.out.println("Duplicate RealisateurFilm ID: " + realisateurFilmId);
+            }
+        }
+        System.out.println("Unique RealisateurFilm IDs Set: " + uniqueRealisateurFilmIds);
+        }
+}
+
+
 

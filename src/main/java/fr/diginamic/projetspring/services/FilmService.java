@@ -1,11 +1,15 @@
 package fr.diginamic.projetspring.services;
 
-import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.entities.Genre;
 import fr.diginamic.projetspring.repositories.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Service gérant les opérations liées à l'entité Film.
@@ -15,6 +19,9 @@ public class FilmService {
     @Autowired
     private FilmRepository filmRepository;
 
+    public List<Film> getFilmsByGenre(String genreName) {
+        return filmRepository.findByGenres_Name(genreName);
+    }
     /**
      * Récupère tous les films.
      *
@@ -102,16 +109,21 @@ public class FilmService {
             return filmRepository.findAllByUrlProfile(urlProfile);
         }
 
-        public List<Film> findByGenres (String genres){
-            return filmRepository.findAllByGenres(genres);
-        }
+   
 
-        public List<Film> findByRealisateurId (Integer realisateurId){
+
+
+        /*public List<Film> findByRealisateurId (Integer realisateurId){
             return filmRepository.findAllByRealisateurId(realisateurId);
-        }
+        }*/
 
     public Film findByIdIMDB(String idIMDB){
         return filmRepository.findByIdIMDB(idIMDB);
+    }
+
+    public List<Film> getFilmsByGenreNames(Set<String> genreNames) {
+        Set<Genre> genres = genreNames.stream().map(Genre::new).collect(Collectors.toSet());
+        return filmRepository.findAllByGenresIn(genres);
     }
 }
 

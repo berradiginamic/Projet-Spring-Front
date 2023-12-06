@@ -1,8 +1,5 @@
 package fr.diginamic.projetspring.entities;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 import jakarta.persistence.*;
 
 @Entity
@@ -11,47 +8,41 @@ public class RealisateurFilm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
     private Integer idRealisateurFilm;
 
     @ManyToOne
-    @JoinColumn(name = "realisateur_id")
-=======
-    @Column(name = "id")
-    private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_realisateur")
->>>>>>> origin/master
+    @JoinColumn(name = "realisateur_id", referencedColumnName = "idRealisateur")
     private Realisateur realisateur;
 
-    @ManyToOne
-    @JoinColumn(name = "film_id")
+    @Column(name = "realisateur_id", insertable = false, updatable = false)
+    private Integer idRealisateur;
+
+    /** Film dans lequel le rôle est joué. */
+    @ManyToOne()
+    @JoinColumn(name = "film_id", referencedColumnName = "filmId")
     private Film film;
+
+    @Column(name = "film_id", insertable = false, updatable = false)
+    private Integer filmId;
 
     public RealisateurFilm() {
     }
 
-    public RealisateurFilm(Realisateur realisateur, Film film) {
-        this.realisateur = realisateur;
-        this.film = film;
+    public RealisateurFilm(Integer idRealisateurFilm, Realisateur realisateur, Film film) {
+        this.idRealisateurFilm = idRealisateurFilm;
+        this.idRealisateur = (realisateur != null) ? realisateur.getIdRealisateur() : null;
+        this.filmId = (film != null) ? film.getFilmId() : null;
     }
 
-<<<<<<< HEAD
+    // Getters et Setters
+
+
     public Integer getIdRealisateurFilm() {
         return idRealisateurFilm;
     }
 
     public void setIdRealisateurFilm(Integer idRealisateurFilm) {
         this.idRealisateurFilm = idRealisateurFilm;
-=======
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
->>>>>>> origin/master
     }
 
     public Realisateur getRealisateur() {
@@ -60,6 +51,14 @@ public class RealisateurFilm {
 
     public void setRealisateur(Realisateur realisateur) {
         this.realisateur = realisateur;
+    }
+
+    public Integer getIdRealisateur() {
+        return idRealisateur;
+    }
+
+    public void setIdRealisateur(Integer idRealisateur) {
+        this.idRealisateur = idRealisateur;
     }
 
     public Film getFilm() {
@@ -72,14 +71,6 @@ public class RealisateurFilm {
 
     @Override
     public String toString() {
-        return "RealisateurFilm{" +
-<<<<<<< HEAD
-                "id=" + idRealisateurFilm +
-=======
-                "id=" + id +
->>>>>>> origin/master
-                ", realisateur=" + realisateur +
-                ", film=" + film +
-                '}';
+        return "RealisateurFilm{" + "idRealisateurFilm= " + idRealisateurFilm;
     }
 }

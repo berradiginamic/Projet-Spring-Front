@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service gérant les opérations liées à l'entité Genre.
@@ -46,7 +47,22 @@ public class GenreService {
     public void deleteGenre(Integer genreId) {
         genreRepository.deleteById(genreId);}
 
-    public List<Genre> findByType(String type) {
-        return genreRepository.findAllByType(type);
+    public List<Genre> findByName(String name) {
+        return genreRepository.findAllByName(name);
+    }
+
+    public Genre findOrCreateGenreByName(String name) {
+        // Check if the genre with the given name already exists
+        Optional<Genre> existingGenre = genreRepository.findByName(name);
+
+        if (existingGenre.isPresent()) {
+            // If the genre exists, return it
+            return existingGenre.get();
+        } else {
+            // If the genre does not exist, create a new one and save it
+            Genre newGenre = new Genre();
+            newGenre.setName(name);
+            return genreRepository.save(newGenre);
+        }
     }
 }

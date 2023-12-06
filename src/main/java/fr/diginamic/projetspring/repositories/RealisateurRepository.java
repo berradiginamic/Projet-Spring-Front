@@ -26,4 +26,5 @@ public interface RealisateurRepository extends JpaRepository<Realisateur, Intege
     // Find all réalisateurs by URL profile
     List<Realisateur> findAllByUrlProfile(String urlProfile);
 
+    Realisateur findByIdIMDB(String realisateurIdIMDB);
 }

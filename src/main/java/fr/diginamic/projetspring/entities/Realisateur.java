@@ -30,7 +30,9 @@ public class Realisateur {
 
     /** Liste des films réalisés par le réalisateur. */
     @OneToMany(mappedBy = "realisateur", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Film> film;
+    private List<RealisateurFilm> realisateurFilms;
+
+
 
     public Realisateur() {
     }
@@ -148,18 +150,7 @@ public class Realisateur {
      *
      * @return La liste des films réalisés par le réalisateur.
      */
-    public List<Film> getFilm() {
-        return film;
-    }
 
-    /**
-     * Définit la liste des films réalisés par le réalisateur.
-     *
-     * @param film La liste des films réalisés par le réalisateur.
-     */
-    public void setFilm(List<Film> film) {
-        this.film = film;
-    }
 
     @Override
     public String toString() {

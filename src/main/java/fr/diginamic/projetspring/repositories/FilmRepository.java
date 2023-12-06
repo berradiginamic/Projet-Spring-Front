@@ -1,12 +1,11 @@
 package fr.diginamic.projetspring.repositories;
 
-import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.entities.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Interface repository pour l'entité Film, utilisant Spring Data JPA.
@@ -37,12 +36,13 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     List<Film> findAllByUrlProfile(String urlProfile);
 
     // Find all films by genre
-    List<Film> findAllByGenres(String genres);
+    List<Film> findAllByGenresIn(Set<Genre> genres);
 
     // Find all films by realisateur id
-    @Query("SELECT f FROM Film f JOIN f.realisateur r WHERE r.idRealisateur = :realisateurId")
-    List<Film> findAllByRealisateurId(@Param("realisateurId") Integer realisateurId);
+   /* @Query("SELECT f FROM Film f JOIN f.realisateur r WHERE r.idRealisateur = :realisateurId")
+    List<Film> findAllByRealisateurId(@Param("realisateurId") Integer realisateurId); */
 
     Film findByIdIMDB(String idIMDB);
 
+    List<Film> findByGenres_Name(String genreName);
 }

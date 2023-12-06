@@ -1,6 +1,7 @@
 package fr.diginamic.projetspring.controllers;
 
 import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.entities.Genre;
 import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.entities.RoleFilm;
 import fr.diginamic.projetspring.services.ActeurService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Contrôleur REST pour la gestion des films.
@@ -97,8 +100,24 @@ public class FilmController {
      * @ filmId Identifiant du film.
      * @return La liste des rôles dans le film.
      */
-    @GetMapping("/realisateur/{realisateurId}")
+    /*@GetMapping("/realisateur/{realisateurId}")
     public List<Film> findByRealisateurId(@PathVariable("realisateurId") Integer realisateurId) {
         return filmService.findByRealisateurId(realisateurId);
+    }*/
+
+    @GetMapping("/byGenres")
+    public ResponseEntity<List<Film>> getFilmsByGenres(@RequestParam Set<String> genreNames) {
+        try {
+            List<Film> films = filmService.getFilmsByGenreNames(genreNames);
+            return new ResponseEntity<>(films, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/byGenre")
+    public List<Film> getFilmsByGenre(@RequestParam String genreName) {
+        // Example of using findByGenres_Name
+        return filmService.getFilmsByGenre(genreName);
     }
 }

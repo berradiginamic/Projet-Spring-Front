@@ -101,4 +101,8 @@ public class RealisateurService {
     public List<Realisateur> findByUrlProfile(String urlProfile) {
         return realisateurRepository.findAllByUrlProfile(urlProfile);
     }
+
+    public Realisateur findByIdIMDB(String realisateurIdIMDB) {
+        return realisateurRepository.findByIdIMDB(realisateurIdIMDB);
+    }
 }

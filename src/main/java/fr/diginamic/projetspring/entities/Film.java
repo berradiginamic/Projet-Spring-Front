@@ -2,7 +2,9 @@ package fr.diginamic.projetspring.entities;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Représente un film avec ses caractéristiques et les personnes impliquées dans sa création.
@@ -41,7 +43,6 @@ public class Film {
      * Langue du film.
      */
     private String langue;
-    private String genres;
     /**
      * Résumé du film.
      */
@@ -54,17 +55,19 @@ public class Film {
     /**
      * Réalisateur du film.
      */
-    @ManyToOne
-    @JoinColumn(name = "realisateur_id")
-    private Realisateur realisateur;
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RealisateurFilm> realisateurFilms;
 
     /** Liste des rôles que l'acteur a joués dans des films. */
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RoleFilm> rolefilm;
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id")
-    private Genre genre;
+    @ManyToMany
+    @JoinTable(name = "film_genre",
+            joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<Genre> genres = new HashSet<>();
 
     // Constructeurs
 
@@ -74,7 +77,7 @@ public class Film {
     public Film() {
     }
 
-    public Film(Integer anneeSortie, String langue, String lieuTournage, String nom, String pays, String rating, String resume, String urlProfile, String genres) {
+    public Film(Integer anneeSortie, String langue, String lieuTournage, String nom, String pays, String rating, String resume, String urlProfile, Set genres) {
         this.anneeSortie = anneeSortie;
         this.langue = langue;
         this.lieuTournage = lieuTournage;
@@ -218,11 +221,11 @@ public class Film {
     }
 
 
-    public String getGenres() {
+    public Set<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(String genres) {
+    public void setGenres(Set<Genre> genres) {
         this.genres = genres;
     }
 
@@ -280,23 +283,9 @@ public class Film {
         this.pays = pays;
     }
 
-    /**
-     * Obtient le réalisateur du film.
-     *
-     * @return Le réalisateur du film.
-     */
-    public Realisateur getRealisateur() {
-        return realisateur;
-    }
 
-    /**
-     * Définit le réalisateur du film.
-     *
-     * @param realisateur Le réalisateur du film.
-     */
-    public void setRealisateur(Realisateur realisateur) {
-        this.realisateur = realisateur;
-    }
+
+
 
     /**
      * Obtient la liste des acteurs qui ont joué dans le film.

@@ -1,7 +1,9 @@
 package fr.diginamic.projetspring.entities;
 
 import jakarta.persistence.*;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Représente un genre de film avec son type et la liste des films associés à ce genre.
@@ -9,16 +11,17 @@ import java.util.List;
 @Entity
 @Table(name="genres")
 public class Genre {
-
     /** Identifiant unique du genre. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer genreId;
 
     /** Type du genre (ex: Action, Comédie, Drame, etc.). */
-    @Column(name="type")
-    private String type;
+    @Column(name="name")
+    private String name;
 
+    @ManyToMany(mappedBy = "genres")
+    private Set<Film> films = new HashSet<>();
 
     // Constructeurs
     /**
@@ -30,10 +33,10 @@ public class Genre {
     /**
      * Constructeur avec type de genre.
      *
-     * @param type Le type de genre (ex: Action, Comédie, Drame, etc.).
+     * @param name Le type de genre (ex: Action, Comédie, Drame, etc.).
      */
-    public Genre(String type) {
-        this.type = type;
+    public Genre(String name) {
+        this.name = name;
     }
 
     // Getters et Setters
@@ -61,17 +64,17 @@ public class Genre {
      *
      * @return Le type de genre.
      */
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     /**
      * Définit le type de genre.
      *
-     * @param type Le type de genre.
+     * @param name Le type de genre.
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -79,7 +82,8 @@ public class Genre {
      *
      * @return La liste des films associés à ce genre.
      */
-    @Override
+    // Getters and Setters
+
 
 
     public String toString()
@@ -89,7 +93,7 @@ public class Genre {
 
                 "Genre{" +
                         "genreId=" + genreId +
-                        ", nom='" + type + '\'' +
+                        ", nom='" + name + '\'' +
                         '}';
     }
 }

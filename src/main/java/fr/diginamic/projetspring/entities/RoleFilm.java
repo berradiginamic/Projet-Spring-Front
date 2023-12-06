@@ -19,18 +19,18 @@ public class RoleFilm {
     private String personnage;
 
     /** Acteur qui joue le rôle. */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "acteur_id", referencedColumnName = "acteurId")
     private Acteur acteur;
-
-    /** Film dans lequel le rôle est joué. */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "film_id", referencedColumnName = "filmId")
-    private Film film;
 
     // Add these fields to store the foreign key values directly
     @Column(name = "acteur_id", insertable = false, updatable = false)
     private Integer acteurId;
+
+    /** Film dans lequel le rôle est joué. */
+    @ManyToOne()
+    @JoinColumn(name = "film_id", referencedColumnName = "filmId")
+    private Film film;
 
     @Column(name = "film_id", insertable = false, updatable = false)
     private Integer filmId;
