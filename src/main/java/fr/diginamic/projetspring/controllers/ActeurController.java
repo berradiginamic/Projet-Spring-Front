@@ -79,9 +79,10 @@ public class ActeurController {
         return acteurService.findFilmsByActeurId(acteurId);
     }
 
-    // Tache 6:
+    // Tache 6:  Extraire les acteurs communs à 2 films donnés
     @GetMapping("/in-films")
-    public List<Object[]> getActeursInFilms(@RequestParam Integer filmId1, @RequestParam Integer filmId2) {
+    public List<Object[]> getActeursInFilms(@RequestParam("filmId1") Integer filmId1,
+                                            @RequestParam("filmId2") Integer filmId2) {
         return acteurService.findActeursInFilms(filmId1, filmId2);
     }
 }
