@@ -25,6 +25,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+// Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
 @SpringBootApplication
 public class TraitementFichierApplication implements CommandLineRunner {
 
@@ -191,7 +193,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
         }
 
         /* Import du fichier realisateurs.csv */
-      Path pathRealisateurs = Paths.get("C:/dev-java/realisateurs.csv");
+       Path pathRealisateurs = Paths.get("C:/dev-java/realisateurs.csv");
         List<String> rowRealisateurs = Files.readAllLines(pathRealisateurs);
         rowRealisateurs.remove(0);
         for (String rowRealisateur : rowRealisateurs) {
@@ -238,32 +240,39 @@ public class TraitementFichierApplication implements CommandLineRunner {
         for (String rowRoleFilms : rowRoleFilm) {
             System.out.println(rowRoleFilms);
             String[] elements = rowRoleFilms.split(";");
-            String acteurIdIMDB = elements[1].trim();
-            String filmIdIMDB = elements[0].trim();
 
-            // Check if the role ID already exists
-            String roleId = acteurIdIMDB + "_" + filmIdIMDB;
-            if (!uniqueRoleFilmIds.contains(roleId)) {
-                Acteur acteur = acteurService.findByIdIMDB(acteurIdIMDB);
-                Film film = filmService.findByIdIMDB(filmIdIMDB);
-                if (acteur != null && film != null) {
-                    // Create and save a new Role entity
-                    RoleFilm role = new RoleFilm();
-                    role.setActeur(acteur);
-                    role.setFilm(film);
-                    role.setPersonnage(elements[2]); // Set the correct value for personnage
-                    roleFilmService.createRoleFilm(role);
+            // Check if the array has enough elements before accessing index 2
+            if (elements.length >= 3) {
+                String acteurIdIMDB = elements[1].trim();
+                String filmIdIMDB = elements[0].trim();
 
-                    // Addition of the role ID to the set of unique IDs
-                    uniqueRoleFilmIds.add(roleId);
+                // Check if the role ID already exists
+                String roleId = acteurIdIMDB + "_" + filmIdIMDB;
+                if (!uniqueRoleFilmIds.contains(roleId)) {
+                    Acteur acteur = acteurService.findByIdIMDB(acteurIdIMDB);
+                    Film film = filmService.findByIdIMDB(filmIdIMDB);
+                    if (acteur != null && film != null) {
+                        // Create and save a new Role entity
+                        RoleFilm role = new RoleFilm();
+                        role.setActeur(acteur);
+                        role.setFilm(film);
+                        role.setPersonnage(elements[2]); // Set the correct value for personnage
+                        roleFilmService.createRoleFilm(role);
+
+                        // Addition of the role ID to the set of unique IDs
+                        uniqueRoleFilmIds.add(roleId);
+                    } else {
+                        System.out.println("Invalid Acteur or Film ID");
+                    }
                 } else {
-                    System.out.println("Invalid Acteur or Film ID");
+                    System.out.println("Duplicate Role ID: " + roleId);
                 }
             } else {
-                System.out.println("Duplicate Role ID: " + roleId);
+                System.out.println("Insufficient elements in the CSV row");
             }
         }
         System.out.println("Unique Role IDs Set: " + uniqueRoleFilmIds);
+
 
 
         /** Import du fichier film_realisateurs.csv */
