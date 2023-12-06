@@ -1,6 +1,6 @@
 # projet-spring [Diginamic]
 
-## Groupe de TP: Christ M.; Christopher A.; Fatima B; Dorian C;
+## Groupe: Christ M.; Christopher A.; Fatima B; Dorian C;
 
 ## Objectifs:
 1. Réaliser un document de conception avec diagramme de classes et Modèle Physique de 
