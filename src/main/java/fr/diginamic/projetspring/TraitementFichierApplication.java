@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 
-// Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
+
 @SpringBootApplication
 public class TraitementFichierApplication implements CommandLineRunner {
 
@@ -37,7 +37,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
     @Autowired
     private RoleFilmService roleFilmService;
     @Autowired
-    private FilmService filmService;// doit ajouter les autres services
+    private FilmService filmService;
     @Autowired
     private RealisateurFilmService realisateurFilmService;
     @Autowired
@@ -52,7 +52,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
     }
     Set<Genre> convertGenres(String genresString) {
         Set<Genre> genres = new HashSet<>();
-        String[] genreTypes = genresString.split(","); // Adjust the delimiter as needed
+        String[] genreTypes = genresString.split(",");
 
         for (String genreType : genreTypes) {
             Genre genre = genreService.findOrCreateGenreByType(genreType.trim());
@@ -69,7 +69,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM d yyyy");
-        // Set up a Set to track unique IDs
+        // Création de Set pour identifer les Id unique
         Set<String> uniqueActeurIds = new HashSet<>();
         Set<String> uniqueFilmIds = new HashSet<>();
         Set<String> uniqueRealisateursIds = new HashSet<>();
@@ -96,19 +96,16 @@ public class TraitementFichierApplication implements CommandLineRunner {
                         acteurs.setDateNaissance(dateNaissance);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                        // Handle the parsing exception appropriately
                     }
                     acteurs.setLieuNaissance(elements[3]);
                     acteurs.setUrlProfile(elements[5]);
                     try {
-                        // Attempt to save the Acteur entity
+                        // Tentative d'enregistrement de acteurs
                         acteurService.createActeur(acteurs);
                         // Addition de l'ID dans le set d'ID uniques
                         uniqueActeurIds.add(idIMDB);
                     } catch (DataIntegrityViolationException e) {
-                        // Handle the unique constraint violation
                         System.out.println("Duplicate ID: " + idIMDB);
-                        // You might want to log the exception or take other actions
                     }
                 } else {
                     System.out.println("Duplicate ID: " + idIMDB);
@@ -117,7 +114,6 @@ public class TraitementFichierApplication implements CommandLineRunner {
             System.out.println("Unique IDs Set: " + uniqueActeurIds);
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle the IO exception appropriately
         }
 
 
@@ -127,15 +123,12 @@ public class TraitementFichierApplication implements CommandLineRunner {
         rowFilms.remove(0);
         for (String rowFilm : rowFilms) {
             System.out.println(rowFilm);
-
             String[] elements = rowFilm.split(";");
             if (elements.length < 10) {
                 System.out.println("Invalid data: " + rowFilm);
                 continue;
             }
-
             String idIMDB = elements[0].trim();
-
             // Vérification si l'ID existe déjà
             if (!uniqueFilmIds.contains(idIMDB)) {
                 Film films = new Film();
@@ -178,14 +171,12 @@ public class TraitementFichierApplication implements CommandLineRunner {
                 films.setLangue(elements[7]);
                 films.setPays(elements[9]);
                 try {
-                    // Attempt to save the Film entity
+                    // Tentative sauvergade Entité Film
                     filmService.createFilm(films);
                     // Addition de l'ID dans le set d'ID uniques
                     uniqueFilmIds.add(idIMDB);
                 } catch (DataIntegrityViolationException e) {
-                    // Handle the unique constraint violation
                     System.out.println("Duplicate ID: " + idIMDB);
-                    // You might want to log the exception or take other actions
                 }
             } else {
                 System.out.println("Duplicate ID: " + idIMDB);
@@ -200,9 +191,7 @@ public class TraitementFichierApplication implements CommandLineRunner {
             System.out.println(rowRealisateur);
             String[] elements = rowRealisateur.split(";");
             String idIMDB = elements[0].trim();
-            // Check if ID already exists
             if (!uniqueRealisateursIds.contains(idIMDB)) {
-                // Create and save a new Film object
                 Realisateur realisateurs = new Realisateur();
                 realisateurs.setIdIMDB(idIMDB);
                 realisateurs.setNom(elements[1]);
@@ -210,22 +199,15 @@ public class TraitementFichierApplication implements CommandLineRunner {
                     Date dateNaissance = sdf.parse(elements[2]);
                     realisateurs.setDateNaissance(dateNaissance);
                 } catch (ParseException e) {
-                    // Handle the parsing exception appropriately
                 }
                 realisateurs.setLieuNaissance(elements[3]);
                 realisateurs.setUrlProfile(elements[4]);
                 try {
-                    // Save the film to the database
                     realisateurService.createRealisateur(realisateurs);
-                    // trynnnnnn
                     uniqueRealisateursIds.add(idIMDB);
                 } catch (DataIntegrityViolationException e) {
-                    // Handle the unique constraint violation
                     System.out.println("Duplicate ID: " + idIMDB);
-                    // You might want to log the exception or take other actions
                 }
-
-                // Add ID to the unique IDs SetuniqueIds.add(idIMDB);
             } else {
                 System.out.println("Duplicate ID: " + idIMDB);
             }
@@ -240,26 +222,19 @@ public class TraitementFichierApplication implements CommandLineRunner {
         for (String rowRoleFilms : rowRoleFilm) {
             System.out.println(rowRoleFilms);
             String[] elements = rowRoleFilms.split(";");
-
-            // Check if the array has enough elements before accessing index 2
             if (elements.length >= 3) {
                 String acteurIdIMDB = elements[1].trim();
                 String filmIdIMDB = elements[0].trim();
-
-                // Check if the role ID already exists
                 String roleId = acteurIdIMDB + "_" + filmIdIMDB;
                 if (!uniqueRoleFilmIds.contains(roleId)) {
                     Acteur acteur = acteurService.findByIdIMDB(acteurIdIMDB);
                     Film film = filmService.findByIdIMDB(filmIdIMDB);
                     if (acteur != null && film != null) {
-                        // Create and save a new Role entity
                         RoleFilm role = new RoleFilm();
                         role.setActeur(acteur);
                         role.setFilm(film);
-                        role.setPersonnage(elements[2]); // Set the correct value for personnage
+                        role.setPersonnage(elements[2]);
                         roleFilmService.createRoleFilm(role);
-
-                        // Addition of the role ID to the set of unique IDs
                         uniqueRoleFilmIds.add(roleId);
                     } else {
                         System.out.println("Invalid Acteur or Film ID");
@@ -281,7 +256,6 @@ public class TraitementFichierApplication implements CommandLineRunner {
         rowRealisateurFilm.remove(0);
 
         Set<String> uniqueRealisateurFilmIds = new HashSet<>(); // Set to track unique RealisateurFilm IDs
-
         for (String rowRealisateurFilms : rowRealisateurFilm) {
             System.out.println(rowRealisateurFilms);
             String[] elements = rowRealisateurFilms.split(";");
@@ -289,20 +263,18 @@ public class TraitementFichierApplication implements CommandLineRunner {
             String filmIdIMDB = elements[0].trim();
             String realisateurIdIMDB = elements[1].trim();
 
-            // Check if the RealisateurFilm ID already exists
             String realisateurFilmId = realisateurIdIMDB + "_" + filmIdIMDB;
             if (!uniqueRealisateurFilmIds.contains(realisateurFilmId)) {
                 Realisateur realisateur = realisateurService.findByIdIMDB(realisateurIdIMDB);
                 Film film = filmService.findByIdIMDB(filmIdIMDB);
 
                 if (realisateur != null && film != null) {
-                    // Create and save a new RealisateurFilm entity
+
                     RealisateurFilm realisateurFilm = new RealisateurFilm();
                     realisateurFilm.setRealisateur(realisateur);
                     realisateurFilm.setFilm(film);
                     realisateurFilmService.createRealisateurFilm(realisateurFilm);
 
-                    // Addition of the RealisateurFilm ID to the set of unique IDs
                     uniqueRealisateurFilmIds.add(realisateurFilmId);
                 } else {
                     System.out.println("Invalid Realisateur or Film ID");
