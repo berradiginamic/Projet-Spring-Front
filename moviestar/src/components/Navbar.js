@@ -8,6 +8,7 @@ const Navbar = () => {
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/acteurs">Acteurs</Link></li>
+        <li><Link to="/modify-acteurs">Modifier Acteur</Link></li> {/* Add this line */}
       </ul>
     </nav>
   );
