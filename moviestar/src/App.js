@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Acteurs from './pages/Acteurs';
 import ModifyActeurs from './pages/ModifyActeurs';
+import FilmActeurs from './pages/FilmActeurs';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/acteurs" element={<Acteurs />} /> {/* Add this line */}
           <Route path="/modify-acteurs" element={<ModifyActeurs />} /> {/* Add this line */}
+          <Route path="/films-acteurs" element={<FilmActeurs />} /> {/* Add this line */}
         </Routes>
       </div>
     </Router>

@@ -1,19 +1,20 @@
-// src/pages/MoviesByActor.js
+// src/pages/FilmActeurs.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const MoviesByActor = () => {
-  const [actorId, setActorId] = useState('');
-  const [movies, setMovies] = useState([]);
+const FilmActeurs = () => {
+  const [acteurId, setActeursId] = useState('');
+  const [films, setFilms] = useState([]);
 
-  const handleActorIdChange = (e) => {
-    setActorId(e.target.value);
+  const handleActeursIdChange = (e) => {
+    setActeursId(e.target.value);
   };
 
-  const handleFetchMovies = async () => {
+  const handleFetchFilms = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/acteurs/${actorId}/movies`);
-      setMovies(response.data);
+      const response = await axios.get(`http://localhost:8080/acteurs/${acteurId}/films`);
+      setFilms(response.data);
+       console.log(response.data);
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
@@ -24,17 +25,19 @@ const MoviesByActor = () => {
       <h2>Movies by Actor</h2>
       <label>
         Actor ID:
-        <input type="text" value={actorId} onChange={handleActorIdChange} />
+        <input type="text" value={acteurId} onChange={handleActeursIdChange} />
       </label>
       <br />
-      <button onClick={handleFetchMovies}>Fetch Movies</button>
+      <button onClick={handleFetchFilms}>Liste de Films</button>
       <ul>
-        {movies.map((movie, index) => (
-          <li key={index}>{movie.titre} ({movie.annee})</li>
+        {films.map((filmData, index) => (
+                  <li key={index}>
+                    <strong>Titre:</strong> {filmData[0]}, <strong>Année:</strong> {filmData[1]}
+                  </li>
         ))}
       </ul>
     </div>
   );
 };
 
-export default MoviesByActor;
+export default FilmActeurs;

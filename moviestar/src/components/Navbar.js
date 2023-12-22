@@ -9,6 +9,7 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/acteurs">Acteurs</Link></li>
         <li><Link to="/modify-acteurs">Modifier Acteur</Link></li> {/* Add this line */}
+        <li><Link to="/films-acteurs">Films d'un' Acteur</Link></li> {/* Add this line */}
       </ul>
     </nav>
   );
