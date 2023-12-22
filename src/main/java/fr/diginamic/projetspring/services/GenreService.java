@@ -4,6 +4,7 @@ import fr.diginamic.projetspring.entities.Genre;
 import fr.diginamic.projetspring.repositories.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public class GenreService {
     public List<Genre> findAll() {
         return genreRepository.findAll();
     }
-    public Genre updateGenre(Integer genreId, Genre genre) {
+    public Genre updateGenre(Integer genreId,@RequestBody Genre genre) {
         // Votre logique de mise à jour du genre
 
         // Assurez-vous de retourner le genre mis à jour
