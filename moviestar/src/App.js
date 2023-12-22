@@ -1,33 +1,21 @@
-import React from "react";
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Trending from "./Pages/Trending";
-// import Acteurs from "./Pages/Acteurs";
-// import Films from "./Pages/Films";
-// import Genres from "./Pages/Genres";
-// import Realisateurs from "./Pages/Realisateurs";
-// import Recherche from "./Pages/Recherche";
-// import SingleMovie from "./Pages/SingleMovie";
-// import Erreur from "./Pages/Erreur";
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Acteurs from './pages/Acteurs';
 
 const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <Header />
+    <Router>
+      <div>
+        <Navbar />
         <Routes>
-          {/* <Route path="/" element={<Home />} exact /> */}
-          {/* Home page is denoted with ‘/’ symbol */}
-
-          {/* <Route path="/films" element={<Films />} /> // page films */}
-          {/* <Route path="/acteurs" element={<Acteurs />} /> // Page acteurs */}
-          {/* <Route path="/recherche" element={<Recherche />} /> // Custom Search Page */}
-          {/* <Route path="*" element={<Error />} /> // Error Page */}
+          <Route path="/" element={<Home />} />
+          <Route path="/acteurs" element={<Acteurs />} /> {/* Add this line */}
         </Routes>
-        <Footer />
-      </BrowserRouter>
-    </>
+      </div>
+    </Router>
   );
 };
 
