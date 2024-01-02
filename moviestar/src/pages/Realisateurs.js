@@ -36,7 +36,7 @@ const Realisateurs = () => {
       <ul>
         {realisateurs.map((realisateur) => (
           <li key={realisateur.id} onClick={() => handleRealisateurClick(realisateur.id)}>
-            {realisateur.name}
+            {realisateur.nom}
           </li>
         ))}
       </ul>

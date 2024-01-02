@@ -24,12 +24,17 @@ const Acteurs = () => {
     <div className="component-container">
           <h2 className="component-heading">Page Acteur</h2>
           <ul className="list-container">
-        {acteurs.map((acteur) => (
-            <li key={acteur.id}>{acteur.nom}</li>
+        {acteurs.map((actorData, index) => (
+                  <li key={index}>
+                    <strong>Nom de films:</strong> {actorData[0]}, <strong>Année de sortie:</strong>{actorData[1]}
+                    {actorData.slice(1).map((film, filmIndex) => (
+                      <span key={filmIndex}>{film[0]} ({film[1]}){filmIndex !== actorData.length - 2 ? ', ' : ''}</span>
+                    ))}
+                  </li>
         ))}
       </ul>
       {/* Ajout de fonctionnalité nécéssaire ici */}
-      Ello
+      <h3> Filmographies: </h3>
     </div>
   );
 };

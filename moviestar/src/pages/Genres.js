@@ -57,13 +57,13 @@ const Genres = () => {
 
   return (
     <div>
-      <h2>Page Genres</h2>
+      <h2>Genres des films et séries TV populaires</h2>
       <ul>
-        {genres.map((genre) => (
-          <li key={genre.id}>
-            {genre.name} -{' '}
-            <button onClick={() => setSelectedGenreId(genre.id)}>Edit</button>{' '}
-            <button onClick={() => handleDeleteGenre(genre.id)}>Delete</button>
+        {genres.map((genres, index) => (
+          <li key={index}>
+            {genres.type} -{' '}
+            <button onClick={() => setSelectedGenreId(index)}>Edit</button>{' '}
+            <button onClick={() => handleDeleteGenre(index)}>Delete</button>
           </li>
         ))}
       </ul>
