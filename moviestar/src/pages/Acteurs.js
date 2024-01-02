@@ -1,6 +1,7 @@
-// src/pages/Acteurs.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// Acteurs.js
+import React, { useEffect, useState } from 'react';
+import backendService from '../services/backendService';
+import '../styles/styles.css';
 
 const Acteurs = () => {
   const [acteurs, setActeurs] = useState([]);
@@ -8,29 +9,27 @@ const Acteurs = () => {
   useEffect(() => {
     const fetchActeurs = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/acteurs/250/films');
-        setActeurs(response.data);
+        const acteursData = await backendService.fetchActeurs();
+        setActeurs(acteursData);
       } catch (error) {
-        console.error('Error fetching actors:', error);
+        // Handle error
       }
     };
 
     fetchActeurs();
   }, []);
 
+
   return (
-    <div>
-      <h2>Actors Page</h2>
-      <ul>
-        {acteurs.map((actorData, index) => (
-          <li key={index}>
-            <strong>Nom de films:</strong> {actorData[0]}, <strong>Année de sortie:</strong>{actorData[1]}
-            {actorData.slice(1).map((film, filmIndex) => (
-              <span key={filmIndex}>{film[0]} ({film[1]}){filmIndex !== actorData.length - 2 ? ', ' : ''}</span>
-            ))}
-          </li>
+    <div className="component-container">
+          <h2 className="component-heading">Page Acteur</h2>
+          <ul className="list-container">
+        {acteurs.map((acteur) => (
+            <li key={acteur.id}>{acteur.nom}</li>
         ))}
       </ul>
+      {/* Ajout de fonctionnalité nécéssaire ici */}
+      Ello
     </div>
   );
 };

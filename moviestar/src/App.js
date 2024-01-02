@@ -1,13 +1,11 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Home from './components/Home';
 import Acteurs from './pages/Acteurs';
-import ModifyActeurs from './pages/ModifyActeurs';
-import FilmActeurs from './pages/FilmActeurs';
-import FilmsEntre2Annees from './pages/FilmsEntre2Annees';
-import ModifierGenres from './pages/ModifierGenres';
+import Films from './pages/Films';
+import Genres from './pages/Genres';
+import Search from './pages/Search';
+import Realisateurs from './pages/Realisateurs';
 
 const App = () => {
   return (
@@ -15,12 +13,11 @@ const App = () => {
       <div>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/acteurs" element={<Acteurs />} /> {/* Add this line */}
-          <Route path="/modify-acteurs" element={<ModifyActeurs />} /> {/* Add this line */}
-          <Route path="/films-acteurs" element={<FilmActeurs />} /> {/* Add this line */}
-          <Route path="/films-entre-annee" element={<FilmsEntre2Annees />} /> {/* Add this line */}
-          <Route path="/modifier-genre" element={<ModifierGenres />} /> {/* Add this line */}
+          <Route path="/acteurs" element={<Acteurs />} />
+          <Route path="/films" element={<Films />} />
+          <Route path="/genres" element={<Genres />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/realisateurs" element={<Realisateurs />} />
         </Routes>
       </div>
     </Router>

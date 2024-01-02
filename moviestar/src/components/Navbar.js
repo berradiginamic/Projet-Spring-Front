@@ -1,6 +1,7 @@
-// src/components/Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/styles.css'; // Import styles
+
 
 const Navbar = () => {
   return (
@@ -8,10 +9,10 @@ const Navbar = () => {
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/acteurs">Acteurs</Link></li>
-        <li><Link to="/modify-acteurs">Modifier Acteur</Link></li> {/* Add this line */}
-        <li><Link to="/films-acteurs">Films d'un' Acteur</Link></li> {/* Add this line */}
-        <li><Link to="/films-entre-annee">Films entre deux annees</Link></li> {/* Add this line */}
-        <li><Link to="/modifier-genre">Genres</Link></li> {/* Add this line */}
+        <li><Link to="/films">Films</Link></li>
+        <li><Link to="/genres">Genres</Link></li>
+        <li><Link to="/search">Recherche Avancée</Link></li>
+        <li><Link to="/realisateurs">Realisateurs</Link></li>
       </ul>
     </nav>
   );
