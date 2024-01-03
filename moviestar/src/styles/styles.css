@@ -28,17 +28,34 @@ button {
 }
 
 /* Style page realisateurs*/
-.container {
-  display: flex;
-   /* Arrange children in a vertical column */
-   align-items: center;/* Center items horizontally */
+.realisateurs-list-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px; /* Adjust the width as needed */
+  height: 100%; /* Adjust the height as needed */
+  overflow-y: auto; /* Add scroll if the content exceeds the height */
+  background-color: #fff; /* Add a background color if needed */
+  padding: 20px; /* Adjust padding as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for styling */
 }
 
-.realisateurs-list {
-  padding-right: 20px; /* Adjust spacing between lists */
+.realisateurs-list-wrapper h2 {
+  margin-bottom: 10px;
 }
+
+.realisateurs-list-wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.realisateurs-list-wrapper li {
+  margin-bottom: 10px;
+}
+
 .selected {
-  background-color: #3498db; /* Set background color for the selected item */
+  background-color: #d00; /* Set background color for the selected item */
   color: #ffffff; /* Set text color for the selected item */
 }
 
@@ -50,10 +67,6 @@ button {
   border-radius: 10px; /* Add rounded corners */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
   margin-top: 20px; /* Add spacing between realisateurs-list and films-section */
-}
-
-.pagination-controls {
-  margin-top: 20px; /* Add some spacing between the lists and pagination controls */
 }
 
 /* Add the following styles for the "Modifier Réalisateur" section */
@@ -72,4 +85,42 @@ button {
 }
 
 
+/* Add a container for the search bar to control its position */
+.search-bar-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
 /* Add more styles as needed */
+/* Override Bootstrap Pagination styling */
+.custom-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px; /* Adjust margin as needed */
+}
+
+.custom-pagination-button {
+  padding: 5px 10px;
+  background-color: #007bff; /* Your preferred button background color */
+  color: #fff; /* Your preferred button text color */
+  border: 1px solid #007bff; /* Your preferred button border color */
+  cursor: pointer;
+}
+
+.custom-pagination-button:disabled {
+  background-color: #ccc; /* Your preferred disabled button background color */
+  color: #888; /* Your preferred disabled button text color */
+  border: 1px solid #ccc; /* Your preferred disabled button border color */
+  cursor: not-allowed;
+}
+
+.custom-pagination-current {
+  font-weight: bold;
+}

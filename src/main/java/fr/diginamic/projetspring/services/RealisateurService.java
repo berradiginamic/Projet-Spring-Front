@@ -114,4 +114,10 @@ public class RealisateurService {
     public List<Object[]> findFilmsByRealisateurId(Integer idRealisateur) {
         return realisateurRepository.findFilmsByRealisateurId(idRealisateur);
     }
+
+    public List<Realisateur> searchRealisateursByNom(String searchTerm, int page, int pageSize) {
+        Page<Realisateur> realisateursPage = realisateurRepository.searchRealisateursByNom(searchTerm, PageRequest.of(page - 1, pageSize));
+        return realisateursPage.getContent();
+    }
+
 }

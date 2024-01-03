@@ -3,6 +3,7 @@ package fr.diginamic.projetspring.controllers;
 import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.services.RealisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,4 +87,17 @@ public class RealisateurController {
 
 
     // Ajoutez d'autres méthodes d'endpoint au besoin
+    @GetMapping("/search")
+    public ResponseEntity<List<Realisateur>> searchRealisateurs(
+            @RequestParam(name = "searchTerm") String searchTerm,
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+        try {
+            List<Realisateur> realisateurs = realisateurService.searchRealisateursByNom(searchTerm, page, pageSize);
+            return ResponseEntity.ok(realisateurs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

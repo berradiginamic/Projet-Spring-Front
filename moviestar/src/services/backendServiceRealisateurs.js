@@ -23,6 +23,24 @@ const backendServiceRealisateurs = {
             throw error;
         }
     },
+
+   searchRealisateurs: async (searchTerm) => {
+     try {
+       const response = await fetch(`${API_BASE_URL}/realisateurs/search?searchTerm=${searchTerm}`);
+       if (!response.ok) {
+         // Handle non-successful responses (e.g., 404 Not Found, 500 Internal Server Error)
+         throw new Error(`HTTP error! Status: ${response.status}`);
+       }
+
+       const data = await response.json();
+       return data;
+     } catch (error) {
+       console.error(`Error searching realisateurs for term "${searchTerm}":`, error);
+       throw error;
+     }
+   },
+
+
 };
 
 export default backendServiceRealisateurs;
