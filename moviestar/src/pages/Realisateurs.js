@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import backendServiceRealisateurs from '../services/backendServiceRealisateurs';
 import '../styles/styles.css'; // Import styles
+import { FaCog } from 'react-icons/fa';
 
 const Realisateurs = () => {
     const [realisateurs, setRealisateurs] = useState([]);
@@ -45,6 +46,15 @@ const Realisateurs = () => {
             console.error('Error fetching films:', error);
         }
     };
+    const handleModifyRealisateurClick = async () => {
+            try {
+                // You can implement the modification logic here
+                // For example, you can open a modal or navigate to a modification page
+                console.log('Modify Realisateur clicked for ID:', selectedRealisateur.idRealisateur);
+            } catch (error) {
+                console.error('Error modifying realisateur:', error);
+            }
+        };
 
     // Additional logs to inspect the state and films data
     useEffect(() => {
@@ -100,6 +110,12 @@ const Realisateurs = () => {
                 <p>Selected Realisateur ID: {selectedRealisateur.idRealisateur}</p>
                 <p>Films Array: {JSON.stringify(selectedRealisateur.films)}</p>
             </div>
+
+            {/* Add the "Modifier Réalisateur" section */}
+            <div className="modify-realisateur-section" onClick={() => handleModifyRealisateurClick()}>
+                    <span>Modifier Réalisateur</span>
+                    <FaCog style={{ color: 'red' }} /> {/* React Font Awesome icon */}
+                  </div>
 
         </div>
     );

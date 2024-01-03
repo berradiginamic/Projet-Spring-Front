@@ -56,5 +56,20 @@ button {
   margin-top: 20px; /* Add some spacing between the lists and pagination controls */
 }
 
+/* Add the following styles for the "Modifier Réalisateur" section */
+.modify-realisateur-section {
+  position: absolute;
+  top: 75px;
+  right: 25px;
+  color: rgba(100, 100, 100, 0.8);
+  display: flex;
+  align-items: center;
+  cursor: pointer; /* Add a pointer cursor to indicate it's clickable */
+}
+
+.modify-realisateur-section span {
+  margin-right: 5px; /* Adjust spacing between text and icon */
+}
+
 
 /* Add more styles as needed */
