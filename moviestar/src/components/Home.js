@@ -2,11 +2,11 @@
 import React from 'react';
 
 const Home = () => {
-  return (
-    <div>
-      <h2>Bienvenue sur Film Harmonie!</h2>
-    </div>
-  );
+    return (
+        <div>
+            <h1><b>Bienvenue sur Film Harmonie</b></h1>
+        </div>
+    );
 };
 
 export default Home;

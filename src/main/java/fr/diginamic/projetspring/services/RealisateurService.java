@@ -3,6 +3,8 @@ package fr.diginamic.projetspring.services;
 import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.repositories.RealisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -35,8 +37,9 @@ public class RealisateurService {
      *
      * @return Une liste de tous les réalisateurs.
      */
-    public List<Realisateur> getAllRealisateurs() {
-        return realisateurRepository.findAll();
+    public List<Realisateur> getAllRealisateurs(int page, int pageSize) {
+        Page<Realisateur> realisateursPage = realisateurRepository.findAll(PageRequest.of(page - 1, pageSize));
+        return realisateursPage.getContent();
     }
 
     /**

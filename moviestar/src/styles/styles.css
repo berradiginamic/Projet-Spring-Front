@@ -27,4 +27,34 @@ button {
   cursor: pointer;
 }
 
+/* Style page realisateurs*/
+.container {
+  display: flex;
+   /* Arrange children in a vertical column */
+   align-items: center;/* Center items horizontally */
+}
+
+.realisateurs-list {
+  padding-right: 20px; /* Adjust spacing between lists */
+}
+.selected {
+  background-color: #3498db; /* Set background color for the selected item */
+  color: #ffffff; /* Set text color for the selected item */
+}
+
+.films-section {
+  text-align: center;
+  align-items: center;
+  padding: 20px; /* Add padding for styling */
+  background-color: #00000; /* Add a background color */
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  margin-top: 20px; /* Add spacing between realisateurs-list and films-section */
+}
+
+.pagination-controls {
+  margin-top: 20px; /* Add some spacing between the lists and pagination controls */
+}
+
+
 /* Add more styles as needed */
