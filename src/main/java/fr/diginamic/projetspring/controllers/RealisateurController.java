@@ -3,6 +3,7 @@ package fr.diginamic.projetspring.controllers;
 import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.services.RealisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,11 +34,16 @@ public class RealisateurController {
      * @return La liste de tous les réalisateurs.
      */
     @GetMapping
-    public ResponseEntity<List<Realisateur>> getAllRealisateurs(
+    public ResponseEntity<Page<Realisateur>> getAllRealisateurs(
             @RequestParam(name = "page", defaultValue = "1") int page,
             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
-        List<Realisateur> realisateurs = realisateurService.getAllRealisateurs(page, pageSize);
-        return ResponseEntity.ok(realisateurs);
+        try {
+            Page<Realisateur> realisateursPage = realisateurService.getAllRealisateurs(page, pageSize);
+            return ResponseEntity.ok(realisateursPage);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     /**

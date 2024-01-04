@@ -37,9 +37,8 @@ public class RealisateurService {
      *
      * @return Une liste de tous les réalisateurs.
      */
-    public List<Realisateur> getAllRealisateurs(int page, int pageSize) {
-        Page<Realisateur> realisateursPage = realisateurRepository.findAll(PageRequest.of(page - 1, pageSize));
-        return realisateursPage.getContent();
+    public Page<Realisateur> getAllRealisateurs(int page, int pageSize) {
+        return realisateurRepository.findAll(PageRequest.of(page - 1, pageSize));
     }
 
     /**

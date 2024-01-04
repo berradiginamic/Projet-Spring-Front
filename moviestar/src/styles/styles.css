@@ -51,6 +51,7 @@ button {
 }
 
 .realisateurs-list-wrapper li {
+position: static;
   margin-bottom: 10px;
 }
 
@@ -100,10 +101,12 @@ button {
 /* Add more styles as needed */
 /* Override Bootstrap Pagination styling */
 .custom-pagination {
+  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px; /* Adjust margin as needed */
+  top: calc(100% + 20px); /* Adjust the margin as needed */
+    margin-top: 10px; /* Adjust margin as needed */
 }
 
 .custom-pagination-button {
