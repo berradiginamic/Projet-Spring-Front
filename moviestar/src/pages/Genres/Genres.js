@@ -1,6 +1,6 @@
 // Genres.js
 import React, { useEffect, useState } from 'react';
-import backendServiceGenres from '../services/backendServiceGenres';
+import backendServiceGenres from '../../backendServices/backendServiceGenres';
 
 const Genres = () => {
     const [genres, setGenres] = useState([]);

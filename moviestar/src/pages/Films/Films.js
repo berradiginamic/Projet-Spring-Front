@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import backendService from '../services/backendService';
+import backendService from '../../backendServices/backendService';
 
 const Films = () => {
     const [films, setFilms] = useState([]);
@@ -33,7 +33,7 @@ const Films = () => {
             <ul>
                 {films.map((film) => (
                     <li key={film.id}>
-                        {film.title} - <button onClick={() => handleFilmDetailsClick(film.id)}>Details</button>
+                        {film.nom} - <button onClick={() => handleFilmDetailsClick(film.id)}>Details</button>
                     </li>
                 ))}
             </ul>

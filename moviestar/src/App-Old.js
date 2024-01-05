@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Acteurs from './pages/Acteurs';
+import Acteurs from './pages/Acteurs/Acteurs';
 import ModifyActeurs from './pages/ModifyActeurs';
 import FilmActeurs from './pages/FilmActeurs';
 import FilmsEntre2Annees from './pages/FilmsEntre2Annees';

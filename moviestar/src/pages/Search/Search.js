@@ -1,6 +1,6 @@
 // Search.js
 import React, { useState } from 'react';
-import backendServiceSearch from '../services/backendServiceSearch';
+import backendServiceSearch from '../../backendServices/backendServiceSearch';
 
 const Search = () => {
     const [searchCriteria, setSearchCriteria] = useState({

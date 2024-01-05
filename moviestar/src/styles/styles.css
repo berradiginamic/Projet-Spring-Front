@@ -7,7 +7,7 @@ body {
 }
 
 nav {
-  background-color: #d00;
+  background-color: white;
   padding: 10px;
   text-align: center;
 }
@@ -90,12 +90,14 @@ position: static;
 .search-bar-container {
   position: fixed;
   top: 20px;
-  right: 20px;
+  left: 500px;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
+  margin-top: 75px;
+  margin-left: 700px;
 }
 
 /* Add more styles as needed */
@@ -106,7 +108,7 @@ position: static;
   justify-content: space-between;
   align-items: center;
   top: calc(100% + 20px); /* Adjust the margin as needed */
-    margin-top: 10px; /* Adjust margin as needed */
+  margin-top: 10px; /* Adjust margin as needed */
 }
 
 .custom-pagination-button {

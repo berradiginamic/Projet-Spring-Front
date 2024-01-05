@@ -1,7 +1,7 @@
 // Acteurs.js
 import React, { useEffect, useState } from 'react';
-import backendService from '../services/backendService';
-import '../styles/styles.css';
+import backendService from '../../backendServices/backendService';
+import '../../styles/styles.css';
 
 const Acteurs = () => {
     const [acteurs, setActeurs] = useState([]);

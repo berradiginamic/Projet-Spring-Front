@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Acteurs from './pages/Acteurs';
-import Films from './pages/Films';
-import Genres from './pages/Genres';
-import Search from './pages/Search';
-import Realisateurs from './pages/Realisateurs';
+import Acteurs from './pages/Acteurs/Acteurs';
+import Films from './pages/Films/Films';
+import Genres from './pages/Genres/Genres';
+import Search from './pages/Search/Search';
+import Realisateurs from './pages/Realisateurs/Realisateurs';
 
 const App = () => {
   return (
