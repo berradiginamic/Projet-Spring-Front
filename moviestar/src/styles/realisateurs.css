@@ -1,0 +1,23 @@
+/* RealisateursList.css */
+.realisateurs-list {
+  position: relative;
+  top: 5px; /* Adjust this value based on your navigation bar height */
+  left: 25px;
+  height: 100%; /* Adjust the height as needed */
+  width: 350px; /* Adjust the width as needed */
+  padding: 10px; /* Adjust padding as needed */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a box shadow for styling */
+}
+.realisateurs-list {
+  margin-bottom: 15px; /* Adjust the margin as needed */
+}
+
+.realisateurs-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.realisateurs-list li {
+  margin-bottom: 10px;
+}

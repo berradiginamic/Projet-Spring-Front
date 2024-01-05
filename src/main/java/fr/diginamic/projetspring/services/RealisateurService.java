@@ -56,11 +56,11 @@ public class RealisateurService {
      * @param realisateur Le réalisateur à enregistrer.
      * @return Le réalisateur enregistré.
      */
-  public Realisateur createRealisateur(Realisateur realisateur) {
+    public Realisateur createRealisateur(Realisateur realisateur) {
         return realisateurRepository.save(realisateur);
     }
-  
-     /**
+
+    /**
      * Enregistre un nouveau réalisateur dans la base de données.
      *
      * @param realisateur Le réalisateur à enregistrer.
