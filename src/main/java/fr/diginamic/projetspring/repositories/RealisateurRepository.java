@@ -1,11 +1,10 @@
 package fr.diginamic.projetspring.repositories;
 
 import fr.diginamic.projetspring.entities.Realisateur;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import java.util.Date;
 import java.util.List;
 
@@ -39,10 +38,5 @@ public interface RealisateurRepository extends JpaRepository<Realisateur, Intege
             "JOIN Film f ON rf.film.filmId = f.filmId " +
             "WHERE r.idRealisateur = :realisateurId")
     List<Object[]> findFilmsByRealisateurId(@Param("realisateurId") Integer realisateurId);
-
-    // Custom query to search realisateurs by name
-    @Query("SELECT r FROM Realisateur r WHERE lower(r.nom) LIKE lower(concat('%', :searchTerm, '%'))")
-    Page<Realisateur> searchRealisateursByNom(@Param("searchTerm") String searchTerm, Pageable pageable);
-
 
 }

@@ -1,0 +1,9 @@
+/* src/styles.css */
+body {
+    background-color: black;
+    color: white; /* Set text color to white for better visibility on a dark background */
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+}
+
+/* Add any additional global styles here */

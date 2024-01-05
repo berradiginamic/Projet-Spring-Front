@@ -3,8 +3,6 @@ package fr.diginamic.projetspring.services;
 import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.repositories.RealisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -37,8 +35,8 @@ public class RealisateurService {
      *
      * @return Une liste de tous les réalisateurs.
      */
-    public Page<Realisateur> getAllRealisateurs(int page, int pageSize) {
-        return realisateurRepository.findAll(PageRequest.of(page - 1, pageSize));
+    public List<Realisateur> getAllRealisateurs() {
+        return realisateurRepository.findAll();
     }
 
     /**
@@ -58,11 +56,11 @@ public class RealisateurService {
      * @param realisateur Le réalisateur à enregistrer.
      * @return Le réalisateur enregistré.
      */
-  public Realisateur createRealisateur(Realisateur realisateur) {
+    public Realisateur createRealisateur(Realisateur realisateur) {
         return realisateurRepository.save(realisateur);
     }
-  
-     /**
+
+    /**
      * Enregistre un nouveau réalisateur dans la base de données.
      *
      * @param realisateur Le réalisateur à enregistrer.
@@ -113,10 +111,4 @@ public class RealisateurService {
     public List<Object[]> findFilmsByRealisateurId(Integer idRealisateur) {
         return realisateurRepository.findFilmsByRealisateurId(idRealisateur);
     }
-
-    public List<Realisateur> searchRealisateursByNom(String searchTerm, int page, int pageSize) {
-        Page<Realisateur> realisateursPage = realisateurRepository.searchRealisateursByNom(searchTerm, PageRequest.of(page - 1, pageSize));
-        return realisateursPage.getContent();
-    }
-
 }
