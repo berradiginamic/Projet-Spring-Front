@@ -5,7 +5,7 @@ import Home from './pages/home/Home';
 import Acteurs from './pages/acteurs/Acteurs';
 import Films from './pages/films/Films';
 import Genres from './pages/genres/Genres';
-import RechercheAvancee from './pages/search/RechercheAvancee';
+import RechercheAvancee from './pages/rechercheavancee/RechercheAvancee';
 import Realisateurs from './pages/realisateurs/Realisateurs';
 import './styles/global.css';
 
