@@ -1,0 +1,32 @@
+const handleRealisateurClick = async (realisateur, index) => {
+        try {
+            console.log('Clicked Realisateur:', realisateur);
+
+            if (realisateur.idRealisateur !== undefined) {
+                console.log('Realisateur ID:', realisateur.idRealisateur);
+
+                const filmsData = await backendRealisateurService.fetchRealisateurFilms(
+                    realisateur.idRealisateur
+                );
+
+                console.log('Films Data:', filmsData);
+
+                if (Array.isArray(filmsData.data)) {
+                    setModalFilms({
+                        data: filmsData.data,
+                        realisateurName: realisateur.nom,
+                    });
+
+                    setModalOpen(true);
+                } else {
+                    console.error('Invalid or missing films data:', filmsData);
+                }
+
+                // ... existing code
+            } else {
+                console.error('Realisateur ID is undefined.');
+            }
+        } catch (error) {
+            console.error('Error fetching films:', error);
+        }
+    };

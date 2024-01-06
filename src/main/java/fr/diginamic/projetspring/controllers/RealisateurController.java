@@ -32,11 +32,8 @@ public class RealisateurController {
      * @return La liste de tous les réalisateurs.
      */
     @GetMapping
-    public ResponseEntity<List<Realisateur>> getAllRealisateurs(
-            @RequestParam(name = "page", defaultValue = "1") int page,
-            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
-        List<Realisateur> realisateurs = realisateurService.getAllRealisateurs(page, pageSize);
-        return ResponseEntity.ok(realisateurs);
+    public List<Realisateur> getAllRealisateurs() {
+        return realisateurService.getAllRealisateurs();
     }
 
     /**

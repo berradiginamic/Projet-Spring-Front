@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
-import backendServiceGenres from '../services/backendServiceGenres';
-import backendServiceFilms from '../services/backendServiceFilms';
-import './Genres.css';
+import backendServiceGenres from '../../services/backendServiceGenres';
+import backendServiceFilms from '../../services/backendServiceFilms';
+import '../../styles/genres.css';
 
 const Genres = () => {
   const [genres, setGenres] = useState([]);

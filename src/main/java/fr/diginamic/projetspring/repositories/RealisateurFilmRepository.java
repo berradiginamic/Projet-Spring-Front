@@ -20,4 +20,6 @@ public interface RealisateurFilmRepository extends JpaRepository<RealisateurFilm
     // les opérations CRUD de base. Ces méthodes peuvent être utilisées telles quelles ou personnalisées
     // selon les besoins spécifiques de l'application.
 
+
+
 }

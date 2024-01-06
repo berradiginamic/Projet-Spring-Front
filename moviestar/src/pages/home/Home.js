@@ -3,7 +3,7 @@ import React from 'react';
 // eslint-disable-next-line
 import { Link } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring';
-import './Home.css'; // Assurez-vous d'importer le fichier de styles CSS
+import '../../components/Home.css'; // Assurez-vous d'importer le fichier de styles CSS
 
 const Home = () => {
   const titleAnimation = useSpring({
