@@ -12,14 +12,12 @@ const Home = () => {
     delay: 500, // Délai pour retarder l'animation
   });
 
-  const windowAnimation = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-    delay: 1000, // Délai pour retarder l'animation de la fenêtre
-    marginTop: 0,
-     // eslint-disable-next-line
-    from: { marginTop: 100 },
-  });
+    const windowAnimation = useSpring({
+        opacity: 1,
+        from: { opacity: 0 },
+        delay: 1000,
+        marginTop: -100, // Proper margin-top value for downward movement
+    });
 
   return (
     <div className="home-page">
