@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FaTrash } from 'react-icons/fa';
 import backendServiceGenres from '../services/backendServiceGenres';
 import backendServiceFilms from '../services/backendServiceFilms';
 import './Genres.css';
@@ -31,7 +32,16 @@ const Genres = () => {
       console.log('Fetching films for genreId:', genreId);
       const films = await backendServiceFilms.getFilmsByGenreId(genreId);
       console.log('Films:', films);
-      setSelectedGenreFilms(films);
+
+      // Assurez-vous que la structure des données est correcte
+      console.log('Films Array:', films);  // Ajout de cette ligne pour voir la structure exacte
+
+      setSelectedGenreFilms(films.map(filmArray => ({
+        id: filmArray[0],  // Assurez-vous que l'index est correct
+        title: filmArray[0],  // Utilisez l'index 0 pour obtenir le nom du film
+        anneeSortie: filmArray[0],  // Utilisez l'index 1 pour obtenir l'année de sortie
+      })));
+
       setSelectedGenre(genreId);
       setIsModalOpen(true);
     } catch (error) {
@@ -45,7 +55,9 @@ const Genres = () => {
         <h3>Films du genre sélectionné</h3>
         <ul>
           {selectedGenreFilms.map((film) => (
-            <li key={film.id}>{film.title}</li>
+            <li key={film.id}>
+              <strong>Nom:</strong> {film.title}, <strong>Date de sortie:</strong> {film.anneeSortie}
+            </li>
           ))}
         </ul>
       </div>
@@ -87,12 +99,11 @@ const Genres = () => {
   };
 
   return (
-    <div>
-      <h2>Genres des films et séries TV populaires</h2>
-      <ul className="genre-list">
-        {genres.map((genre, index) => (
-          index % 2 === 0 && (
-            <li key={index} className="genre-item">
+      <div>
+        <h2>Genres des films et séries TV populaires</h2>
+        <ul className="genre-list">
+          {genres.map((genre, index) => (
+            <li key={index} className={`genre-item${genre.genreId === 1 ? ' double-column' : ''}`}>
               <div>
                 <button
                   onClick={() => {
@@ -105,27 +116,12 @@ const Genres = () => {
                   }}
                 ></button>
                 <span>{genre.type}</span>{' '}
-                <button onClick={() => handleDeleteGenre(genre.genreId)}>Delete</button>
+                {/* Replace delete button with trash icon */}
+                <FaTrash onClick={() => handleDeleteGenre(genre.genreId)} />
               </div>
-              {genres[index + 1] && (
-                <div key={index + 1}>
-                  <button
-                    onClick={() => {
-                      fetchFilmsByGenre(genres[index + 1].genreId);
-                    }}
-                    style={{
-                      backgroundImage: `url(/images/${(genres[index + 1].type || 'default').toLowerCase()}.jpg)`,
-                      backgroundSize: 'cover',
-                    }}
-                  ></button>{' '}
-                  <span>{genres[index + 1].type}</span>{' '}
-                  <button onClick={() => handleDeleteGenre(genres[index + 1].genreId)}>Delete</button>
-                </div>
-              )}
             </li>
-          )
-        ))}
-      </ul>
+          ))}
+        </ul>
 
       {isModalOpen && (
         <div className="modal">

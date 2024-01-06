@@ -1,4 +1,14 @@
 /* Home.css */
+@keyframes slidein {
+  from {
+    transform: translateY(-50px); /* Déplacement initial vers le haut */
+    opacity: 0; /* Opacité initiale */
+  }
+  to {
+    transform: translateY(0); /* Déplacement final vers le bas (position initiale) */
+    opacity: 1; /* Opacité finale */
+  }
+}
 .home-page {
   position: relative;
   text-align: center; /* Aligner le texte au centre */
@@ -8,13 +18,12 @@
   font-size: 3rem;
   font-weight: bold;
   color: white;
-  margin: 20px 0; /* Ajustez les marges selon vos préférences */
+  margin: 3px 0;
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 20%;
+  left: 68%;
+  transform: translate(-50%, -50%);
 }
-
 
 .full-width-image {
   width: 100%;
@@ -74,4 +83,10 @@
 .info-window p {
   color: red; /* Texte en rouge */
   margin-top: 10px; /* Ajustez la marge selon vos préférences */
+}
+
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: 1;
 }
