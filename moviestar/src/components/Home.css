@@ -1,0 +1,92 @@
+/* Home.css */
+@keyframes slidein {
+  from {
+    transform: translateY(-50px); /* Déplacement initial vers le haut */
+    opacity: 0; /* Opacité initiale */
+  }
+  to {
+    transform: translateY(0); /* Déplacement final vers le bas (position initiale) */
+    opacity: 1; /* Opacité finale */
+  }
+}
+.home-page {
+  position: relative;
+  text-align: center; /* Aligner le texte au centre */
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  margin: 3px 0;
+  position: absolute;
+  top: 20%;
+  left: 68%;
+  transform: translate(-50%, -50%);
+}
+
+.full-width-image {
+  width: 100%;
+  height: auto; /* Pour maintenir les proportions de l'image */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around; /* Espacement égal entre les boutons */
+  position: absolute;
+  bottom: 20px; /* Ajuster la distance depuis le bas */
+  width: 100%;
+}
+
+.decorated-button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff; /* Couleur de fond */
+  padding: 10px 20px; /* Espacement intérieur du bouton */
+  text-decoration: none; /* Supprimer la soulignement du lien par défaut */
+  border: 2px solid #007bff; /* Bordure du bouton */
+  border-radius: 5px; /* Coins arrondis */
+  transition: background-color 0.3s ease; /* Animation de transition */
+
+  /* Ajouter un effet de survol */
+  &:hover {
+    background-color: #0056b3; /* Couleur de fond au survol */
+  }
+}
+
+.info-window {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px; /* Ajustez la largeur maximale selon vos préférences */
+  background-color: black; /* Fond noir */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Ombre légère */
+  text-align: center;
+  opacity: 0; /* Initial opacity for animation */
+}
+
+.info-window .black-band {
+  background-color: black;
+  height: 20px; /* Ajustez la hauteur de la bande selon vos préférences */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 10px 10px 0 0; /* Coins arrondis uniquement en haut */
+}
+
+.info-window p {
+  color: red; /* Texte en rouge */
+  margin-top: 10px; /* Ajustez la marge selon vos préférences */
+}
+
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: 1;
+}

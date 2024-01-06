@@ -62,55 +62,55 @@ public class FilmService {
 
 
     public Film updateFilm(Integer filmId, Film film) {
-     if (filmRepository.existsById(filmId)) {
-     film.setFilmId(filmId); // Utilisez setId pour définir l'identifiant du film
-     return filmRepository.save(film);
-     }
-     return null;
-     }
-
-        /**
-         * Supprime un film par son identifiant.
-         *
-         * @param filmId L'identifiant du film à supprimer.
-         */
-        public void deleteFilm(Integer filmId) {
-            filmRepository.deleteById(filmId);
+        if (filmRepository.existsById(filmId)) {
+            film.setFilmId(filmId); // Utilisez setId pour définir l'identifiant du film
+            return filmRepository.save(film);
         }
+        return null;
+    }
 
-        // Ajoutez d'autres méthodes en fonction des besoins
+    /**
+     * Supprime un film par son identifiant.
+     *
+     * @param filmId L'identifiant du film à supprimer.
+     */
+    public void deleteFilm(Integer filmId) {
+        filmRepository.deleteById(filmId);
+    }
 
-        public List<Film> findByAnneeSortie (Integer anneeSortie){
-            return filmRepository.findAllByAnneeSortie(anneeSortie);
-        }
+    // Ajoutez d'autres méthodes en fonction des besoins
 
-        public List<Film> findByLangue (String langue){
-            return filmRepository.findAllByLangue(langue);
-        }
+    public List<Film> findByAnneeSortie (Integer anneeSortie){
+        return filmRepository.findAllByAnneeSortie(anneeSortie);
+    }
 
-        public List<Film> findByLieuTournage (String lieuTournage){
-            return filmRepository.findAllByLieuTournage(lieuTournage);
-        }
+    public List<Film> findByLangue (String langue){
+        return filmRepository.findAllByLangue(langue);
+    }
 
-        public List<Film> findByNom (String nom){
-            return filmRepository.findAllByNom(nom);
-        }
+    public List<Film> findByLieuTournage (String lieuTournage){
+        return filmRepository.findAllByLieuTournage(lieuTournage);
+    }
 
-        public List<Film> findByPays (String pays){
-            return filmRepository.findAllByPays(pays);
-        }
+    public List<Film> findByNom (String nom){
+        return filmRepository.findAllByNom(nom);
+    }
 
-        public List<Film> findByRating (String rating){
-            return filmRepository.findAllByRating(rating);
-        }
+    public List<Film> findByPays (String pays){
+        return filmRepository.findAllByPays(pays);
+    }
 
-        public List<Film> findByResume (String resume){
-            return filmRepository.findAllByResume(resume);
-        }
+    public List<Film> findByRating (String rating){
+        return filmRepository.findAllByRating(rating);
+    }
 
-        public List<Film> findByUrlProfile (String urlProfile){
-            return filmRepository.findAllByUrlProfile(urlProfile);
-        }
+    public List<Film> findByResume (String resume){
+        return filmRepository.findAllByResume(resume);
+    }
+
+    public List<Film> findByUrlProfile (String urlProfile){
+        return filmRepository.findAllByUrlProfile(urlProfile);
+    }
 
     public Film findByIdIMDB(String idIMDB){
         return filmRepository.findByIdIMDB(idIMDB);
@@ -147,4 +147,3 @@ public class FilmService {
         return filmRepository.findFilmsBetweenYearsAndByActeur(startYear, endYear, acteurId);
     }
 }
-

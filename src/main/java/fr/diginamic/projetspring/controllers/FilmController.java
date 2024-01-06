@@ -77,7 +77,7 @@ public class FilmController {
     @PutMapping("/{filmId}")
     public Film updateFilm(@PathVariable("filmId") Integer filmId, @RequestBody Film film) {
         return filmService.updateFilm(filmId, film);
-        }
+    }
 
 
     /**
