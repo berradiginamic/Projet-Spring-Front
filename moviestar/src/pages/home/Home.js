@@ -3,7 +3,7 @@ import React from 'react';
 // eslint-disable-next-line
 import { Link } from 'react-router-dom';
 import { useSpring, animated } from 'react-spring';
-import '../../components/Home.css'; // Assurez-vous d'importer le fichier de styles CSS
+import '../../styles/home.css'; // Assurez-vous d'importer le fichier de styles CSS
 
 const Home = () => {
   const titleAnimation = useSpring({
@@ -20,7 +20,7 @@ const Home = () => {
     });
 
   return (
-    <div className="home-page">
+    <div className="home-page-container">
       <animated.h1 style={titleAnimation} className="title">
         Bienvenue sur Film Harmonie
       </animated.h1>
