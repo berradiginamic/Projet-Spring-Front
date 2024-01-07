@@ -5,14 +5,20 @@ import '../../styles/ModifyRealisateurModal.css';
 const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) => {
     const [modifiedInfo, setModifiedInfo] = useState({
         nom: '',
-        // Add other fields as needed
+        idIMDB: '',
+        dateNaissance: '',
+        lieuNaissance: '',
+        urlProfile: '',
     });
 
     useEffect(() => {
         if (realisateur) {
             setModifiedInfo({
                 nom: realisateur.nom || '',
-                // Update with other fields as needed
+                idIMDB: realisateur.idIMDB || '',
+                dateNaissance: realisateur.dateNaissance || '',
+                lieuNaissance: realisateur.lieuNaissance || '',
+                urlProfile: realisateur.urlProfile || '',
             });
         }
     }, [realisateur]);
@@ -36,7 +42,7 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
                 <button className="modal-close" onClick={handleClose}>
                     Close
                 </button>
-                <h2>Modifier Réalisateur</h2>
+                <h2>La mélodie n'est pas toujours harmonieuse, changer les informations erronées ici</h2>
                 <form>
                     <label>
                         Nom:
@@ -47,7 +53,42 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
                             onChange={handleInputChange}
                         />
                     </label>
-                    {/* Add other input fields for modification */}
+                    <label>
+                        ID IMDB:
+                        <input
+                            type="text"
+                            name="idIMDB"
+                            value={modifiedInfo.idIMDB}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <label>
+                        Date de Naissance:
+                        <input
+                            type="text"
+                            name="dateNaissance"
+                            value={modifiedInfo.dateNaissance}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <label>
+                        Lieu de Naissance:
+                        <input
+                            type="text"
+                            name="lieuNaissance"
+                            value={modifiedInfo.lieuNaissance}
+                            onChange={handleInputChange}
+                        />
+                    </label>
+                    <label>
+                        URL de Profil:
+                        <input
+                            type="text"
+                            name="urlProfile"
+                            value={modifiedInfo.urlProfile}
+                            onChange={handleInputChange}
+                        />
+                    </label>
                 </form>
                 <button onClick={handleSave}>Enregistrer</button>
             </div>

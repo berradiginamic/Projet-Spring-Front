@@ -4,12 +4,15 @@ import RealisateursSearchBar from './RealisateursSearchBar';
 import RealisateurList from './RealisateurList';
 import ModifyRealisateurModal from './ModifyRealisateurModal';
 import backendRealisateurService from '../../services/backendRealisateursService';
-import Modal from './Modal';
+import FilmModal from './FilmModal';
+import { FaCog } from 'react-icons/fa';
+import '../../styles/boutonmodifier.css';
 
 const Realisateurs = () => {
     const [realisateurs, setRealisateurs] = useState([]);
     const [filteredRealisateurs, setFilteredRealisateurs] = useState([]);
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [isFilmModalOpen, setIsFilmModalOpen] = useState(false); // Add film modal state
+    const [isModifierButtonClicked, setIsModifierButtonClicked] = useState(false);
     const [modalFilms, setModalFilms] = useState({ data: [], realisateurName: '' });
     const [modifyModalOpen, setModifyModalOpen] = useState(false);
     const [selectedRealisateur, setSelectedRealisateur] = useState(null);
@@ -29,21 +32,17 @@ const Realisateurs = () => {
     };
 
     const handleRealisateurClick = async (realisateur) => {
-        console.log('Clicked Realisateur:', realisateur);
         try {
-            console.log('Clicked Realisateur:', realisateur);
-            console.log('Selected Realisateur:', selectedRealisateur);
-
             if (realisateur.id !== undefined) {
-                console.log('Realisateur ID:', realisateur.id);
+                setSelectedRealisateur(realisateur);
 
-                setSelectedRealisateur(realisateur); // Set selectedRealisateur first
+                // Open the modification modal on realisateur click
+                setModifyModalOpen(true);
 
+                // Fetch and show films in the film modal
                 const filmsData = await backendRealisateurService.fetchRealisateurFilms(
                     realisateur.id
                 );
-
-                console.log('Films Data:', filmsData);
 
                 if (Array.isArray(filmsData.data)) {
                     setModalFilms({
@@ -51,8 +50,8 @@ const Realisateurs = () => {
                         realisateurName: realisateur.nom,
                     });
 
-                    setModalOpen(true);
-                    setModifyModalOpen(true); // Open the modification modal on realisateur click
+                    // Open the film modal
+                    setIsFilmModalOpen(true);
                 } else {
                     console.error('Invalid or missing films data:', filmsData);
                 }
@@ -64,17 +63,14 @@ const Realisateurs = () => {
         }
     };
 
-    const handleModalClose = () => {
-        setModalOpen(false);
+    const handleFilmModalClose = () => {
+        setIsFilmModalOpen(false); // Use setIsFilmModalOpen to close the film modal
         setModalFilms({ data: [], realisateurName: '' });
     };
 
-    const handleSaveModifiedRealisateur = async (modifiedInfo) => {
+    const handleSaveModifiedRealisateur = async (modifiedInfo, isModifierButtonClicked) => {
         try {
-            console.log('Trying to save Modified Realisateur Info:', modifiedInfo);
-
-            // Ensure selectedRealisateur is defined before making the update request
-            if (selectedRealisateur) {
+            if (selectedRealisateur && isModifierButtonClicked) {
                 // Send a request to update the realisateur in the backend
                 await backendRealisateurService.updateRealisateur(
                     selectedRealisateur.idRealisateur,
@@ -91,35 +87,43 @@ const Realisateurs = () => {
                 setModifyModalOpen(false);
                 setSelectedRealisateur(null); // Reset selected realisateur after modification
             } else {
-                console.error('Selected realisateur is undefined.');
+                console.error('Selected realisateur is undefined or Modifier button is not clicked.');
             }
         } catch (error) {
             console.error('Error updating realisateur:', error);
-            // Handle error as needed (e.g., show an error message to the user)
+            // Handle error as needed
         }
     };
-
     return (
         <div>
-            <RealisateursTitle />
-            <RealisateursSearchBar onSearch={handleSearch} />
-            <button onClick={() => setModifyModalOpen(true)}>
-                Modifier Réalisateurs
-            </button>
+            <RealisateursTitle/>
+            <RealisateursSearchBar onSearch={handleSearch}/>
+            <div className="modify-button-container">
+                <button className="modify-button" onClick={() => setIsModifierButtonClicked(true)}>
+                    Modifier Realisateurs <FaCog className="modify-button-icon"/>
+                </button>
+            </div>
+            {isModifierButtonClicked && (
+                <ModifyRealisateurModal
+                    isOpen={modifyModalOpen}
+                    handleClose={() => setIsModifierButtonClicked(false)}
+                    realisateur={selectedRealisateur}
+                    onSave={(modifiedInfo) =>
+                        handleSaveModifiedRealisateur(modifiedInfo, isModifierButtonClicked)
+                    }
+                />
+            )}
             <RealisateurList
                 realisateurs={filteredRealisateurs}
                 handleRealisateurClick={handleRealisateurClick}
             />
-
-            {/* Add Modal component */}
-            <Modal isOpen={isModalOpen} handleClose={handleModalClose} films={modalFilms} />
-            {/* Add ModifyRealisateurModal */}
-            <ModifyRealisateurModal
-                isOpen={modifyModalOpen}
-                handleClose={() => setModifyModalOpen(false)}
-                realisateur={selectedRealisateur}
-                onSave={handleSaveModifiedRealisateur}
-            />
+            {isFilmModalOpen && (
+                <FilmModal // Use FilmModal instead of Modal
+                    isOpen={isFilmModalOpen}
+                    handleClose={handleFilmModalClose} // Use handleFilmModalClose to close the film modal
+                    films={modalFilms}
+                />
+            )}
         </div>
     );
 };

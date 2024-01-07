@@ -5,7 +5,7 @@ import FilmsEntre2Annees from "./FilmsEntre2Annees";
 import FilmsEntre2Annees1Acteur from "./FilmsEntre2Annees1Acteur";
 import Modal from './Modal';
 
-// Modal component
+// FilmModal component
 const RechercheAvancee = () => {
     const [modalResults, setModalResults] = useState([]);
     const [modalTitle, setModalTitle] = useState('');

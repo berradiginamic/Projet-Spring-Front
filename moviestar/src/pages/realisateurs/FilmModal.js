@@ -1,8 +1,8 @@
-// Modal.js
+// FilmModal.js
 import React from 'react';
 import '../../styles/modal.css';
 
-const Modal = ({ isOpen, handleClose, films }) => {
+const FilmModal = ({ isOpen, handleClose, films }) => {
     if (!isOpen) return null;
 
     return (
@@ -22,4 +22,4 @@ const Modal = ({ isOpen, handleClose, films }) => {
     );
 };
 
-export default Modal;
+export default FilmModal;
