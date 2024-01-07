@@ -21,3 +21,37 @@
 .realisateurs-list li {
   margin-bottom: 10px;
 }
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.realisateurs-list {
+  flex: 1;
+  margin-right: 20px; /* Adjust as needed */
+}
+
+.film-info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  padding: 15px; /* Match the padding for consistency */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: rgba(255, 0, 0, 0.2); /* Lighter, translucent red background */
+  color: white; /* Text color */
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3); /* Red glow effect */
+}

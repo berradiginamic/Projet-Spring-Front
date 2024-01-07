@@ -4,16 +4,15 @@ import RealisateursSearchBar from './RealisateursSearchBar';
 import RealisateurList from './RealisateurList';
 import ModifyRealisateurModal from './ModifyRealisateurModal';
 import backendRealisateurService from '../../services/backendRealisateursService';
-import FilmModal from './FilmModal';
 import { FaCog } from 'react-icons/fa';
 import '../../styles/boutonmodifier.css';
+import FilmInfo from './FilmInfo'; // Import the new FilmInfo component
+
 
 const Realisateurs = () => {
     const [realisateurs, setRealisateurs] = useState([]);
     const [filteredRealisateurs, setFilteredRealisateurs] = useState([]);
-    const [isFilmModalOpen, setIsFilmModalOpen] = useState(false); // Add film modal state
     const [isModifierButtonClicked, setIsModifierButtonClicked] = useState(false);
-    const [modalFilms, setModalFilms] = useState({ data: [], realisateurName: '' });
     const [modifyModalOpen, setModifyModalOpen] = useState(false);
     const [selectedRealisateur, setSelectedRealisateur] = useState(null);
 
@@ -39,19 +38,17 @@ const Realisateurs = () => {
                 // Open the modification modal on realisateur click
                 setModifyModalOpen(true);
 
-                // Fetch and show films in the film modal
+                // Fetch and show films in the film section
                 const filmsData = await backendRealisateurService.fetchRealisateurFilms(
                     realisateur.id
                 );
 
                 if (Array.isArray(filmsData.data)) {
-                    setModalFilms({
-                        data: filmsData.data,
-                        realisateurName: realisateur.nom,
+                    // Update the state with the films
+                    setSelectedRealisateur({
+                        ...realisateur,
+                        films: filmsData.data,
                     });
-
-                    // Open the film modal
-                    setIsFilmModalOpen(true);
                 } else {
                     console.error('Invalid or missing films data:', filmsData);
                 }
@@ -61,11 +58,6 @@ const Realisateurs = () => {
         } catch (error) {
             console.error('Error fetching films:', error);
         }
-    };
-
-    const handleFilmModalClose = () => {
-        setIsFilmModalOpen(false); // Use setIsFilmModalOpen to close the film modal
-        setModalFilms({ data: [], realisateurName: '' });
     };
 
     const handleSaveModifiedRealisateur = async (modifiedInfo, isModifierButtonClicked) => {
@@ -94,6 +86,7 @@ const Realisateurs = () => {
             // Handle error as needed
         }
     };
+
     return (
         <div>
             <RealisateursTitle/>
@@ -113,17 +106,17 @@ const Realisateurs = () => {
                     }
                 />
             )}
-            <RealisateurList
-                realisateurs={filteredRealisateurs}
-                handleRealisateurClick={handleRealisateurClick}
-            />
-            {isFilmModalOpen && (
-                <FilmModal // Use FilmModal instead of Modal
-                    isOpen={isFilmModalOpen}
-                    handleClose={handleFilmModalClose} // Use handleFilmModalClose to close the film modal
-                    films={modalFilms}
-                />
-            )}
+            <div>
+                <div className="realisateurs-list">
+                    <RealisateurList
+                        realisateurs={filteredRealisateurs}
+                        handleRealisateurClick={(realisateur) =>
+                            handleRealisateurClick({...realisateur, id: realisateur.idRealisateur})
+                        }
+                    />
+                </div>
+                {selectedRealisateur && <FilmInfo selectedRealisateur={selectedRealisateur} />}
+            </div>
         </div>
     );
 };

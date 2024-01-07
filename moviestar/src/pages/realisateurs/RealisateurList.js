@@ -13,7 +13,7 @@ const RealisateursList = ({ realisateurs, handleRealisateurClick }) => {
                     <li key={realisateur.id}>
                         <RealisateurItem
                             realisateur={realisateur}
-                            onClick={() => handleRealisateurClick({ ...realisateur, id: realisateur.idRealisateur })}
+                            onClick={() => handleRealisateurClick(realisateur)}
                         />
                     </li>
                 ))}

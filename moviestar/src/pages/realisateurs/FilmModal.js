@@ -1,14 +1,14 @@
 // FilmModal.js
 import React from 'react';
-import '../../styles/modal.css';
+import '../../styles/filmmodal.css';
 
 const FilmModal = ({ isOpen, handleClose, films }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <button className="modal-close" onClick={handleClose}>
+        <div className="film-modal-overlay">
+            <div className="film-modal-content">
+                <button className="film-modal-close" onClick={handleClose}>
                     Close
                 </button>
                 <h2>Filmographie de {films.realisateurName}</h2>
