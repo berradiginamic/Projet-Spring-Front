@@ -1,8 +1,8 @@
-// src/components/RealisateursTitle.js
+// src/components/ActeursTitle.js
 import React from 'react';
 
 const ActeursTitle = () => {
-    return <h2>Liste de Acteurs</h2>;
+    return <h2>Liste des Acteurs</h2>;
 };
 
 export default ActeursTitle;
