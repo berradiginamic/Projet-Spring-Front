@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import RealisateursTitle from './RealisateursTitle';
-import SearchBar from '../../components/SearchBar';
+import RealisateursSearchBar from './RealisateursSearchBar';
 import RealisateurList from './RealisateurList';
 import ModifyRealisateurModal from './ModifyRealisateurModal';
 import backendRealisateurService from '../../services/backendRealisateursService';
@@ -102,7 +102,7 @@ const Realisateurs = () => {
     return (
         <div>
             <RealisateursTitle />
-            <SearchBar onSearch={handleSearch} />
+            <RealisateursSearchBar onSearch={handleSearch} />
             <button onClick={() => setModifyModalOpen(true)}>
                 Modifier Réalisateurs
             </button>

@@ -38,13 +38,13 @@
 .title {
   font-size: 65px;
   font-weight: bold;
-  font-family: 'Bebas Neue', serif;
+  font-family: 'Roboto Slab', serif;
   color: #181414;
   margin: 3px 0;
   position: absolute;
-  top: 22%;
+  top: 18%;
   left: 55%;
-  transform: translate(-0%);
+  transform: translate(0%) perspective(1000px) rotateX(15deg);;
 }
 
 .full-width-image {

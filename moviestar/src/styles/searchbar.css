@@ -1,13 +1,41 @@
+/* Add these styles to your searchbar.css file */
+
 .search-bar {
     margin: 20px 0;
     text-align: center;
 }
 
 .search-bar input {
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 15px; /* Maintain the desired padding */
+    border: none;
     border-radius: 5px;
-    width: 300px;
+    width: 400px; /* Maintain the desired fixed width */
+    font-family: 'Bebas Neue', serif;
     font-size: 16px;
+    background-color: rgba(255, 0, 0, 0.2); /* Lighter, translucent red background */
+    color: white; /* Text color */
     outline: none;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3); /* Red glow effect */
+    text-align: center; /* Center the text inside the input */
 }
+
+.search-bar button {
+    padding: 15px; /* Match the padding for consistency */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgba(255, 0, 0, 0.2); /* Lighter, translucent red background */
+    color: white; /* Text color */
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3); /* Red glow effect */
+}
+
+/* Use React Icons for the search icon */
+.search-bar button svg {
+    font-size: 20px;
+    margin-right: 5px; /* Adjust the spacing between the icon and text */
+    color: red; /* Red color for the search loop */
+}
+
+

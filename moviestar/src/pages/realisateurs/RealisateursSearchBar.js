@@ -1,8 +1,9 @@
 // RealisateursSearchBar.js
 import React, { useState } from 'react';
-import '../styles/searchbar.css';
+import { FaUserTie } from 'react-icons/fa';
+import '../../styles/searchbar.css';
 
-const SearchBar = ({ onSearch }) => {
+const RealisateursSearchBar = ({ onSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = () => {
@@ -17,9 +18,9 @@ const SearchBar = ({ onSearch }) => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button onClick={handleSearch}>Search</button>
+            <button onClick={handleSearch}><FaUserTie /> {/* React Icons search icon */}</button>
         </div>
     );
 };
 
-export default SearchBar;
+export default RealisateursSearchBar;
