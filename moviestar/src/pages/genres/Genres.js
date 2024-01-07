@@ -131,7 +131,7 @@ const Genres = () => {
               <h3>Films du genre sélectionné</h3>
               <ul>
                 {selectedGenreFilms.map((film) => (
-                  <li key={film.id}>{film.title}</li>
+                  <li key={film.id}>{film.title}>{film.anneeSortie}</li>
                 ))}
               </ul>
             </div>
