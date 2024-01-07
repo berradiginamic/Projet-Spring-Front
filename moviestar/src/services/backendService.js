@@ -7,7 +7,7 @@ const backendService = {
     // Fonction pour récupérer liste d'acteurs
     fetchActeurs: async () => {
         try {
-            const response = await axios.get('/acteurs/250/films');
+            const response = await axios.get('/acteurs');
             return response.data;
         } catch (error) {
             console.error('Error fetching actors:', error);
