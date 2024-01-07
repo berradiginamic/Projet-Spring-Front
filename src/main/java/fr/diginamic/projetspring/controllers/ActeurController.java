@@ -1,8 +1,11 @@
 package fr.diginamic.projetspring.controllers;
 
 import fr.diginamic.projetspring.entities.Acteur;
+import fr.diginamic.projetspring.entities.Film;
 import fr.diginamic.projetspring.services.ActeurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +27,9 @@ public class ActeurController {
      * @return La liste de tous les acteurs.
      */
     @GetMapping
-    public List<Acteur> getAllActeurs() {
-        return acteurService.getAllActeurs();
+    public ResponseEntity<List<Acteur>> getAllActeurs() {
+        List<Acteur> acteurs = acteurService.getAllActeurs();
+        return new ResponseEntity<>(acteurs, HttpStatus.OK);
     }
 
     /**
@@ -46,8 +50,9 @@ public class ActeurController {
      * @return L'acteur créé.
      */
     @PostMapping
-    public Acteur createActeur(@RequestBody Acteur acteur) {
-        return acteurService.createActeur(acteur);
+    public ResponseEntity<Acteur> createActeur(@RequestBody Acteur acteur) {
+        Acteur createdActeur = acteurService.createActeur(acteur);
+        return new ResponseEntity<>(createdActeur, HttpStatus.CREATED);
     }
 
     /**
@@ -58,7 +63,7 @@ public class ActeurController {
      * @return L'acteur mis à jour.
      */
     @PutMapping("/{acteurId}")
-    public Acteur updateActeur(@PathVariable("acteurId") Integer acteurId, @RequestBody Acteur acteur) {
+    public Acteur updateActeur(@PathVariable(name ="acteurId") Integer acteurId, @RequestBody Acteur acteur) {
         return acteurService.updateActeur(acteurId, acteur);
     }
 
@@ -68,7 +73,7 @@ public class ActeurController {
      * @param acteurId Identifiant de l'acteur à supprimer.
      */
     @DeleteMapping("/{acteurId}")
-    public void deleteActeur(@PathVariable("acteurId") Integer acteurId) {
+    public void deleteActeur(@PathVariable(name ="acteurId") Integer acteurId) {
         acteurService.deleteActeur(acteurId);
     }
 

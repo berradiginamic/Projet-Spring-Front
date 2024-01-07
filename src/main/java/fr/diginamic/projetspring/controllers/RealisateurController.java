@@ -66,11 +66,11 @@ public class RealisateurController {
      */
 
     @PutMapping("/{idRealisateur}")
-    public Realisateur updateRealisateur(@PathVariable Integer idRealisateur, @RequestBody Realisateur realisateur) {
+    public Realisateur updateRealisateur(@PathVariable(name ="idRealisateur") Integer idRealisateur, @RequestBody Realisateur realisateur) {
         return realisateurService.updateRealisateur(idRealisateur, realisateur);
     }
     @DeleteMapping("/{idRealisateur}")
-    public void deleteRealisateurById(@PathVariable("id") Integer idRealisateur) {
+    public void deleteRealisateurById(@PathVariable(name ="idRealisateur") Integer idRealisateur) {
         realisateurService.deleteRealisateurById(idRealisateur);
     }
 

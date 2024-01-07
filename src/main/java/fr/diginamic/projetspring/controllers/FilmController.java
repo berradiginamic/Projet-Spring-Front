@@ -75,7 +75,7 @@ public class FilmController {
      * @return Le film mis à jour.
      */
     @PutMapping("/{filmId}")
-    public Film updateFilm(@PathVariable("filmId") Integer filmId, @RequestBody Film film) {
+    public Film updateFilm(@PathVariable(name = "filmId") Integer filmId, @RequestBody Film film) {
         return filmService.updateFilm(filmId, film);
     }
 
@@ -87,9 +87,10 @@ public class FilmController {
      * @return Réponse indiquant le succès de l'opération.
      */
     @DeleteMapping("/{filmId}")
-    public void deleteFilm(@PathVariable Integer filmId) {
+    public void deleteFilm(@PathVariable(name = "filmId") Integer filmId) {
         filmService.deleteFilm(filmId);
     }
+
 
     // Opérations spécifiques
 
@@ -105,7 +106,7 @@ public class FilmController {
     }
 
     @GetMapping("/byGenre")
-    public List<Film> getFilmsByGenre(@RequestParam String genreType) {
+    public List<Film> getFilmsByGenre(@RequestParam("genreType") String genreType) {
         // Example of using findByGenres_Type
         return filmService.getFilmsByGenre(genreType);
     }

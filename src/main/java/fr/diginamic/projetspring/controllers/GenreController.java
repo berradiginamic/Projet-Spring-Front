@@ -1,8 +1,11 @@
 package fr.diginamic.projetspring.controllers;
 
+import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Genre;
 import fr.diginamic.projetspring.services.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,22 +32,23 @@ public class GenreController {
     }
 
     @GetMapping("/{genreId}")
-    public Genre getGenreById(@PathVariable Integer genreId) {
+    public Genre getGenreById(@PathVariable("genreId") Integer genreId) {
         return genreService.findById(genreId);
     }
 
     @PostMapping
-    public Genre createGenre(@RequestBody Genre genre) {
-        return genreService.createGenre(genre);
+    public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
+        Genre createdGenre = genreService.createGenre(genre);
+        return new ResponseEntity<>(createdGenre, HttpStatus.CREATED);
     }
 
     @PutMapping("/{genreId}")
-    public Genre updateGenre(@PathVariable("genreId") Integer genreId, @RequestBody Genre genre) {
+    public Genre updateGenre(@PathVariable(name ="genreId") Integer genreId, @RequestBody Genre genre) {
         return genreService.updateGenre(genreId, genre);
     }
 
     @DeleteMapping("/{genreId}")
-    public void deleteGenre(@PathVariable("genreId") Integer genreId) {
+    public void deleteGenre(@PathVariable(name ="genreId") Integer genreId) {
         genreService.deleteGenre(genreId);
     }
 }

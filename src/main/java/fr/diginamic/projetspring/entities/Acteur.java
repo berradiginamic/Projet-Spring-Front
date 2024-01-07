@@ -1,5 +1,6 @@
 package fr.diginamic.projetspring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Acteur {
 
     /** Liste des rôles que l'acteur a joués dans des films. */
     @OneToMany(mappedBy = "acteur")
+    @JsonIgnore
     private List<RoleFilm> rolefilm;
 
     // Constructeurs

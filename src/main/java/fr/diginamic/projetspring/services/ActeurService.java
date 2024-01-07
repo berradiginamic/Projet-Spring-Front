@@ -48,9 +48,9 @@ public class ActeurService {
      * @param acteur L'acteur à créer.
      * @return L'acteur créé.
      */
- 
-        // Logique de création de l'acteur (par exemple, validation des données, etc.)
-  public Acteur createActeur(Acteur acteur) {
+
+    // Logique de création de l'acteur (par exemple, validation des données, etc.)
+    public Acteur createActeur(Acteur acteur) {
         return acteurRepository.save(acteur);
     }
 
