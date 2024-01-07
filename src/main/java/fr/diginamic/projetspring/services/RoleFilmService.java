@@ -64,6 +64,16 @@ public class RoleFilmService {
        return roleRepository.save(role);
    }
 
+    public RoleFilm updateRoleFilm(Integer roleId, RoleFilm role) {
+        // Logique de mise à jour de l'acteur (par exemple, vérification de l'existence de l'acteur, validation des données, etc.)
+        if (roleRepository.existsById(roleId)) {
+            role.setActeurId(roleId);
+            return roleRepository.save(role);
+        }
+        return null; // Ou lancez une exception appropriée si nécessaire
+    }
+
+
 
     /**
      * Supprime un rôle par son identifiant.
@@ -87,6 +97,7 @@ public class RoleFilmService {
     public List<RoleFilm> findByActeurId(Integer acteurId) {
         return roleRepository.findAllByActeurId(acteurId);
     }
+
 
     // Ajoutez d'autres méthodes en fonction des besoins
 }

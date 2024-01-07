@@ -48,4 +48,3 @@ public interface ActeurRepository extends JpaRepository<Acteur, Integer> {
                                       @Param("filmId2") Integer filmId2);
 
 }
-

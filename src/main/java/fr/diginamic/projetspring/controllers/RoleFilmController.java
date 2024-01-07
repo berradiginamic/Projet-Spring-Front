@@ -1,6 +1,8 @@
 package fr.diginamic.projetspring.controllers;
 
+import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Film;
+import fr.diginamic.projetspring.entities.Realisateur;
 import fr.diginamic.projetspring.entities.RoleFilm;
 import fr.diginamic.projetspring.services.RoleFilmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +62,13 @@ public class RoleFilmController {
      */
     @PostMapping
     public RoleFilm createRoleFilm(@RequestBody RoleFilm role) {
+        RoleFilm createdRoleFilm = roleFilmService.createRoleFilm(role);
         return roleFilmService.createRoleFilm(role);
+    }
+
+    @PutMapping("/{roleId}")
+    public RoleFilm updateRoleFilm(@PathVariable(name ="roleId") Integer roleId, @RequestBody RoleFilm role) {
+        return roleFilmService.updateRoleFilm(roleId, role);
     }
 
     /**
@@ -70,7 +78,7 @@ public class RoleFilmController {
      * @return Réponse indiquant le succès de l'opération.
      */
     @DeleteMapping("/{roleId}")
-    public ResponseEntity<Void> deleteRoleFilm(@PathVariable("roleId") Integer roleId) {
+    public ResponseEntity<Void> deleteRoleFilm(@PathVariable(name ="roleId") Integer roleId) {
         roleFilmService.deleteRoleFilm(roleId);
         return ResponseEntity.noContent().build();
     }
