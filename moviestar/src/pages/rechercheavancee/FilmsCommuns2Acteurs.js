@@ -28,18 +28,18 @@ const FilmsCommuns2Acteurs = ({ onUpdateModalResults }) => {
 
     return (
         <div>
-            <h2>Films Communs A 2 Acteurs</h2>
+            <h2>Films communs à deux Acteurs</h2>
             <label>
-                Id Premier Acteurs:
+                Id Acteur 1:
                 <input type="text" value={acteurId1} onChange={handleFilmsByTwoActeurId1Change}/>
             </label>
             <br/>
             <label>
-                Id Deuxieme Acteurs:
+                Id Acteur 2:
                 <input type="text" value={acteurId2} onChange={handleFilmsByTwoActeurId2Change}/>
             </label>
             <br/>
-            <button onClick={handleFetchFilmsByTwoActors}>Fetch Films</button>
+            <button onClick={handleFetchFilmsByTwoActors}>Voir Films</button>
             <ul>
                 {films.length > 0 ? (
                     films.map((film, index) => (
@@ -49,7 +49,7 @@ const FilmsCommuns2Acteurs = ({ onUpdateModalResults }) => {
                         </li>
                     ))
                 ) : (
-                    <li>No films found</li>
+                    <li>pas de film correspondant</li>
                 )}
             </ul>
         </div>

@@ -2,7 +2,4 @@
 
 ## Groupe: Christ M.; Christopher A.; Fatima B; Dorian C;
 
-## Objectifs:
-1. 
-2.
-3. M
+### La documentation et les commentaires du code sont dans à retrouver dans le dernier commit de la branche Styles sur GitHub

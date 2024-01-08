@@ -1,6 +1,6 @@
 // Modal.js
 import React from 'react';
-import '../../styles/modal.css';
+import '../../styles/filmmodal.css';
 
 const Modal = ({ isOpen, handleClose, films }) => {
     if (!isOpen) return null;

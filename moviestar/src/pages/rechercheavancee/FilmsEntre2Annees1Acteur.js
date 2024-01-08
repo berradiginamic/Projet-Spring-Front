@@ -38,22 +38,22 @@ const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
 
     return (
         <div>
-            <h2>Films Entre 2 Années Avec 1 Acteurs Communs</h2>
+            <h2>Films entre deux années avec un Acteur commun</h2>
             <label>
-                Start Year:
+                Année début:
                 <input type="text" value={startYear} onChange={handleYearsAndByActeurStartYearChange}/>
             </label>
             <br/>
             <label>
-                End Year:
+                Année de fin    :
                 <input type="text" value={endYear} onChange={handleYearsAndByActeurEndYearChange}/>
             </label>
             <label>
-                Acteur Id:
+                Id Acteur:
                 <input type="text" value={acteurId} onChange={handleYearsAndByActeurIdChange}/>
             </label>
             <br/>
-            <button onClick={handleFetchFilmsBetweenYearsAndByActeur}>Fetch Films</button>
+            <button onClick={handleFetchFilmsBetweenYearsAndByActeur}>voir Films</button>
             <ul>
                 {films.length > 0 ? (
                     films.map((film, index) => (
@@ -63,7 +63,7 @@ const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
                         </li>
                     ))
                 ) : (
-                    <li>Renseigner un Id</li>
+                    <li>Renseignez un Id</li>
                 )}
             </ul>
         </div>

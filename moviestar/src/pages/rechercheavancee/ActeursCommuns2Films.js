@@ -27,14 +27,14 @@ const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
 
     return (
         <div>
-            <h2>Acteurs Communs a 2 Films</h2>
+            <h2>Acteurs communs à deux Films</h2>
             <label>
-                Id Films 1:
+                Id Film 1:
                 <input type="text" value={filmId1} onChange={handleActeursInFilmId1Change} />
             </label>
             <br />
             <label>
-                Id Films 2:
+                Id Film 2:
                 <input type="text" value={filmId2} onChange={handleActeursInFilmId2Change} />
             </label>
             <br />
@@ -47,7 +47,7 @@ const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
                         </li>
                     ))
                 ) : (
-                    <li>Renseigner un id valide</li>
+                    <li>Renseignez un id valide</li>
                 )}
             </ul>
         </div>

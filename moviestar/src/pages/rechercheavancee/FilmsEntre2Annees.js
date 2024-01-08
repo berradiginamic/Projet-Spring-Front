@@ -28,18 +28,18 @@ const FilmsEntre2Annees = ({ onUpdateModalResults }) => {
 
     return (
         <div>
-            <h2>Films entre 2 Années</h2>
+            <h2>Films entre deux années</h2>
             <label>
-                Start Year:
+                Année début:
                 <input type="text" value={startYear} onChange={handleBetweenYearsStartYearChange} />
             </label>
             <br />
             <label>
-                End Year:
+                Année de fin   :
                 <input type="text" value={endYear} onChange={handleBetweenYearsEndYearChange} />
             </label>
             <br />
-            <button onClick={handleFetchFilmsBetweenYears}>Fetch Films</button>
+            <button onClick={handleFetchFilmsBetweenYears}>Voir Films</button>
             <ul>
                 {films.map((film, index) => (
                     <li key={index}>{film.nom} ({film.anneeSortie})</li>
