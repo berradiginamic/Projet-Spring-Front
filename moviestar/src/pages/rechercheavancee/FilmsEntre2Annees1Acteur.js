@@ -40,7 +40,7 @@ const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
         <div>
             <h2>Films entre deux années avec un Acteur commun</h2>
             <label>
-                Année début:
+                Année début :
                 <input type="text" value={startYear} onChange={handleYearsAndByActeurStartYearChange}/>
             </label>
             <br/>

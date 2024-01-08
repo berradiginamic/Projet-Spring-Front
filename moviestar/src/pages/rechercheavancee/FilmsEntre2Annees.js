@@ -30,7 +30,7 @@ const FilmsEntre2Annees = ({ onUpdateModalResults }) => {
         <div>
             <h2>Films entre deux années</h2>
             <label>
-                Année début:
+                Année début :
                 <input type="text" value={startYear} onChange={handleBetweenYearsStartYearChange} />
             </label>
             <br />
